@@ -1,10 +1,3 @@
-const readline = require('readline');
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
 class Enum {
     constructor(values) {
         this.values = values;
@@ -177,86 +170,6 @@ function findStratagem(name) {
     return stratagems.find(stratagem => stratagem.name.toLowerCase().includes(name.toLowerCase())) || null;
 }
 
-const armorsLight = [
-    new Armor("SC-34 Infilitrator", 1, 3, "Scout"),
-    new Armor("SC-30 Trailblazer Scout", 1, 2, "Scout"),
-    new Armor("AC-2 Obedient", 1, 2, "Acclimated"),
-    new Armor("EX-00 Prototype X", 1, 2, "Electrical Conduit"),
-    new Armor("CE-07 Demolition Specialist", 1, 3, "Engineering Kit"),
-    new Armor("CW-4 Arctic Ranger", 1, 2, "Scout"),
-    new Armor("PH-9 Predator", 1, 2, "Peak Physique"),
-    new Armor("I-09 Heatseeker", 1, 2, "Inflammable"),
-    new Armor("AF-50 Noxious Ranger", 1, 2, "Advanced Filtration"),
-    new Armor("UF-16 Inspector", 1, 2, "Unflinching"),
-    new Armor("SR-24 Street Scout", 1, 2, "Siege-Ready"),
-    new Armor("SC-37 Legionnare", 1, 2, "Servo-Assisted"),
-    new Armor("CE-74 Breaker", 1, 2, "Engineering Kit"),
-    new Armor("FS-38 Eradicator", 1, 2, "Fortified"),
-    new Armor("B-08 Light Gunner", 1, 2, "Extra Padding"),
-    new Armor("CM-21 Trench Paramedic", 1, 3, "Med-Kit"),
-    new Armor("CE-67 Titan", 1, 3, "Engineering Kit"),
-    new Armor("FS-37 Ravager", 1, 2, "Engineering Kit"),
-    new Armor("IE-57 Hell-Bent", 1, 2, "Integrated Explosives")
-];
-const armorsMedium = [
-    new Armor("B-01 Tactical", 2, 3, "Extra Padding"),
-    new Armor("CE-35 Trench Engineer", 2, 3, "Engineering Kit"),
-    new Armor("CM-09 Bonesnapper", 2, 3, "Med-Kit"),
-    new Armor("DP-40 Hero of the Federation", 2, 3, "Democracy Protects"),
-    new Armor("SA-04 Combat Technician", 2, 3, "Scout"),
-    new Armor("CM-14 Physician", 2, 3, "Med-Kit"),
-    new Armor("DP-11 Champion of the People", 2, 3, "Democracy Protects"),
-    new Armor("DP-53 Savior of the Free", 2, 3, "Democracy Protects"),
-    new Armor("DP-00 Tactical", 2, 3, "Democracy Protects"),
-    new Armor("TR-9 Cavalier of Democracy", 2, 3, "Extra Padding"),
-    new Armor("TR-117 Alpha Commander", 2, 3, "Med-kit"),
-    new Armor("TR-40 Gold Eagle", 2, 3, "Extra Padding"),
-    new Armor("SA-25 Steel Trooper", 2, 3, "Servo-Assisted"),
-    new Armor("SA-12 Servo Assisted", 2, 3, "Servo-Assisted"),
-    new Armor("EX-03 Prototype 3", 2, 3, "Electrical Conduit"),
-    new Armor("EX-16 Prototype 16", 2, 3, "Electrical Conduit"),
-    new Armor("CE-27 Ground Breaker", 2, 3, "Engineering Kit"),
-    new Armor("I-102 Draconaught", 2, 3, "Inflammable"),
-    new Armor("AF-02 Haz-Master", 2, 3, "Advanced Filtration"),
-    new Armor("UF-50 Bloodhound", 2, 3, "Unflinching"),
-    new Armor("IE-3 Martyr", 2, 3, "Integrated Explosives"),
-    new Armor("IE-12 Righteous", 2, 3, "Integrated Explosives"),
-    new Armor("SC-15 Drone Master", 2, 3, "Engineering Kit"),
-    new Armor("B-24 Enforcer", 2, 4, "Fortified"),
-    new Armor("CE-81 Juggernaut", 2, 3, "Engineering Kit"),
-    new Armor("FS-34 Exterminator", 2, 3, "Fortified"),
-    new Armor("CM-10 Clinician", 2, 3, "Med-Kit"),
-    new Armor("CW-9 White Wolf", 2, 3, "Extra Padding"),
-    new Armor("PH-56 Jaguar", 2, 3, "Peak Physique"),
-    new Armor("I-92 Fire Fighter", 2, 3, "Inflammable"),
-    new Armor("AF-91 Field Chemist", 2, 3, "Advanced Filtration"),
-    new Armor("UF-84 Doubt Killer", 2, 3, "Unflinching"),
-    new Armor("AC-1 Dutiful", 2, 3, "Acclimated")
-];
-const armorsHeavy = [
-    new Armor("FS-05 Marksman", 3, 4, "Fortified"),
-    new Armor("FS-23 Battle Master", 3, 4, "Fortified"),
-    new Armor("TR-62 Knight", 3, 4, "Servo-Assisted"),
-    new Armor("SA-32 Dynamo", 3, 4, "Servo-Assisted"),
-    new Armor("FS-55 Devastator", 3, 4, "Fortified"),
-    new Armor("CW-36 Winter Warrior", 3, 4, "Servo-Assisted"),
-    new Armor("CW-22 Kodiak", 3, 4, "Fortified"),
-    new Armor("PH-202 Twigsnapper", 3, 4, "Peak Physique"),
-    new Armor("SR-18 Roadblock", 3, 4, "Siege-Ready"),
-    new Armor("B-27 Fortified Commando", 3, 4, "Extra Padding"),
-    new Armor("FS-61 Dreadnought", 3, 4, "Servo-Assisted"),
-    new Armor("FS-11 Executioner", 3, 4, "Fortified"),
-    new Armor("CM-17 Butcher", 3, 4, "Med-Kit"),
-    new Armor("CE-64 Grenadier", 3, 4, "Engineering Kit"),
-    new Armor("CE-101 Guerilla Gorilla", 3, 4, "Engineering Kit"),
-    new Armor("I-44 Salamander", 3, 4, "Inflammable"),
-    new Armor("AF-52 Lockdown", 3, 4, "Advanced Filtration"),
-    new Armor("SR-64 Cinderblock", 3, 4, "Siege-Ready")
-];
-const armorsSpecial = [
-    new Armor("SH-20 Ballistic Shield", 2, 4, "Backpack"),
-    new Armor("SH-32 Spherical Shield", 1, 2, "Backpack")
-];
 const weaponsPrimary = [
     new Weapon("AR-23 Liberator", 0, [0], 1, 3, 3, 8),
     new Weapon("AR-23P Liberator Penetrator", 0, [0], 1, 2, 3, 7),
@@ -346,6 +259,86 @@ const weaponsSupport = [
     new Weapon("TX-41 Sterilizer", 13, [4], 4, 2, 5, 4, ["Stagger", "Confuse"]),
     new Weapon("SG-88 Break-Action Shotgun", 4, [0], 1, 3, 2, 40),
     new Weapon("Entrenchment Tool", 10, [0], 2, 2, 2, 0, ["One handed", "Shovel"])
+];
+const armorsLight = [
+    new Armor("SC-34 Infilitrator", 1, 3, "Scout"),
+    new Armor("SC-30 Trailblazer Scout", 1, 2, "Scout"),
+    new Armor("AC-2 Obedient", 1, 2, "Acclimated"),
+    new Armor("EX-00 Prototype X", 1, 2, "Electrical Conduit"),
+    new Armor("CE-07 Demolition Specialist", 1, 3, "Engineering Kit"),
+    new Armor("CW-4 Arctic Ranger", 1, 2, "Scout"),
+    new Armor("PH-9 Predator", 1, 2, "Peak Physique"),
+    new Armor("I-09 Heatseeker", 1, 2, "Inflammable"),
+    new Armor("AF-50 Noxious Ranger", 1, 2, "Advanced Filtration"),
+    new Armor("UF-16 Inspector", 1, 2, "Unflinching"),
+    new Armor("SR-24 Street Scout", 1, 2, "Siege-Ready"),
+    new Armor("SC-37 Legionnare", 1, 2, "Servo-Assisted"),
+    new Armor("CE-74 Breaker", 1, 2, "Engineering Kit"),
+    new Armor("FS-38 Eradicator", 1, 2, "Fortified"),
+    new Armor("B-08 Light Gunner", 1, 2, "Extra Padding"),
+    new Armor("CM-21 Trench Paramedic", 1, 3, "Med-Kit"),
+    new Armor("CE-67 Titan", 1, 3, "Engineering Kit"),
+    new Armor("FS-37 Ravager", 1, 2, "Engineering Kit"),
+    new Armor("IE-57 Hell-Bent", 1, 2, "Integrated Explosives")
+];
+const armorsMedium = [
+    new Armor("B-01 Tactical", 2, 3, "Extra Padding"),
+    new Armor("CE-35 Trench Engineer", 2, 3, "Engineering Kit"),
+    new Armor("CM-09 Bonesnapper", 2, 3, "Med-Kit"),
+    new Armor("DP-40 Hero of the Federation", 2, 3, "Democracy Protects"),
+    new Armor("SA-04 Combat Technician", 2, 3, "Scout"),
+    new Armor("CM-14 Physician", 2, 3, "Med-Kit"),
+    new Armor("DP-11 Champion of the People", 2, 3, "Democracy Protects"),
+    new Armor("DP-53 Savior of the Free", 2, 3, "Democracy Protects"),
+    new Armor("DP-00 Tactical", 2, 3, "Democracy Protects"),
+    new Armor("TR-9 Cavalier of Democracy", 2, 3, "Extra Padding"),
+    new Armor("TR-117 Alpha Commander", 2, 3, "Med-kit"),
+    new Armor("TR-40 Gold Eagle", 2, 3, "Extra Padding"),
+    new Armor("SA-25 Steel Trooper", 2, 3, "Servo-Assisted"),
+    new Armor("SA-12 Servo Assisted", 2, 3, "Servo-Assisted"),
+    new Armor("EX-03 Prototype 3", 2, 3, "Electrical Conduit"),
+    new Armor("EX-16 Prototype 16", 2, 3, "Electrical Conduit"),
+    new Armor("CE-27 Ground Breaker", 2, 3, "Engineering Kit"),
+    new Armor("I-102 Draconaught", 2, 3, "Inflammable"),
+    new Armor("AF-02 Haz-Master", 2, 3, "Advanced Filtration"),
+    new Armor("UF-50 Bloodhound", 2, 3, "Unflinching"),
+    new Armor("IE-3 Martyr", 2, 3, "Integrated Explosives"),
+    new Armor("IE-12 Righteous", 2, 3, "Integrated Explosives"),
+    new Armor("SC-15 Drone Master", 2, 3, "Engineering Kit"),
+    new Armor("B-24 Enforcer", 2, 4, "Fortified"),
+    new Armor("CE-81 Juggernaut", 2, 3, "Engineering Kit"),
+    new Armor("FS-34 Exterminator", 2, 3, "Fortified"),
+    new Armor("CM-10 Clinician", 2, 3, "Med-Kit"),
+    new Armor("CW-9 White Wolf", 2, 3, "Extra Padding"),
+    new Armor("PH-56 Jaguar", 2, 3, "Peak Physique"),
+    new Armor("I-92 Fire Fighter", 2, 3, "Inflammable"),
+    new Armor("AF-91 Field Chemist", 2, 3, "Advanced Filtration"),
+    new Armor("UF-84 Doubt Killer", 2, 3, "Unflinching"),
+    new Armor("AC-1 Dutiful", 2, 3, "Acclimated")
+];
+const armorsHeavy = [
+    new Armor("FS-05 Marksman", 3, 4, "Fortified"),
+    new Armor("FS-23 Battle Master", 3, 4, "Fortified"),
+    new Armor("TR-62 Knight", 3, 4, "Servo-Assisted"),
+    new Armor("SA-32 Dynamo", 3, 4, "Servo-Assisted"),
+    new Armor("FS-55 Devastator", 3, 4, "Fortified"),
+    new Armor("CW-36 Winter Warrior", 3, 4, "Servo-Assisted"),
+    new Armor("CW-22 Kodiak", 3, 4, "Fortified"),
+    new Armor("PH-202 Twigsnapper", 3, 4, "Peak Physique"),
+    new Armor("SR-18 Roadblock", 3, 4, "Siege-Ready"),
+    new Armor("B-27 Fortified Commando", 3, 4, "Extra Padding"),
+    new Armor("FS-61 Dreadnought", 3, 4, "Servo-Assisted"),
+    new Armor("FS-11 Executioner", 3, 4, "Fortified"),
+    new Armor("CM-17 Butcher", 3, 4, "Med-Kit"),
+    new Armor("CE-64 Grenadier", 3, 4, "Engineering Kit"),
+    new Armor("CE-101 Guerilla Gorilla", 3, 4, "Engineering Kit"),
+    new Armor("I-44 Salamander", 3, 4, "Inflammable"),
+    new Armor("AF-52 Lockdown", 3, 4, "Advanced Filtration"),
+    new Armor("SR-64 Cinderblock", 3, 4, "Siege-Ready")
+];
+const armorsSpecial = [
+    new Armor("SH-20 Ballistic Shield", 2, 4, "Backpack"),
+    new Armor("SH-32 Spherical Shield", 1, 2, "Backpack")
 ];
 const stratagems = [
     new Stratagem("Resupply", 0, [DOWN, DOWN, UP, RIGHT], "Deploys a container of four supply packs. Each supply pack fills primary and secondary weapon magazines to full, and all other ammo by half their max."),
@@ -489,80 +482,47 @@ class Character {
         const stats = ["strength", "constitution", "speed", "stealth", "precision", "perception"];
         this[stats[stat]] = value;
     }
-}
+};
 
 function generateCharacter() {
     const character = new Character();
-//
-    rl.question("Character name: ", name => {
-        character.name = name;
 
-        rl.question("Character rank (0-21, -1--8 for special titles): ", rank => {
-            character.rank = parseInt(rank);
+    const stats = [1, 2, 3, 4, 5, 6];
+    const priorities = [parseInt(priority1), parseInt(priority2), parseInt(priority3), parseInt(priority4)];
+    const dumps = stats.filter(stat => !priorities.includes(stat));
 
-            rl.question("Character faction: ", faction => {
-                character.faction = faction;
+    let points = 6;
+    const max = 3;
+    const min = -2;
 
-                rl.question("Choose your greatest ability from Strength(1), Constitution(2), Speed(3), Stealth(4), Precision(5), Perception(6): ", priority1 => {
-                    rl.question("Choose your second-greatest ability from the same list: ", priority2 => {
-                        rl.question("Choose one ability you want to keep decent (Can be 0 for none): ", priority3 => {
-                            rl.question("Choose a second ability you want to keep decent (Can be 0 for none): ", priority4 => {
-                                const stats = [1, 2, 3, 4, 5, 6];
-                                const priorities = [parseInt(priority1), parseInt(priority2), parseInt(priority3), parseInt(priority4)];
-                                const dumps = stats.filter(stat => !priorities.includes(stat));
+    character.set(priorities[0] - 1, max - 1);
+    points -= max - 1;
 
-                                let points = 6;
-                                const max = 3;
-                                const min = -2;
+    character.set(priorities[1] - 1, Math.max(0, max - 3));
+    points -= Math.max(0, max - 3);
 
-                                character.set(priorities[0] - 1, max - 1);
-                                points -= max - 1;
-
-                                character.set(priorities[1] - 1, Math.max(0, max - 3));
-                                points -= Math.max(0, max - 3);
-
-                                priorities.slice(2).forEach(priority => {
-                                    if (priority > 0) {
-                                        const value = Math.max(0, max - 2);
-                                        character.set(priority - 1, value);
-                                        points -= value;
-                                    }
-                                });
-
-                                dumps.forEach(dump => {
-                                    const value = Math.min(0, min);
-                                    character.set(dump - 1, value);
-                                    points -= value;
-                                });
-
-                                while (points > 0) {
-                                    const stat = stats[Math.floor(Math.random() * stats.length)];
-                                    character.set(stat - 1, character[stat] + 1);
-                                    points--;
-                                }
-
-                                console.log("\nCharacter generated successfully!");
-                                console.log(`Name: ${character.name}`);
-                                console.log(`Rank: ${character.rank}`);
-                                console.log(`Faction: ${character.faction}`);
-                                console.log(`Stats: Strength=${character.strength}, Constitution=${character.constitution}, Speed=${character.speed}, Stealth=${character.stealth}, Precision=${character.precision}, Perception=${character.perception}`);
-                                console.log(`Armor: ${character.armor}`);
-                                console.log(`Primary Weapon: ${character.weaponPrimary}`);
-                                console.log(`Secondary Weapon: ${character.weaponSecondary}`);
-                                console.log(`Throwable Weapon: ${character.weaponThrowable}`);
-                                console.log(`Support Weapon: ${character.weaponSupport}`);
-                                console.log(`Backpack: ${character.backpack}`);
-                                console.log(`Stratagems: \n - ${character.stratagem1}\n - ${character.stratagem2}\n - ${character.stratagem3}\n - ${character.stratagem4}`);
-                                console.log(`Booster: ${character.booster}`);
-
-                                rl.close();
-                            });
-                        });
-                    });
-                });
-            });
-        });
+    priorities.slice(2).forEach(priority => {
+        if (priority > 0) {
+            const value = Math.max(0, max - 2);
+            character.set(priority - 1, value);
+            points -= value;
+        }
     });
-}
 
-generateCharacter();
+    dumps.forEach(dump => {
+        const value = Math.min(0, min);
+        character.set(dump - 1, value);
+        points -= value;
+    });
+
+    while (points > 0) {
+        const stat = stats[Math.floor(Math.random() * stats.length)];
+        character.set(stat - 1, character[stat] + 1);
+        points--;
+    }
+};
+
+for (const weapon of weaponsPrimary) {
+    document.getElementById("dd_primary").appendChild(new Option(weapon.name, weapon.name));
+};
+

@@ -21,3 +21,8 @@ body {
     display: block;
     
 }
+
+button {
+    padding: 5px;
+    font-size: larger;
+}

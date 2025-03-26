@@ -522,7 +522,8 @@ function generateCharacter() {
     }
 };
 
-for (const weapon of weaponsPrimary) {
-    document.getElementById("dd_primary").appendChild(new Option(weapon.name, weapon.name));
-};
+for (const weapon of weaponsPrimary) {document.getElementById("dd_primary").appendChild(new Option(weapon.name, weapon.name))};
+for (const weapon of weaponsSecondary) {document.getElementById("dd_secondary").appendChild(new Option(weapon.name, weapon.name))};
+for (const weapon of weaponsThrowable) {document.getElementById("dd_throwable").appendChild(new Option(weapon.name, weapon.name))};
+for (const weapon of weaponsSupport) {document.getElementById("dd_support").appendChild(new Option(weapon.name, weapon.name))};
 

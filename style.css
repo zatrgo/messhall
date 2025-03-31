@@ -3,6 +3,9 @@
     border: 0;
     padding: 0;
     max-width: 100%;
+    font-family:"FS Sinclair";
+    color:white;
+
 }
 
 body {
@@ -26,3 +29,113 @@ button {
     padding: 5px;
     font-size: larger;
 }
+
+.cc {
+    margin: auto;
+    display: block;
+    width: 800px;
+    background-color: #0c0c0ce0;
+    padding: 10px;
+}
+
+.dropdown_custom {
+    display: inline-block;
+    height:60px;
+    width:100%;
+    margin: 0;
+    background-color: #2d2e30;
+    overflow: visible;
+}
+
+.dropdown_custom_head {
+    display: inline-block;
+    background-color: #2d2e30;
+    width: 44%;
+    padding: 0;
+    height: 100%;
+    max-height: 100%;
+    vertical-align: top;
+    align-content: center;
+    border-right: 2px solid #998766;
+}
+.dropdown_custom_head h3 {
+    display: flex;
+    font-weight: 500;
+    font-size: 30px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.dropdown_custom_body {
+    display: inline-block;
+    background-color: #2d2e30;
+    width: 55%;
+    height: 60px;
+    padding: 0;
+}
+
+.dropdown_custom_list {
+    display: flex;
+    flex-direction: column;
+    float:left;
+    z-index: 1;
+    margin-left: -7px;
+    background-color: #2d2e30;
+    width: 100%;
+    height: max-content;
+    border: 5px solid #708090;
+    border-top: 2px solid #708090;
+}
+
+.dropdown_custom_item {
+    display: flex;
+    float: right;
+    height: 50px;
+    width: 100%;
+    margin: 0;
+    padding: 5px;
+    color: white;
+    font-weight:400;
+    background: none;
+
+}
+.dropdown_custom_item:hover h4 {
+    color: yellow;
+    font-weight:500;
+}
+
+.dropdown_custom_list .dropdown_custom_item {
+    width: var(100% - 5px);
+    height: 40px;
+    border-top: 1px solid #96958f90;
+}
+
+.dropdown_custom_item h4 {
+    display: flex;
+    float: left;
+    flex-grow: 1;
+    height: 100%;
+    max-width:inherit;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 400;
+}
+.dropdown_custom_list .dropdown_custom_item h4 {
+    font-size: 20px;
+
+}
+.dropdown_custom_item img {
+    display: flex;
+    align-items: center;
+    float: right;
+    width: 80px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+
+
+

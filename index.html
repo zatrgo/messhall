@@ -10,15 +10,120 @@
     <div class="header"><img src="images/title_yellow.png", style="object-fit:contain"></div>
 
     <div class="cc">
-        <label for="dd_primary">Primary Weapon: </label>
-        <select id="dd_primary" name="dd_primary"><option value="None">None</option></select>
-        <label for="dd_secondary">Secondary Weapon: </label>
-        <select id="dd_secondary" name="dd_secondary"><option value="None">None</option></select>
-        <label for="dd_throwable">Throwable: </label>
-        <select id="dd_throwable" name="dd_throwable"><option value="None">None</option></select>
-        <label for="dd_support">Support Weapon: </label>
-        <select id="dd_support" name="dd_support"><option value="None">None</option></select>
+        <div class="dropdown_custom">
+            <div class="dropdown_custom_head">
+                <h3><u>Primary Weapon</u></h3>
+            </div>
+            <div class="dropdown_custom_body">
+                <button class="dropdown_custom_item" onclick="toggleDisplay('weaponsPrimary')">
+                    <h4>None</h4>
+                    <img src="images/None.png">
+                </button>
 
+                <div class="dropdown_custom_list" id="weaponsPrimary">
+                </div>
+            </div>
+        </div>
+        <!-- 
+        <div class="dropdown_custom">
+            <div class="dropdown_custom_header">
+                <h3><u>Secondary Weapon</u></h3>
+            </div>
+            <div class="dropdown_custom_item">
+                <h4>None</h4>
+                <img src="images/None.png">
+            </div>
+            <div class="dropdown_custom_list" id="weaponsSecondary">
+            </div>
+        </div>
+        <div class="dropdown_custom">
+            <div class="dropdown_custom_header">
+                <h3><u>Throwable</u></h3>
+            </div>
+            <div class="dropdown_custom_item">
+                <h4>None</h4>
+                <img src="images/None.png">
+            </div>
+            <div class="dropdown_custom_list" id="weaponsThrowable">
+            </div>
+        </div>
+        <div class="dropdown_custom">
+            <div class="dropdown_custom_header">
+                <h3><u>Support Weapon</u></h3>
+            </div>
+            <div class="dropdown_custom_item">
+                <h4>None</h4>
+                <img src="images/None.png">
+            </div>
+            <div class="dropdown_custom_list" id="weaponsSupport">
+            </div>
+        </div>
+        <div class="dropdown_custom">
+            <div class="dropdown_custom_header">
+                <h3><u>Backpack</u></h3>
+            </div>
+            <div class="dropdown_custom_item">
+                <h4>None</h4>
+                <img src="images/None.png">
+            </div>
+            <div class="dropdown_custom_list" id="backpack">
+            </div>
+        </div>
+        <div class="dropdown_custom">
+            <div class="dropdown_custom_header">
+                <h3><u>Stratagem #1</u></h3>
+            </div>
+            <div class="dropdown_custom_item">
+                <h4>None</h4>
+                <img src="images/None.png">
+            </div>
+            <div class="dropdown_custom_list" id="stratagem1">
+            </div>
+        </div>
+        <div class="dropdown_custom">
+            <div class="dropdown_custom_header">
+                <h3><u>Stratagem #2</u></h3>
+            </div>
+            <div class="dropdown_custom_item">
+                <h4>None</h4>
+                <img src="images/None.png">
+            </div>
+            <div class="dropdown_custom_list" id="stratagem2">
+            </div>
+        </div>
+        <div class="dropdown_custom">
+            <div class="dropdown_custom_header">
+                <h3><u>Stratagem #3</u></h3>
+            </div>
+            <div class="dropdown_custom_item">
+                <h4>None</h4>
+                <img src="images/None.png">
+            </div>
+            <div class="dropdown_custom_list" id="stratagem3">
+            </div>
+        </div>
+        <div class="dropdown_custom">
+            <div class="dropdown_custom_header">
+                <h3><u>Stratagem #4</u></h3>
+            </div>
+            <div class="dropdown_custom_item">
+                <h4>None</h4>
+                <img src="images/None.png">
+            </div>
+            <div class="dropdown_custom_list" id="stratagem4">
+            </div>
+        </div>
+        <div class="dropdown_custom">
+            <div class="dropdown_custom_header">
+                <h3><u>Booster</u></h3>
+            </div>
+            <div class="dropdown_custom_item">
+                <h4>None</h4>
+                <img src="images/None.png">
+            </div>
+            <div class="dropdown_custom_list" id="booster">
+            </div>
+        </div> -->
         <script src="sheet creator.js"></script>
     </div>
 

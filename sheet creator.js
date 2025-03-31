@@ -522,8 +522,37 @@ function generateCharacter() {
     }
 };
 
-for (const weapon of weaponsPrimary) {document.getElementById("dd_primary").appendChild(new Option(weapon.name, weapon.name))};
-for (const weapon of weaponsSecondary) {document.getElementById("dd_secondary").appendChild(new Option(weapon.name, weapon.name))};
-for (const weapon of weaponsThrowable) {document.getElementById("dd_throwable").appendChild(new Option(weapon.name, weapon.name))};
-for (const weapon of weaponsSupport) {document.getElementById("dd_support").appendChild(new Option(weapon.name, weapon.name))};
+//for (var weapon of weaponsPrimary) createDDCC("weaponsPrimary", weapon.name);
+//for (var weapon of weaponsSecondary) createDDCC("weaponsSecondary", weapon.name);
+//for (var weapon of weaponsThrowable) createDDCC("weaponsThrowable", weapon.name);
+//for (var weapon of weaponsSupport) createDDCC("weaponsSupport", weapon.name);
 
+createDDCC("weaponsPrimary", findWeapon("liberator").name)
+
+function createDDCC(id, name) {
+    const element = document.getElementById(id);
+    var d = document.createElement('div');
+    d.setAttribute('class', "dropdown_custom_item");
+    var h = document.createElement('h4');
+    h.appendChild(new Text(name));
+    var i = document.createElement('img');
+    i.setAttribute('src', "images/" + name + ".webp");
+    d.appendChild(h);
+    d.appendChild(i);
+    element.appendChild(d);
+}
+
+
+
+var hidden = {};
+
+function toggleDisplay(i) {
+    if (hidden.length == 0 || !i in hidden) {
+        hidden[i] = document.getElementById(i).style.display;
+        document.getElementById(i).style.display = "hidden";
+    }
+        else if (i in hidden) {
+        document.getElementById(i).style.display = hidden[i];
+    }
+    console.log(i, hidden[i]);
+}

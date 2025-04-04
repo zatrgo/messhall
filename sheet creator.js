@@ -544,15 +544,23 @@ function createDDCC(id, name) {
 
 
 
-var hidden = {};
+const hidden = {};
 
-function toggleDisplay(i) {
-    if (hidden.length == 0 || !i in hidden) {
-        hidden[i] = document.getElementById(i).style.display;
-        document.getElementById(i).style.display = "hidden";
+function toggleDisplay(id) {
+    if (!hidden[id]) {
+        hidden[id] = [];
     }
-        else if (i in hidden) {
-        document.getElementById(i).style.display = hidden[i];
+
+    const element = document.getElementById(id);
+    
+    if (hidden[id].length === 0) {
+        console.log("new");
+        hidden[id].push(element.style.display);
+        element.style.display = "hidden";
+    } else {
+        console.log("remove");
+        element.style.display = hidden[id].pop();
     }
-    console.log(i, hidden[i]);
+
+    console.log(id, element.style.display);
 }

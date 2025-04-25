@@ -87,6 +87,26 @@ const Stratatype = new Enum({
     Defensive: 3
 });
 
+class Armor {
+    constructor(name, plating = 0, resistance = 0, passive = "") {
+        this.name = name;
+        this.plating = Thickness.name(plating);
+        this.resistance = Damage.name(resistance);
+        this.passive = passive;
+    }
+
+    toString() {
+        return `${this.name} (${this.plating} Armor, ${this.resistance} Resistance, PASSIVE: "${this.passive}")`;
+    }
+}
+
+function findArmor(name, plating = 0) {
+    const allArmors = [...armorsLight, ...armorsMedium,  ...armorsHeavy];
+    const armorLists = [allArmors, armorsLight, armorsMedium, armorsHeavy];
+    const armors = armorLists[plating] || allArmors;
+    return armors.find(armor => armor.name.toLowerCase().includes(name.toLowerCase())) || new Armor("None");
+}
+
 class Weapon {
     constructor(name, weaponType = 0, damageType = [], penetration = 0, damage = 0, accuracy = 0, maxReloads = 0, passives = []) {
         this.name = name;
@@ -108,30 +128,11 @@ class Weapon {
 }
 
 function findWeapon(name, slot = 0) {
+    if (name.toLowerCase == "none") return new Weapon("None");
     const allWeapons = [...weaponsPrimary, ...weaponsSecondary, ...weaponsThrowable, ...weaponsSupport];
     const weaponLists = [allWeapons, weaponsPrimary, weaponsSecondary, weaponsThrowable, weaponsSupport];
     const weapons = weaponLists[slot] || allWeapons;
     return weapons.find(weapon => weapon.name.toLowerCase().includes(name.toLowerCase())) || new Weapon("None");
-}
-
-class Armor {
-    constructor(name, plating = 0, resistance = 0, passive = "") {
-        this.name = name;
-        this.plating = Thickness.name(plating);
-        this.resistance = Damage.name(resistance);
-        this.passive = passive;
-    }
-
-    toString() {
-        return `${this.name} (${this.plating} Armor, ${this.resistance} Resistance, PASSIVE: "${this.passive}")`;
-    }
-}
-
-function findArmor(name, plating = 0) {
-    const allArmors = [...armorsLight, ...armorsMedium, ...armorsHeavy];
-    const armorLists = [allArmors, armorsLight, armorsMedium, armorsHeavy];
-    const armors = armorLists[plating] || allArmors;
-    return armors.find(armor => armor.name.toLowerCase().includes(name.toLowerCase())) || new Armor("None");
 }
 
 class TacPack {
@@ -170,96 +171,6 @@ function findStratagem(name) {
     return stratagems.find(stratagem => stratagem.name.toLowerCase().includes(name.toLowerCase())) || null;
 }
 
-const weaponsPrimary = [
-    new Weapon("AR-23 Liberator", 0, [0], 1, 3, 3, 8),
-    new Weapon("AR-23P Liberator Penetrator", 0, [0], 1, 2, 3, 7),
-    new Weapon("AR-23C Liberator Concussive", 0, [0], 1, 2, 3, 6, ["Stagger"]),
-    new Weapon("StA-52 Assault Rifle", 0, [0], 1, 3, 3, 6),
-    new Weapon("AR-23A Liberator Carbine", 0, [0], 1, 3, 2, 8),
-    new Weapon("AR-61 Tenderizer", 0, [0], 1, 4, 3, 7),
-    new Weapon("BR-14 Adjudicator", 0, [0], 2, 4, 2, 8),
-    new Weapon("R-2124 Constitution", 1, [0], 1, 4, 4, 99),
-    new Weapon("R-63 Diligence", 1, [0], 1, 4, 4, 8),
-    new Weapon("R-63CS Diligence Counter-Sniper", 1, [0], 2, 4, 3, 6),
-    new Weapon("PLAS-39 Accelerator Rifle", 2, [1, 7], 2, 4, 5, 8),
-    new Weapon("SMG-37 Defender", 3, [0], 1, 3, 3, 7, ["One-handed"]),
-    new Weapon("SMG-72 Pummeler", 3, [0], 1, 2, 2, 7, ["One-handed", "Stagger"]),
-    new Weapon("SMG-32 Reprimand", 3, [0], 2, 4, 2, 9),
-    new Weapon("StA-11 SMG", 3, [0], 1, 3, 2, 7, ["One-handed"]),
-    new Weapon("MP-98 Knight", 3, [0], 1, 2, 1, 7, ["One-handed"]),
-    new Weapon("SG-8 Punisher", 4, [0], 1, 4, 2, 60),
-    new Weapon("SG-8S Slugger", 4, [0], 2, 3, 3, 60),
-    new Weapon("SG-225 Breaker", 4, [0], 1, 4, 1, 7),
-    new Weapon("SG-225SP Breaker Spray&Pray", 4, [0], 1, 3, 1, 8),
-    new Weapon("SG-225IE Breaker Incendiary", 4, [0, 2], 1, 3, 1, 4, ["Burn"]),
-    new Weapon("SG-451 Cookout", 4, [0, 2], 1, 4, 2, 60, ["Burn"]),
-    new Weapon("SG-20 Halt (Flechette)", 4, [0], 2, 3, 3, 30),
-    new Weapon("SG-20 Halt (Stun)", 4, [0], 1, 2, 3, 30, ["Stun"]),
-    new Weapon("CB-9 Exploding Crossbow", 5, [0, 1], 2, 4, 4, 8, ["Explosive", "One-handed"]),
-    new Weapon("R-36 Eruptor", 5, [0, 1], 2, 3, 5, 6, ["Explosive"]),
-    new Weapon("LAS-5 Scythe", 6, [3], 1, 3, 5, 4, ["Heatsink"]),
-    new Weapon("LAS-16 Sickle", 6, [3], 1, 3, 4, 3, ["Heatsink"]),
-    new Weapon("LAS-17 Double-Edge Sickle", 6, [3], 3, 4, 4, 3, ["Heatsink", "Backlash"]),
-    new Weapon("PLAS-1 Scorcher", 6, [1, 7], 2, 4, 4, 5, ["Explosive"]),
-    new Weapon("SG-8P Punisher Plasma", 6, [7], 2, 4, 2, 8, ["Explosive"]),
-    new Weapon("ARC-12 Blitzer", 6, [6], 1, 3, 2, 0, ["Stun"]),
-    new Weapon("PLAS-101 Purifier", 6, [1, 7], 2, 3, 3, 6, ["Explosive"]),
-    new Weapon("FLAM-66 Torcher", 10, [2], 3, 3, 4, 6, ["Fire", "Burn"]),
-    new Weapon("JAR-5 Dominator", 10, [0], 2, 4, 3, 6)
-];
-const weaponsSecondary = [
-    new Weapon("P-2 Peacemaker", 7, [0], 1, 1, 3, 6, ["One-handed"]),
-    new Weapon("P-19 Redeemer", 7, [0], 1, 2, 2, 4, ["One-handed"]),
-    new Weapon("P-113 Verdict", 7, [0], 2, 3, 3, 8, ["One-handed"]),
-    new Weapon("P-4 Senator", 7, [0], 3, 3, 4, 40, ["One-handed"]),
-    new Weapon("CQC-19 Stun Lance", 8, [0], 2, 2, 3, 0, ["Stun", "One-handed"]),
-    new Weapon("CQC-30 Stun Baton", 8, [0], 2, 1, 2, 0, ["Stun", "One-handed"]),
-    new Weapon("CQC-5 Combat Hatchet", 8, [0], 2, 2, 2, 0, ["One-handed"]),
-    new Weapon("P-11 Stim Pistol", 10, [0], 0, 0, 4, 24, ["Heal", "One-handed"]),
-    new Weapon("SG-22 Bushwhacker", 10, [0], 1, 3, 2, 30, ["One-handed", "One-handed"]),
-    new Weapon("P-72 Crisper", 10, [2], 1, 2, 3, 4, ["Fire", "Burn", "One-handed"]),
-    new Weapon("GP-31 Grenade Pistol", 10, [0, 1], 2, 4, 4, 6, ["Explosive", "One-handed"]),
-    new Weapon("LAS-7 Dagger", 10, [3], 1, 2, 4, 3, ["Heatsink", "One-handed"]),
-    new Weapon("GP-31 Ultimatum", 10, [0, 1], 4, 7, 4, 1, ["Explosive", "One-handed"]),
-    new Weapon("PLAS-15 Loyalist", 10, [7], 2, 2, 3, 4, ["Explosive", "One-handed"])
-];
-const weaponsThrowable = [
-    new Weapon("G-6 Frag", 9, [1], 2, 2, 3, 5, ["Explosive"]),
-    new Weapon("G-12 High Explosive", 9, [1], 3, 3, 4, 4, ["Explosive"]),
-    new Weapon("G-10 Incendiary", 9, [1], 2, 2, 4, 4, ["Explosive", "Burn"]),
-    new Weapon("G-16 Impact", 9, [1], 3, 2, 3, 4, ["Explosive", "Impact"]),
-    new Weapon("G-13 Incendiary Impact", 9, [1], 2, 1, 3, 4, ["Explosive", "Burn", "Impact"]),
-    new Weapon("G-23 Stun", 9, [1], 4, 0, 2, 4, ["Explosive", "Stun"]),
-    new Weapon("G-4 Gas", 9, [4], 4, 2, 3, 4, ["Explosive", "Gas"]),
-    new Weapon("G-50 Seeker", 9, [1], 3, 3, 2, 4, ["Explosive", "Impact"]),
-    new Weapon("G-3 Smoke", 9, [1], 0, 0, 3, 4, ["Explosive", "Smoke"]),
-    new Weapon("G-123 Thermite", 9, [1, 2], 4, 7, 3, 3, ["Burn"]),
-    new Weapon("K-2 Throwing Knife", 9, [0], 2, 3, 4, 20)
-];
-const weaponsSupport = [
-    new Weapon("MG-43 Machine Gun", 11, [0], 2, 5, 3, 3, ["Stationary Reload"]),
-    new Weapon("APW-1 Anti-Materiel Rifle", 2, [0], 3, 6, 5, 6),
-    new Weapon("M-105 Stalwart", 11, [0], 1, 4, 4, 3),
-    new Weapon("EAT-17 Expendable Anti-Tank", 12, [0, 1], 4, 7, 5, 0, ["Explosive", "Single Shot"]),
-    new Weapon("GR-8 Recoilless Rifle (HEAT)", 12, [0, 1], 4, 7, 4, 0, ["Explosive", "Stationary Reload", "Backpack"]),
-    new Weapon("GR-8 Recoilless Rifle (HE)", 12, [0, 1], 2, 5, 4, 0, ["Single Shot", "Stationary Reload", "Backpack"]),
-    new Weapon("FLAM-40 Flamethrower", 13, [2], 3, 5, 3, 4, ["Fire", "Burn"]),
-    new Weapon("AC-8 Autocannon (AP)", 0, [0, 1], 3, 5, 4, 10, ["Explosive", "Stationary Reload", "Backpack"]),
-    new Weapon("AC-8 Autocannon (FLAK)", 0, [0, 1], 2, 3, 4, 10, ["Explosive", "Stationary Reload", "Backpack"]),
-    new Weapon("MG-206 Heavy Machine Gun", 11, [0], 3, 6, 2, 2, ["Stationary Reload"]),
-    new Weapon("RL-77 Airburst Rocket Launcher", 12, [1], 2, 7, 3, 0, ["Explosive", "Stationary Reload", "Backpack"]),
-    new Weapon("MLS-4X Commando", 12, [0, 1], 4, 7, 5, 0, ["Explosive", "Laser-guided"]),
-    new Weapon("RS-422 Railgun", 2, [0], 4, 7, 5, 20, ["Single Shot", "Safety Toggle"]),
-    new Weapon("FAF-14 Spear", 12, [0], 4, 7, 4, 0, ["Explosive", "Stationary Reload", "Backpack"]),
-    new Weapon("StA-X3 W.A.S.P. Launcher", 12, [1], 4, 5, 4, 0, ["Explosive", "Stationary Reload", "Backpack"]),
-    new Weapon("GL-21 Grenade Launcher", 12, [1], 2, 4, 4, 3, ["Explosive"]),
-    new Weapon("LAS-98 Laser Cannon", 6, [3], 3, 5, 5, 2, ["Laser", "Burn"]),
-    new Weapon("ARC-3 Arc Thrower", 6, [6], 4, 3, 3, 0, ["Electric", "Chargeup"]),
-    new Weapon("LAS-99 Quasar Cannon", 6, [1, 7], 4, 7, 5, 0, ["Chargeup"]),
-    new Weapon("TX-41 Sterilizer", 13, [4], 4, 2, 5, 4, ["Stagger", "Confuse"]),
-    new Weapon("SG-88 Break-Action Shotgun", 4, [0], 1, 3, 2, 40),
-    new Weapon("Entrenchment Tool", 10, [0], 2, 2, 2, 0, ["One handed", "Shovel"])
-];
 const armorsLight = [
     new Armor("SC-34 Infilitrator", 1, 3, "Scout"),
     new Armor("SC-30 Trailblazer Scout", 1, 2, "Scout"),
@@ -339,6 +250,100 @@ const armorsHeavy = [
 const armorsSpecial = [
     new Armor("SH-20 Ballistic Shield", 2, 4, "Backpack"),
     new Armor("SH-32 Spherical Shield", 1, 2, "Backpack")
+];
+const weaponsPrimary = [
+    new Weapon("None"),
+    new Weapon("AR-23 Liberator", 0, [0], 1, 3, 3, 8),
+    new Weapon("AR-23P Liberator Penetrator", 0, [0], 1, 2, 3, 7),
+    new Weapon("AR-23C Liberator Concussive", 0, [0], 1, 2, 3, 6, ["Stagger"]),
+    new Weapon("StA-52 Assault Rifle", 0, [0], 1, 3, 3, 6),
+    new Weapon("AR-23A Liberator Carbine", 0, [0], 1, 3, 2, 8),
+    new Weapon("AR-61 Tenderizer", 0, [0], 1, 4, 3, 7),
+    new Weapon("BR-14 Adjudicator", 0, [0], 2, 4, 2, 8),
+    new Weapon("R-2124 Constitution", 1, [0], 1, 4, 4, 99),
+    new Weapon("R-63 Diligence", 1, [0], 1, 4, 4, 8),
+    new Weapon("R-63CS Diligence Counter-Sniper", 1, [0], 2, 4, 3, 6),
+    new Weapon("PLAS-39 Accelerator Rifle", 2, [1, 7], 2, 4, 5, 8),
+    new Weapon("SMG-37 Defender", 3, [0], 1, 3, 3, 7, ["One-handed"]),
+    new Weapon("SMG-72 Pummeler", 3, [0], 1, 2, 2, 7, ["One-handed", "Stagger"]),
+    new Weapon("SMG-32 Reprimand", 3, [0], 2, 4, 2, 9),
+    new Weapon("StA-11 SMG", 3, [0], 1, 3, 2, 7, ["One-handed"]),
+    new Weapon("MP-98 Knight", 3, [0], 1, 2, 1, 7, ["One-handed"]),
+    new Weapon("SG-8 Punisher", 4, [0], 1, 4, 2, 60),
+    new Weapon("SG-8S Slugger", 4, [0], 2, 3, 3, 60),
+    new Weapon("SG-225 Breaker", 4, [0], 1, 4, 1, 7),
+    new Weapon("SG-225SP Breaker Spray&Pray", 4, [0], 1, 3, 1, 8),
+    new Weapon("SG-225IE Breaker Incendiary", 4, [0, 2], 1, 3, 1, 4, ["Burn"]),
+    new Weapon("SG-451 Cookout", 4, [0, 2], 1, 4, 2, 60, ["Burn"]),
+    new Weapon("SG-20 Halt (Flechette)", 4, [0], 2, 3, 3, 30),
+    new Weapon("SG-20 Halt (Stun)", 4, [0], 1, 2, 3, 30, ["Stun"]),
+    new Weapon("CB-9 Exploding Crossbow", 5, [0, 1], 2, 4, 4, 8, ["Explosive", "One-handed"]),
+    new Weapon("R-36 Eruptor", 5, [0, 1], 2, 3, 5, 6, ["Explosive"]),
+    new Weapon("LAS-5 Scythe", 6, [3], 1, 3, 5, 4, ["Heatsink"]),
+    new Weapon("LAS-16 Sickle", 6, [3], 1, 3, 4, 3, ["Heatsink"]),
+    new Weapon("LAS-17 Double-Edge Sickle", 6, [3], 3, 4, 4, 3, ["Heatsink", "Backlash"]),
+    new Weapon("PLAS-1 Scorcher", 6, [1, 7], 2, 4, 4, 5, ["Explosive"]),
+    new Weapon("SG-8P Punisher Plasma", 6, [7], 2, 4, 2, 8, ["Explosive"]),
+    new Weapon("ARC-12 Blitzer", 6, [6], 1, 3, 2, 0, ["Stun"]),
+    new Weapon("PLAS-101 Purifier", 6, [1, 7], 2, 3, 3, 6, ["Explosive"]),
+    new Weapon("FLAM-66 Torcher", 10, [2], 3, 3, 4, 6, ["Fire", "Burn"]),
+    new Weapon("JAR-5 Dominator", 10, [0], 2, 4, 3, 6)
+];
+const weaponsSecondary = [
+    new Weapon("None"),
+    new Weapon("P-2 Peacemaker", 7, [0], 1, 1, 3, 6, ["One-handed"]),
+    new Weapon("P-19 Redeemer", 7, [0], 1, 2, 2, 4, ["One-handed"]),
+    new Weapon("P-113 Verdict", 7, [0], 2, 3, 3, 8, ["One-handed"]),
+    new Weapon("P-4 Senator", 7, [0], 3, 3, 4, 40, ["One-handed"]),
+    new Weapon("CQC-19 Stun Lance", 8, [0], 2, 2, 3, 0, ["Stun", "One-handed"]),
+    new Weapon("CQC-30 Stun Baton", 8, [0], 2, 1, 2, 0, ["Stun", "One-handed"]),
+    new Weapon("CQC-5 Combat Hatchet", 8, [0], 2, 2, 2, 0, ["One-handed"]),
+    new Weapon("P-11 Stim Pistol", 10, [0], 0, 0, 4, 24, ["Heal", "One-handed"]),
+    new Weapon("SG-22 Bushwhacker", 10, [0], 1, 3, 2, 30, ["One-handed", "One-handed"]),
+    new Weapon("P-72 Crisper", 10, [2], 1, 2, 3, 4, ["Fire", "Burn", "One-handed"]),
+    new Weapon("GP-31 Grenade Pistol", 10, [0, 1], 2, 4, 4, 6, ["Explosive", "One-handed"]),
+    new Weapon("LAS-7 Dagger", 10, [3], 1, 2, 4, 3, ["Heatsink", "One-handed"]),
+    new Weapon("GP-31 Ultimatum", 10, [0, 1], 4, 7, 4, 1, ["Explosive", "One-handed"]),
+    new Weapon("PLAS-15 Loyalist", 10, [7], 2, 2, 3, 4, ["Explosive", "One-handed"])
+];
+const weaponsThrowable = [
+    new Weapon("None"),
+    new Weapon("G-6 Frag", 9, [1], 2, 2, 3, 5, ["Explosive"]),
+    new Weapon("G-12 High Explosive", 9, [1], 3, 3, 4, 4, ["Explosive"]),
+    new Weapon("G-10 Incendiary", 9, [1], 2, 2, 4, 4, ["Explosive", "Burn"]),
+    new Weapon("G-16 Impact", 9, [1], 3, 2, 3, 4, ["Explosive", "Impact"]),
+    new Weapon("G-13 Incendiary Impact", 9, [1], 2, 1, 3, 4, ["Explosive", "Burn", "Impact"]),
+    new Weapon("G-23 Stun", 9, [1], 4, 0, 2, 4, ["Explosive", "Stun"]),
+    new Weapon("G-4 Gas", 9, [4], 4, 2, 3, 4, ["Explosive", "Gas"]),
+    new Weapon("G-50 Seeker", 9, [1], 3, 3, 2, 4, ["Explosive", "Impact"]),
+    new Weapon("G-3 Smoke", 9, [1], 0, 0, 3, 4, ["Explosive", "Smoke"]),
+    new Weapon("G-123 Thermite", 9, [1, 2], 4, 7, 3, 3, ["Burn"]),
+    new Weapon("K-2 Throwing Knife", 9, [0], 2, 3, 4, 20)
+];
+const weaponsSupport = [
+    new Weapon("None"),
+    new Weapon("MG-43 Machine Gun", 11, [0], 2, 5, 3, 3, ["Stationary Reload"]),
+    new Weapon("APW-1 Anti-Materiel Rifle", 2, [0], 3, 6, 5, 6),
+    new Weapon("M-105 Stalwart", 11, [0], 1, 4, 4, 3),
+    new Weapon("EAT-17 Expendable Anti-Tank", 12, [0, 1], 4, 7, 5, 0, ["Explosive", "Single Shot"]),
+    new Weapon("GR-8 Recoilless Rifle (HEAT)", 12, [0, 1], 4, 7, 4, 0, ["Explosive", "Stationary Reload", "Backpack"]),
+    new Weapon("GR-8 Recoilless Rifle (HE)", 12, [0, 1], 2, 5, 4, 0, ["Single Shot", "Stationary Reload", "Backpack"]),
+    new Weapon("FLAM-40 Flamethrower", 13, [2], 3, 5, 3, 4, ["Fire", "Burn"]),
+    new Weapon("AC-8 Autocannon (AP)", 0, [0, 1], 3, 5, 4, 10, ["Explosive", "Stationary Reload", "Backpack"]),
+    new Weapon("AC-8 Autocannon (FLAK)", 0, [0, 1], 2, 3, 4, 10, ["Explosive", "Stationary Reload", "Backpack"]),
+    new Weapon("MG-206 Heavy Machine Gun", 11, [0], 3, 6, 2, 2, ["Stationary Reload"]),
+    new Weapon("RL-77 Airburst Rocket Launcher", 12, [1], 2, 7, 3, 0, ["Explosive", "Stationary Reload", "Backpack"]),
+    new Weapon("MLS-4X Commando", 12, [0, 1], 4, 7, 5, 0, ["Explosive", "Laser-guided"]),
+    new Weapon("RS-422 Railgun", 2, [0], 4, 7, 5, 20, ["Single Shot", "Safety Toggle"]),
+    new Weapon("FAF-14 Spear", 12, [0], 4, 7, 4, 0, ["Explosive", "Stationary Reload", "Backpack"]),
+    new Weapon("StA-X3 W.A.S.P. Launcher", 12, [1], 4, 5, 4, 0, ["Explosive", "Stationary Reload", "Backpack"]),
+    new Weapon("GL-21 Grenade Launcher", 12, [1], 2, 4, 4, 3, ["Explosive"]),
+    new Weapon("LAS-98 Laser Cannon", 6, [3], 3, 5, 5, 2, ["Laser", "Burn"]),
+    new Weapon("ARC-3 Arc Thrower", 6, [6], 4, 3, 3, 0, ["Electric", "Chargeup"]),
+    new Weapon("LAS-99 Quasar Cannon", 6, [1, 7], 4, 7, 5, 0, ["Chargeup"]),
+    new Weapon("TX-41 Sterilizer", 13, [4], 4, 2, 5, 4, ["Stagger", "Confuse"]),
+    new Weapon("SG-88 Break-Action Shotgun", 4, [0], 1, 3, 2, 40),
+    new Weapon("Entrenchment Tool", 10, [0], 2, 2, 2, 0, ["One handed", "Shovel"])
 ];
 const stratagems = [
     new Stratagem("Resupply", 0, [DOWN, DOWN, UP, RIGHT], "Deploys a container of four supply packs. Each supply pack fills primary and secondary weapon magazines to full, and all other ammo by half their max."),
@@ -522,45 +527,49 @@ function generateCharacter() {
     }
 };
 
-//for (var weapon of weaponsPrimary) createDDCC("weaponsPrimary", weapon.name);
+const character = new Character();
+const hidden = {};
+
+for (var weapon of weaponsPrimary) createDDCC("weaponsPrimary", weapon.name);
 //for (var weapon of weaponsSecondary) createDDCC("weaponsSecondary", weapon.name);
 //for (var weapon of weaponsThrowable) createDDCC("weaponsThrowable", weapon.name);
 //for (var weapon of weaponsSupport) createDDCC("weaponsSupport", weapon.name);
 
-createDDCC("weaponsPrimary", findWeapon("liberator").name)
+/*createDDCC("weaponsPrimary", findWeapon("liberator").name);
+createDDCC("weaponsPrimary", findWeapon("none").name);*/
 
 function createDDCC(id, name) {
-    const element = document.getElementById(id);
-    var d = document.createElement('div');
+    const element = document.getElementById(id).children[2];
+    var d = document.createElement('button');
     d.setAttribute('class', "dropdown_custom_item");
+    d.setAttribute('onclick', "select(\""+id+"\", \""+name+"\")");
+    hidden[id] = true;
     var h = document.createElement('h4');
     h.appendChild(new Text(name));
     var i = document.createElement('img');
-    i.setAttribute('src', "images/" + name + ".webp");
+   if (name == "None") i.setAttribute('src', "images/" + name + ".png");
+else i.setAttribute('src', "images/" + name + ".webp");
     d.appendChild(h);
     d.appendChild(i);
     element.appendChild(d);
 }
 
-
-
-const hidden = {};
-
 function toggleDisplay(id) {
-    if (!hidden[id]) {
-        hidden[id] = [];
-    }
-
     const element = document.getElementById(id);
-    
-    if (hidden[id].length === 0) {
-        console.log("new");
-        hidden[id].push(element.style.display);
-        element.style.display = "hidden";
+    if (hidden[id]) {
+        hidden[id] = false;
+        element.setAttribute("style", "overflow: visible");
     } else {
-        console.log("remove");
-        element.style.display = hidden[id].pop();
+        hidden[id] = true;
+        element.setAttribute("style", "overflow: hidden");
     }
+}
 
-    console.log(id, element.style.display);
+function select(id, name) {
+    toggleDisplay(id);
+    item = document.getElementById(id).children[1].children[0];
+    console.log(item.children[0]);
+    item.children[0].innerText = name;
+    if (name == "None") item.children[1].setAttribute('src', "images/" + name + ".png");
+    else item.children[1].setAttribute('src', "images/" + name + ".webp");
 }

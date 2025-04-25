@@ -345,6 +345,19 @@ const weaponsSupport = [
     new Weapon("SG-88 Break-Action Shotgun", 4, [0], 1, 3, 2, 40),
     new Weapon("Entrenchment Tool", 10, [0], 2, 2, 2, 0, ["One handed", "Shovel"])
 ];
+tacpacks = [
+    new TacPack("GR-8 Recoilless Rifle Backpack", "Holds 5 extra rounds to reload.", 5 ,5),
+    new TacPack("AC-8 Autocannon", "Holds 10 extra magazines to reload.", 10, 10),
+    new TacPack("StA-X3 W.A.S.P. Launcher", "Holds 5 extra magazines to reload.", 5, 5),
+    new TacPack("LIFT-850 Jump Pack", "Allows the wearer to jump short distances. +5 to movement-related rolls and DCs. 15 second recharge.", 5),
+    new TacPack("B-1 Supply Pack", "Allows the wearer to carry resupply boxes for themself or others. Max 4. Can be refilled with resupply drops.", 4, 4),
+    new TacPack("SH-20 Ballistic Shield Backpack", "Provides portable cover against oncoming fire when wielded. +4 to DC against incoming attacks you can see.", 4),
+    new TacPack("SH-32 Shield Generator Pack", "Provides portable cover against oncoming fire. Takes two successful hits before breaking. 15 second recharge.", 2, 2),
+    new TacPack("AX/AR-23 Guard Dog", "An autonomous drone equipped with a miniature Liberator. CAN BE ATTACKED. Will be forced to return to backpack after three hits.", 3, 3, findWeapon("Liberator")),
+    new TacPack("AX/LAS-5 Guard Dog: Rover", "An autonomous drone equipped with a miniature Scythe. CAN BE ATTACKED. Will be forced to return to backpack after three hits.", 3, 3, findWeapon("Scythe")),
+    new TacPack("AX/TX-13 Guard Dog: Dog Breath", "An autonomous drone equipped with a miniature Sterilizer. CAN BE ATTACKED. Will be forced to return to backpack after three hits.", 3, 3, findWeapon("Sterilizer")),
+    new TacPack("B-100 Portable Hellbomb", "Remember to drop it once armed. 10 second countdown that CANNOT be canceled. Will kill anything within 20 meters of it, will wound anything within 40.", 0) 
+]
 const stratagems = [
     new Stratagem("Resupply", 0, [DOWN, DOWN, UP, RIGHT], "Deploys a container of four supply packs. Each supply pack fills primary and secondary weapon magazines to full, and all other ammo by half their max."),
     new Stratagem("Reinforce", 0, [UP, DOWN, RIGHT, LEFT, UP], "Calls in a new Helldiver to reinforce. Limited to 3 reinforcements per Destroyer."),
@@ -531,9 +544,15 @@ const character = new Character();
 const hidden = {};
 
 for (var weapon of weaponsPrimary) createDDCC("weaponsPrimary", weapon.name);
-//for (var weapon of weaponsSecondary) createDDCC("weaponsSecondary", weapon.name);
-//for (var weapon of weaponsThrowable) createDDCC("weaponsThrowable", weapon.name);
-//for (var weapon of weaponsSupport) createDDCC("weaponsSupport", weapon.name);
+for (var weapon of weaponsSecondary) createDDCC("weaponsSecondary", weapon.name);
+for (var weapon of weaponsThrowable) createDDCC("weaponsThrowable", weapon.name);
+for (var weapon of weaponsSupport) createDDCC("weaponsSupport", weapon.name);
+for (var pack of tacpacks) createDDCC("tacpack", pack.name);
+for (var s of stratagems) createDDCC("stratagem1", s.name);
+for (var s of stratagems) createDDCC("stratagem2", s.name);
+for (var s of stratagems) createDDCC("stratagem3", s.name);
+for (var s of stratagems) createDDCC("stratagem4", s.name);
+//for (var b of boosters) createDDCC("booster", b.name);
 
 /*createDDCC("weaponsPrimary", findWeapon("liberator").name);
 createDDCC("weaponsPrimary", findWeapon("none").name);*/
@@ -558,10 +577,10 @@ function toggleDisplay(id) {
     const element = document.getElementById(id);
     if (hidden[id]) {
         hidden[id] = false;
-        element.setAttribute("style", "overflow: visible");
+        element.setAttribute("style", "overflow: visible; z-index: 5;");
     } else {
         hidden[id] = true;
-        element.setAttribute("style", "overflow: hidden");
+        element.setAttribute("style", "overflow: hidden; z-index: 0;");
     }
 }
 

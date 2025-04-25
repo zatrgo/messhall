@@ -3,6 +3,7 @@
     border: 0;
     padding: 0;
     max-width: 100%;
+    z-index: 0;
     font-family:"FS Sinclair";
     color:white;
 }
@@ -10,6 +11,7 @@
 body {
     background-image: url("images/bg.webp");
     background-size: 100%;
+    background-attachment: fixed;
 }
 
 @media (min-width: 1000px) {
@@ -52,10 +54,14 @@ button {
     width: 100%;
     margin: 0;
     overflow: visible;
+    position: absolute;
+    z-index: 0;
 }
 
 .dropdown_custom_head {
     display: inline-block;
+    position: fixed;
+    z-index: 1;
     background-color: #2d2e30;
     width: 44%;
     padding: 0;
@@ -74,19 +80,12 @@ button {
     height: 100%;
 }
 
-.dropdown_custom_body {
-    display: inline-block;
-    background-color: #2d2e30;
-    width: 55%;
-    height: 60px;
-    padding: 0;
-}
-
 .dropdown_custom_list {
     overflow: hidden;
+    position: absolute;
+    z-index: 0;
     flex-direction: column;
     float:left;
-    z-index: 1;
     margin-left: -7px;
     background-color: #2d2e30;
     width: 100%;
@@ -104,7 +103,7 @@ button {
     padding: 5px;
     color: white;
     font-weight:400;
-    background: none;
+    background: #555020;
 
 }
 .dropdown_custom_item:hover h4 {
@@ -115,7 +114,7 @@ button {
 .dropdown_custom_list .dropdown_custom_item {
     width: var(100% - 5px);
     height: 40px;
-    border-top: 1px solid #96958f90;
+    border-top: 1px solid #96958fa0;
 }
 
 .dropdown_custom_item h4 {
@@ -174,7 +173,7 @@ button {
     align-items: center;
     margin: auto;
     padding: 10px;
-    width: 90%;
+    width: 300px;
     background-color: #0c0c0cc0;
 }
 
@@ -190,20 +189,23 @@ button {
 }
 
 .dropdown_custom {
+    overflow: hidden;
+    position: relative;
     height: 90px;
     width: 100%;
     margin: 0;
-    overflow: visible;
 }
 
 .dropdown_custom_head {
     display: inline-block;
-    background-color: #2d2e30;
+    background-color: #30406055;
     width: 100%;
     padding: 0;
-    height: 45%;
+    height: 40px;
     vertical-align: top;
     align-content: center;
+    border-bottom: 1px solid #88804444;
+    border-top: 2px solid #99993366;
 }
 .dropdown_custom_head h3 {
     display: flex;
@@ -214,18 +216,18 @@ button {
     padding: 5px;
 }
 
-.dropdown_custom_body {
+.dropdown_custom_select {
     display: inline-block;
-    background-color: #2d2e30;
-    width: 100%;
-    height: 50%;
-    padding: 0;
+    background-color: #20254088;
+    width: 270px;
+    height: 40px;
+    padding: 5px;
 }
 
 .dropdown_custom_list {
-    overflow: hidden;
     flex-direction: column;
-    z-index: 1;
+    z-index: 0;
+    margin-left: -5px;
     background-color: #2d2e30;
     width: 100%;
     border: 5px solid #708090;
@@ -234,7 +236,7 @@ button {
 
 .dropdown_custom_item {
     display: flex;
-    height: 50px;
+    height: 40px;
     width: 100%;
     margin: 0;
     padding: 0;
@@ -249,7 +251,8 @@ button {
 }
 
 .dropdown_custom_list .dropdown_custom_item {
-    height: 40px;
+    height: 41px;
+    padding: 0 5px;
     border-top: 1px solid #96958f90;
 }
 
@@ -266,14 +269,13 @@ button {
     font-weight: 400;
 }
 .dropdown_custom_list .dropdown_custom_item h4 {
-    font-size: 20px;
-
+    font-size: 13px;
 }
 .dropdown_custom_item img {
     display: flex;
     align-items: center;
     float: right;
     height: 40px;
+    width: 80px;
 }
-
 }

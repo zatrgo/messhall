@@ -345,10 +345,10 @@ const weaponsSupport = [
     new Weapon("SG-88 Break-Action Shotgun", 4, [0], 1, 3, 2, 40),
     new Weapon("Entrenchment Tool", 10, [0], 2, 2, 2, 0, ["One handed", "Shovel"])
 ];
-tacpacks = [
-    new TacPack("GR-8 Recoilless Rifle Backpack", "Holds 5 extra rounds to reload.", 5 ,5),
-    new TacPack("AC-8 Autocannon", "Holds 10 extra magazines to reload.", 10, 10),
-    new TacPack("StA-X3 W.A.S.P. Launcher", "Holds 5 extra magazines to reload.", 5, 5),
+const tacpacks = [
+    new TacPack("GR-8 Recoilless Rifle Pack", "Holds 5 extra rounds to reload.", 5 ,5),
+    new TacPack("AC-8 Autocannon Pack", "Holds 10 extra magazines to reload.", 10, 10),
+    new TacPack("StA-X3 W.A.S.P. Launcher Pack", "Holds 5 extra magazines to reload.", 5, 5),
     new TacPack("LIFT-850 Jump Pack", "Allows the wearer to jump short distances. +5 to movement-related rolls and DCs. 15 second recharge.", 5),
     new TacPack("B-1 Supply Pack", "Allows the wearer to carry resupply boxes for themself or others. Max 4. Can be refilled with resupply drops.", 4, 4),
     new TacPack("SH-20 Ballistic Shield Backpack", "Provides portable cover against oncoming fire when wielded. +4 to DC against incoming attacks you can see.", 4),
@@ -359,13 +359,13 @@ tacpacks = [
     new TacPack("B-100 Portable Hellbomb", "Remember to drop it once armed. 10 second countdown that CANNOT be canceled. Will kill anything within 20 meters of it, will wound anything within 40.", 0) 
 ]
 const stratagems = [
-    new Stratagem("Resupply", 0, [DOWN, DOWN, UP, RIGHT], "Deploys a container of four supply packs. Each supply pack fills primary and secondary weapon magazines to full, and all other ammo by half their max."),
+    /*new Stratagem("Resupply", 0, [DOWN, DOWN, UP, RIGHT], "Deploys a container of four supply packs. Each supply pack fills primary and secondary weapon magazines to full, and all other ammo by half their max."),
     new Stratagem("Reinforce", 0, [UP, DOWN, RIGHT, LEFT, UP], "Calls in a new Helldiver to reinforce. Limited to 3 reinforcements per Destroyer."),
     new Stratagem("SoS Beacon", 0, [UP, DOWN, RIGHT, UP], "Deploys a beacon to transmit an SoS signal to other Helldivers. Basically a 'join the op' ex machina."),
     new Stratagem("Eagle Rearm", 0, [DOWN, DOWN, UP, RIGHT], "Signals your Destroyer's Eagle to return to the ship to resupply, if one is in flight."),
     new Stratagem("SEAF Artillery", 0, [RIGHT, UP, UP, DOWN], "Calls in an artillery strike from a SEAF Artillery turret, if one has been connected to your Destroyer."),
     new Stratagem("Hellbomb", 0, [DOWN, UP, LEFT, DOWN, UP, RIGHT, DOWN, UP], "Deploys a Hellbomb. Must be armed manually. 10 second fuse."),
-
+    */
     new Stratagem("MG-43 Machine Gun", 1, [DOWN, RIGHT, DOWN, UP, RIGHT], "Deploys a machine gun designed for stationary use. High power, low accuracy."),
     new Stratagem("APW-1 Anti-Materiel Rifle", 1, [DOWN, LEFT, RIGHT, UP, DOWN], "Deploys a high-caliber sniper rifle effective against heavy armor at a distance."),
     new Stratagem("M-105 Stalwart", 1, [DOWN, LEFT, DOWN, UP, UP, LEFT], "Deploys a compact machine gun that trades power for ease of use."),
@@ -436,6 +436,9 @@ const stratagems = [
     new Stratagem("A/AC-8 Autocannon Sentry", 3, [DOWN,UP,RIGHT,RIGHT,DOWN], "Deploys an automated autocannon turret. Turns slowly, but effective against heavy armor at range."),
     new Stratagem("A/MLS-4X Rocket Sentry", 3, [DOWN,UP,RIGHT,RIGHT,LEFT], "Deploys an automated rocket turret. Effective against large groups & heavy armor. Will prioritise larger enemies."),
     new Stratagem("A/FLAM-40 Flame Sentry", 3, [DOWN,UP,RIGHT,DOWN,UP,UP], "Deploys an automated flamethrower turret. Burns through heavy armor and alights terrain. May explode.")
+];
+const boosters = [
+    
 ];
 
 const Ranking = new Enum({
@@ -543,6 +546,7 @@ function generateCharacter() {
 const character = new Character();
 const hidden = {};
 
+for (var armor of [...armorsLight, ...armorsMedium, ...armorsHeavy]) createDDCC("armor", armor.name);
 for (var weapon of weaponsPrimary) createDDCC("weaponsPrimary", weapon.name);
 for (var weapon of weaponsSecondary) createDDCC("weaponsSecondary", weapon.name);
 for (var weapon of weaponsThrowable) createDDCC("weaponsThrowable", weapon.name);
@@ -587,7 +591,6 @@ function toggleDisplay(id) {
 function select(id, name) {
     toggleDisplay(id);
     item = document.getElementById(id).children[1].children[0];
-    console.log(item.children[0]);
     item.children[0].innerText = name;
     if (name == "None") item.children[1].setAttribute('src', "images/" + name + ".png");
     else item.children[1].setAttribute('src', "images/" + name + ".webp");

@@ -8,11 +8,22 @@
     <title>HELLDIVERS: Mess Hall</title>
 </head>
 <body>
-    <div class="header"><img src="images/title_yellow.png", style="object-fit:contain"></div>
-
+    <div class="header"><a href="index.html"><img src="images/title_yellow.png", style="object-fit:contain"></a></div>
     <div class="content">
         <div class="contentcontainer" id="charcreator">
-            
+            <div class="dropdown_custom" id="armor">
+                <div class="dropdown_custom_head">
+                    <h3><u>Armor</u></h3>
+                </div>
+                <div class="dropdown_custom_select">
+                    <button class="dropdown_custom_item" onclick="toggleDisplay('armor')">
+                        <h4>None</h4>
+                        <img src="images/None.png">
+                    </button>
+                </div>
+                <div class="dropdown_custom_list">
+                </div>
+            </div>
             <div class="dropdown_custom" id="weaponsPrimary">
                 <div class="dropdown_custom_head">
                     <h3><u>Primary Weapon</u></h3>
@@ -139,6 +150,12 @@
                 <div class="dropdown_custom_list">
                 </div>
             </div>
+            
+            <button class="confirm">
+                Confirm Loadout
+            </button>
+            
+            
             <script src="sheet creator.js"></script>
         </div>
     </div>

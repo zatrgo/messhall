@@ -191,7 +191,7 @@ button {
 .dropdown_custom {
     overflow: hidden;
     position: relative;
-    height: 90px;
+    height: 70px;
     width: 100%;
     margin: 0;
 }
@@ -201,7 +201,7 @@ button {
     background-color: #30406055;
     width: 100%;
     padding: 0;
-    height: 40px;
+    height: 30px;
     vertical-align: top;
     align-content: center;
     border-bottom: 1px solid #88804444;
@@ -210,7 +210,7 @@ button {
 .dropdown_custom_head h3 {
     display: flex;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 17px;
     justify-content: center;
     align-items: center;
     padding: 5px;
@@ -219,9 +219,8 @@ button {
 .dropdown_custom_select {
     display: inline-block;
     background-color: #20254088;
-    width: 270px;
+    width: 100%;
     height: 40px;
-    padding: 5px;
 }
 
 .dropdown_custom_list {
@@ -240,22 +239,8 @@ button {
     width: 100%;
     margin: 0;
     padding: 0;
-    color: white;
-    font-weight:400;
     background: none;
-
 }
-.dropdown_custom_item:hover h4 {
-    color: yellow;
-    font-weight:500;
-}
-
-.dropdown_custom_list .dropdown_custom_item {
-    height: 41px;
-    padding: 0 5px;
-    border-top: 1px solid #96958f90;
-}
-
 .dropdown_custom_item h4 {
     display: flex;
     float: left;
@@ -265,17 +250,56 @@ button {
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-size: 18px;
+    color: white;
+    font-size: 16px;
     font-weight: 400;
+}
+.dropdown_custom_item img {
+    display: flex;
+    align-items: center ;
+    float: right;
+    height: 100%;
+    width: 80px;
+}
+
+.dropdown_custom_item:hover h4 {
+    color: yellow;
+    font-weight:500;
+}
+
+.dropdown_custom_list .dropdown_custom_item {
+    position: relative;
+    height: 31px;
+    border-top: 1px solid #96958f90;
 }
 .dropdown_custom_list .dropdown_custom_item h4 {
     font-size: 13px;
 }
-.dropdown_custom_item img {
-    display: flex;
-    align-items: center;
-    float: right;
-    height: 40px;
-    width: 80px;
+.dropdown_custom_list .dropdown_custom_item img {
+    width: 60px;
 }
+#stratagem1 .dropdown_custom_select * img, #stratagem2 .dropdown_custom_select * img, #stratagem3 .dropdown_custom_select * img, #stratagem4 .dropdown_custom_select * img {
+    width: 40px;
+}
+#stratagem1 .dropdown_custom_list * img, #stratagem2 .dropdown_custom_list * img, #stratagem3 .dropdown_custom_list * img, #stratagem4 .dropdown_custom_list * img {
+    width: 30px;
+}
+
+
+.confirm {
+    margin: 10px auto;
+    width: 300px;
+    height: 50px;
+    background-color: black;
+    color: #ed0;
+    display: block;
+    align-content: center;
+    font-size: 25px;
+    font-weight: 800;
+}
+.confirm:hover {
+    color: black;
+    background-color: #ed0;
+}
+
 }

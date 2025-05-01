@@ -87,6 +87,39 @@ const Stratatype = new Enum({
     Defensive: 3
 });
 
+const Ranking = new Enum({
+    Citizen: 0,
+    Cadet: 1,
+    Space_Cadet: 2,
+    Sergeant: 3,
+    Master_Sergeant: 4,
+    Chief: 5,
+    Space_Chief_Prime: 6,
+    Death_Captain: 7,
+    Marshal: 8,
+    Star_Marshal: 9,
+    Admiral: 10,
+    Skull_Admiral: 11,
+    Fleet_Admiral: 12,
+    Admirable_Admiral: 13,
+    Commander: 14,
+    Galactic_Commander: 15,
+    Hell_Commander: 16,
+    General: 17,
+    Five_Star_General: 18,
+    Ten_Star_General: 19,
+    Private: 20,
+    Super_Private: 21,
+    Super_Citizen: -1,
+    Viper_Commando: -2,
+    Fire_Safety_Officer: -3,
+    Expert_Exterminator: -4,
+    Free_of_Thought: -5,
+    Super_Pedestrian: -6,
+    Assault_Infantry: -7,
+    Servant_of_Freedom: -8
+});
+
 class Armor {
     constructor(name, plating = 0, resistance = 0, passive = "") {
         this.name = name;
@@ -99,18 +132,21 @@ class Armor {
         return `${this.name} (${this.plating} Armor, ${this.resistance} Resistance, PASSIVE: "${this.passive}")`;
     }
 }
-
 function findArmor(name, plating = 0) {
-    const allArmors = [...armorsLight, ...armorsMedium,  ...armorsHeavy];
-    const armorLists = [allArmors, armorsLight, armorsMedium, armorsHeavy];
-    const armors = armorLists[plating] || allArmors;
-    return armors.find(armor => armor.name.toLowerCase().includes(name.toLowerCase())) || new Armor("None");
+
+    if (plating == 0) 
+        return armors.find(armor => armor.name.toLowerCase().includes(name.toLowerCase())) || new Armor("None");
+    else if (plating > 3) return armorsSpecial.find(armor => armor.name.toLowerCase().includes(name.toLowerCase())) || new Armor("None");
+    else {
+        const armorp = armors.filter(armor => armor.plating === Thickness.name(plating));
+        return armorp.find(armor => armor.name.toLowerCase().includes(name.toLowerCase())) || new Armor("None");
+    }
 }
 
 class Weapon {
     constructor(name, weaponType = 0, damageType = [], penetration = 0, damage = 0, accuracy = 0, maxReloads = 0, passives = []) {
         this.name = name;
-        this.weaponType = weaponType;
+        this.weaponType = WeaponType.name(weaponType);
         this.damageType = damageType.map(dt => DamageType.name(dt));
         this.penetration = Thickness.name(penetration);
         this.damage = Damage.name(damage);
@@ -126,7 +162,6 @@ class Weapon {
         return `${this.name} (${WeaponType.name(this.weaponType)}, DMG TYPE: ${damageTypes}, ${this.penetration} Penetrating, ${this.damage} Damage, ${this.accuracy} Accuracy, Max Reloads: ${this.maxReloads}, PASSIVES: ${passives})`;
     }
 }
-
 function findWeapon(name, slot = 0) {
     if (name.toLowerCase == "none") return new Weapon("None");
     const allWeapons = [...weaponsPrimary, ...weaponsSecondary, ...weaponsThrowable, ...weaponsSupport];
@@ -148,16 +183,15 @@ class TacPack {
         return `${this.name}: ${this.description}`;
     }
 }
-
 function findTacPack(name) {
     return tacpacks.find(pack => pack.name.toLowerCase().includes(name.toLowerCase())) || null;
 }
 
 class Stratagem {
-    constructor(name, stratatype, code, description = "", modifier = [], cooldown = 0) {
+    constructor(name, type=0, code=[], description = "", modifier = [], cooldown = 0) {
         this.name = name;
-        this.stratatype = Stratatype.name(stratatype);
-        this.code = code;
+        this.type = Stratatype.name(type);
+        this.code = code.map(value => StratInput.name(value));
         this.description = description;
         this.cooldown = cooldown;
     }
@@ -166,13 +200,23 @@ class Stratagem {
         return `${this.name}: ${this.description}`;
     }
 }
-
 function findStratagem(name) {
     return stratagems.find(stratagem => stratagem.name.toLowerCase().includes(name.toLowerCase())) || null;
 }
 
-const armorsLight = [
-    new Armor("SC-34 Infilitrator", 1, 3, "Scout"),
+class Booster {
+    constructor(name, description="", modifier="") {
+        this.name = name;
+        this.description = description;
+        this.modifier = modifier;
+    }
+    toString() {return `${this.name}: ${this.description}`;}
+}
+
+const armors = [
+    new Armor("None"),
+
+    new Armor("SC-34 Infiltrator", 1, 3, "Scout"),
     new Armor("SC-30 Trailblazer Scout", 1, 2, "Scout"),
     new Armor("AC-2 Obedient", 1, 2, "Acclimated"),
     new Armor("EX-00 Prototype X", 1, 2, "Electrical Conduit"),
@@ -183,16 +227,16 @@ const armorsLight = [
     new Armor("AF-50 Noxious Ranger", 1, 2, "Advanced Filtration"),
     new Armor("UF-16 Inspector", 1, 2, "Unflinching"),
     new Armor("SR-24 Street Scout", 1, 2, "Siege-Ready"),
-    new Armor("SC-37 Legionnare", 1, 2, "Servo-Assisted"),
+    new Armor("SC-37 Legionnaire", 1, 2, "Servo-Assisted"),
     new Armor("CE-74 Breaker", 1, 2, "Engineering Kit"),
     new Armor("FS-38 Eradicator", 1, 2, "Fortified"),
     new Armor("B-08 Light Gunner", 1, 2, "Extra Padding"),
     new Armor("CM-21 Trench Paramedic", 1, 3, "Med-Kit"),
     new Armor("CE-67 Titan", 1, 3, "Engineering Kit"),
     new Armor("FS-37 Ravager", 1, 2, "Engineering Kit"),
-    new Armor("IE-57 Hell-Bent", 1, 2, "Integrated Explosives")
-];
-const armorsMedium = [
+    new Armor("IE-57 Hell-Bent", 1, 2, "Integrated Explosives"),
+    new Armor("GS-11 Democracy's Deputy", 1, 2, "Gunslinger"),
+
     new Armor("B-01 Tactical", 2, 3, "Extra Padding"),
     new Armor("CE-35 Trench Engineer", 2, 3, "Engineering Kit"),
     new Armor("CM-09 Bonesnapper", 2, 3, "Med-Kit"),
@@ -225,9 +269,9 @@ const armorsMedium = [
     new Armor("I-92 Fire Fighter", 2, 3, "Inflammable"),
     new Armor("AF-91 Field Chemist", 2, 3, "Advanced Filtration"),
     new Armor("UF-84 Doubt Killer", 2, 3, "Unflinching"),
-    new Armor("AC-1 Dutiful", 2, 3, "Acclimated")
-];
-const armorsHeavy = [
+    new Armor("AC-1 Dutiful", 2, 3, "Acclimated"),
+    new Armor("GS-17 Frontier Marshal", 2, 3, "Gunslinger"),
+
     new Armor("FS-05 Marksman", 3, 4, "Fortified"),
     new Armor("FS-23 Battle Master", 3, 4, "Fortified"),
     new Armor("TR-62 Knight", 3, 4, "Servo-Assisted"),
@@ -249,7 +293,8 @@ const armorsHeavy = [
 ];
 const armorsSpecial = [
     new Armor("SH-20 Ballistic Shield", 2, 4, "Backpack"),
-    new Armor("SH-32 Spherical Shield", 1, 2, "Backpack")
+    new Armor("SH-32 Spherical Shield", 1, 2, "Backpack"),
+    new Armor("SH-51 Directional Shield", 2, 3, "Backpack")
 ];
 const weaponsPrimary = [
     new Weapon("None"),
@@ -261,8 +306,9 @@ const weaponsPrimary = [
     new Weapon("AR-61 Tenderizer", 0, [0], 1, 4, 3, 7),
     new Weapon("BR-14 Adjudicator", 0, [0], 2, 4, 2, 8),
     new Weapon("R-2124 Constitution", 1, [0], 1, 4, 4, 99),
+    new Weapon("R-6 Deadeye", 1, [0], 2, 4, 4, 60),
     new Weapon("R-63 Diligence", 1, [0], 1, 4, 4, 8),
-    new Weapon("R-63CS Diligence Counter-Sniper", 1, [0], 2, 4, 3, 6),
+    new Weapon("R-63CS Diligence Counter Sniper", 1, [0], 2, 4, 3, 6),
     new Weapon("PLAS-39 Accelerator Rifle", 2, [1, 7], 2, 4, 5, 8),
     new Weapon("SMG-37 Defender", 3, [0], 1, 3, 3, 7, ["One-handed"]),
     new Weapon("SMG-72 Pummeler", 3, [0], 1, 2, 2, 7, ["One-handed", "Stagger"]),
@@ -272,7 +318,7 @@ const weaponsPrimary = [
     new Weapon("SG-8 Punisher", 4, [0], 1, 4, 2, 60),
     new Weapon("SG-8S Slugger", 4, [0], 2, 3, 3, 60),
     new Weapon("SG-225 Breaker", 4, [0], 1, 4, 1, 7),
-    new Weapon("SG-225SP Breaker Spray&Pray", 4, [0], 1, 3, 1, 8),
+    new Weapon("SG-225SP Breaker Spray & Pray", 4, [0], 1, 3, 1, 8),
     new Weapon("SG-225IE Breaker Incendiary", 4, [0, 2], 1, 3, 1, 4, ["Burn"]),
     new Weapon("SG-451 Cookout", 4, [0, 2], 1, 4, 2, 60, ["Burn"]),
     new Weapon("SG-20 Halt (Flechette)", 4, [0], 2, 3, 3, 30),
@@ -301,6 +347,7 @@ const weaponsSecondary = [
     new Weapon("P-11 Stim Pistol", 10, [0], 0, 0, 4, 24, ["Heal", "One-handed"]),
     new Weapon("SG-22 Bushwhacker", 10, [0], 1, 3, 2, 30, ["One-handed", "One-handed"]),
     new Weapon("P-72 Crisper", 10, [2], 1, 2, 3, 4, ["Fire", "Burn", "One-handed"]),
+    new Weapon("LAS-58 Talon", 10, [3], 2, 3, 3, 3, ["Heatsink", "One-handed"]),
     new Weapon("GP-31 Grenade Pistol", 10, [0, 1], 2, 4, 4, 6, ["Explosive", "One-handed"]),
     new Weapon("LAS-7 Dagger", 10, [3], 1, 2, 4, 3, ["Heatsink", "One-handed"]),
     new Weapon("GP-31 Ultimatum", 10, [0, 1], 4, 7, 4, 1, ["Explosive", "One-handed"]),
@@ -310,6 +357,7 @@ const weaponsThrowable = [
     new Weapon("None"),
     new Weapon("G-6 Frag", 9, [1], 2, 2, 3, 5, ["Explosive"]),
     new Weapon("G-12 High Explosive", 9, [1], 3, 3, 4, 4, ["Explosive"]),
+    new Weapon("TED-63 Dynamite", 9, [1], 2, 4, 2, 4, ["Explosive"]),
     new Weapon("G-10 Incendiary", 9, [1], 2, 2, 4, 4, ["Explosive", "Burn"]),
     new Weapon("G-16 Impact", 9, [1], 3, 2, 3, 4, ["Explosive", "Impact"]),
     new Weapon("G-13 Incendiary Impact", 9, [1], 2, 1, 3, 4, ["Explosive", "Burn", "Impact"]),
@@ -346,17 +394,19 @@ const weaponsSupport = [
     new Weapon("Entrenchment Tool", 10, [0], 2, 2, 2, 0, ["One handed", "Shovel"])
 ];
 const tacpacks = [
-    new TacPack("GR-8 Recoilless Rifle Pack", "Holds 5 extra rounds to reload.", 5 ,5),
-    new TacPack("AC-8 Autocannon Pack", "Holds 10 extra magazines to reload.", 10, 10),
-    new TacPack("StA-X3 W.A.S.P. Launcher Pack", "Holds 5 extra magazines to reload.", 5, 5),
-    new TacPack("LIFT-850 Jump Pack", "Allows the wearer to jump short distances. +5 to movement-related rolls and DCs. 15 second recharge.", 5),
-    new TacPack("B-1 Supply Pack", "Allows the wearer to carry resupply boxes for themself or others. Max 4. Can be refilled with resupply drops.", 4, 4),
-    new TacPack("SH-20 Ballistic Shield Backpack", "Provides portable cover against oncoming fire when wielded. +4 to DC against incoming attacks you can see.", 4),
-    new TacPack("SH-32 Shield Generator Pack", "Provides portable cover against oncoming fire. Takes two successful hits before breaking. 15 second recharge.", 2, 2),
-    new TacPack("AX/AR-23 Guard Dog", "An autonomous drone equipped with a miniature Liberator. CAN BE ATTACKED. Will be forced to return to backpack after three hits.", 3, 3, findWeapon("Liberator")),
-    new TacPack("AX/LAS-5 Guard Dog: Rover", "An autonomous drone equipped with a miniature Scythe. CAN BE ATTACKED. Will be forced to return to backpack after three hits.", 3, 3, findWeapon("Scythe")),
-    new TacPack("AX/TX-13 Guard Dog: Dog Breath", "An autonomous drone equipped with a miniature Sterilizer. CAN BE ATTACKED. Will be forced to return to backpack after three hits.", 3, 3, findWeapon("Sterilizer")),
-    new TacPack("B-100 Portable Hellbomb", "Remember to drop it once armed. 10 second countdown that CANNOT be canceled. Will kill anything within 20 meters of it, will wound anything within 40.", 0) 
+    new TacPack("None", "None"),
+    new TacPack("GR-8 Recoilless Rifle Loadpack", "Holds 5 extra rounds to reload.", "RELOADS +5"),
+    new TacPack("AC-8 Autocannon Loadpack", "Holds 10 extra magazines to reload.", "RELOADS +10"),
+    new TacPack("StA-X3 W.A.S.P. Launcher Loadpack", "Holds 5 extra magazines to reload.", "RELOADS +5"),
+    new TacPack("LIFT-850 Jump Pack", "Allows the wearer to jump short distances. +5 to movement-related rolls and DCs. 15 second recharge.", "SPE +5"),
+    new TacPack("B-1 Supply Pack", "Allows the wearer to carry resupply boxes for themself or others. Max 4. Can be refilled with resupply drops.", "SUPPLY +4"),
+    new TacPack("SH-20 Ballistic Shield Pack", "Provides portable cover against oncoming fire you can see, when wielded. Withstands 6 hits capable of Medium penetration or higher before breaking.", "", 6, findArmor("Ballistic Shield")),
+    new TacPack("SH-32 Shield Generator Pack", "Provides portable cover against oncoming fire from all directions. Withstands 3 hits before breaking. 15 second recharge.", "", 2, findArmor("Spherical Shield")),
+    new TacPack("SH-51 Directional Shield Pack", "Provides portable cover against oncoming fire you can see, when wielded. Withstands 3 hits capable of Medium penetration or higher before breaking. 20 second recharge.", 0, 3, findArmor("Directional Shield")),
+    new TacPack("AX/AR-23 \"Guard Dog\"", "An autonomous drone equipped with a miniature Liberator. CAN BE ATTACKED. Will be forced to return to backpack after three hits to repair.", "ARMOR +8", 3, findWeapon("Liberator")),
+    new TacPack("AX/LAS-5 \"Guard Dog\" Rover", "An autonomous drone equipped with a miniature Scythe. CAN BE ATTACKED. Will be forced to return to backpack after three hits to repair.", "ARMOR +8", 3, findWeapon("Scythe")),
+    new TacPack("AX/TX-13 \"Guard Dog\" Dog Breath", "An autonomous drone equipped with a miniature Sterilizer. CAN BE ATTACKED. Will be forced to return to backpack after three hits to repair.", "ARMOR +8", 3, findWeapon("Sterilizer")),
+    new TacPack("B-100 Portable Hellbomb", "Remember to drop it once armed. 10 second countdown that CANNOT be canceled. Will kill anything within 20 meters of it, will wound and launch anything within 50.") 
 ]
 const stratagems = [
     /*new Stratagem("Resupply", 0, [DOWN, DOWN, UP, RIGHT], "Deploys a container of four supply packs. Each supply pack fills primary and secondary weapon magazines to full, and all other ammo by half their max."),
@@ -366,6 +416,8 @@ const stratagems = [
     new Stratagem("SEAF Artillery", 0, [RIGHT, UP, UP, DOWN], "Calls in an artillery strike from a SEAF Artillery turret, if one has been connected to your Destroyer."),
     new Stratagem("Hellbomb", 0, [DOWN, UP, LEFT, DOWN, UP, RIGHT, DOWN, UP], "Deploys a Hellbomb. Must be armed manually. 10 second fuse."),
     */
+    new Stratagem("None"),
+    
     new Stratagem("MG-43 Machine Gun", 1, [DOWN, RIGHT, DOWN, UP, RIGHT], "Deploys a machine gun designed for stationary use. High power, low accuracy."),
     new Stratagem("APW-1 Anti-Materiel Rifle", 1, [DOWN, LEFT, RIGHT, UP, DOWN], "Deploys a high-caliber sniper rifle effective against heavy armor at a distance."),
     new Stratagem("M-105 Stalwart", 1, [DOWN, LEFT, DOWN, UP, UP, LEFT], "Deploys a compact machine gun that trades power for ease of use."),
@@ -385,15 +437,16 @@ const stratagems = [
     new Stratagem("LAS-99 Quasar Cannon", 1, [DOWN, DOWN, UP, LEFT, RIGHT], "Deploys a weapon that charges up to fire a single explosive energy burst. Specialized for vehicle armor."),
 
     new Stratagem("LIFT-850 Jump Pack", 1, [DOWN, UP, UP, DOWN, UP], "Deploys a Tac-pack that allows the wearer to jump short distances quickly."),
+    new Stratagem("LIFT-860 Hover Pack", 1, [DOWN, UP, UP, DOWN, LEFT, RIGHT], "Deploys a Tac-pack that allows the wearer to hover in midair for a short time."),
     new Stratagem("B-1 Supply Pack", 1, [DOWN, LEFT, UP, DOWN, RIGHT], "Deploys a Tac-pack that allows the wearer to carry resupply boxes for themself or others."),
     new Stratagem("SH-20 Ballistic Shield Pack", 1, [DOWN, LEFT, UP, DOWN, LEFT], "Deploys a Tac-pack that provides a one-handed front-facing ballistic shield."),
     new Stratagem("SH-32 Shield Generator Pack", 1, [DOWN, LEFT, UP, DOWN, RIGHT], "Deploys a Tac-pack that encloses a spherical energy shield around the wearer."),
     new Stratagem("SH-51 Directional Shield Pack", 1, [DOWN, LEFT, UP, DOWN, RIGHT], "Deploys a Tac-pack that provides a one-handed device which creates a front-facing energy shield."),
-    new Stratagem("AX/AR-23 Guard Dog", 1, [DOWN, UP, LEFT, UP, RIGHT, DOWN], "Deploys a Tac-pack that releases an autonomous drone equipped with a miniature Liberator."),
-    new Stratagem("AX/LAS-5 Guard Dog: Rover", 1, [DOWN, UP, LEFT, UP, RIGHT, RIGHT], "Deploys a Tac-pack that releases an autonomous drone equipped with a miniature Scythe."),
-    new Stratagem("AX/TX-13 Guard Dog: Dog Breath", 1, [DOWN, UP, LEFT, UP, RIGHT, UP], "Deploys a Tac-pack that releases an autonomous drone equipped with a miniature Sterilizer."),
+    new Stratagem("AX/AR-23 \"Guard Dog\"", 1, [DOWN, UP, LEFT, UP, RIGHT, DOWN], "Deploys a Tac-pack that releases an autonomous drone equipped with a miniature Liberator."),
+    new Stratagem("AX/LAS-5 \"Guard Dog\" Rover", 1, [DOWN, UP, LEFT, UP, RIGHT, RIGHT], "Deploys a Tac-pack that releases an autonomous drone equipped with a miniature Scythe."),
+    new Stratagem("AX/TX-13 \"Guard Dog\" Dog Breath", 1, [DOWN, UP, LEFT, UP, RIGHT, UP], "Deploys a Tac-pack that releases an autonomous drone equipped with a miniature Sterilizer."),
     new Stratagem("B-100 Portable Hellbomb", 1, [DOWN, LEFT, UP, DOWN, LEFT], "Deploys a Tac-pack with a miniaturized Hellbomb. Remember to drop it once armed."),
-
+    
     new Stratagem("M-102 Fast Recon Vehicle", 1, [LEFT, DOWN, RIGHT, DOWN, RIGHT, DOWN, UP], "Calls in a vehicle with a mounted machinegun. Carries up to five people."),
     new Stratagem("EXO-45 Patriot Exosuit", 1, [LEFT, DOWN, RIGHT, UP, LEFT, DOWN, DOWN], "Calls in an armored walking mechsuit equipped with a minigun and rocket launcher."),
     new Stratagem("EXO-49 Emancipator Exosuit", 1, [LEFT, DOWN, RIGHT, UP, LEFT, DOWN, UP], "Calls in an armored walking mechsuit equipped with a dual autocannons."),
@@ -435,50 +488,35 @@ const stratagems = [
     new Stratagem("A/M-23 EMS Mortar Sentry", 3, [DOWN,UP,RIGHT,DOWN,RIGHT], "Deploys an automated mortar turret that fires static field generators to stun and slow enemies."),
     new Stratagem("A/AC-8 Autocannon Sentry", 3, [DOWN,UP,RIGHT,RIGHT,DOWN], "Deploys an automated autocannon turret. Turns slowly, but effective against heavy armor at range."),
     new Stratagem("A/MLS-4X Rocket Sentry", 3, [DOWN,UP,RIGHT,RIGHT,LEFT], "Deploys an automated rocket turret. Effective against large groups & heavy armor. Will prioritise larger enemies."),
-    new Stratagem("A/FLAM-40 Flame Sentry", 3, [DOWN,UP,RIGHT,DOWN,UP,UP], "Deploys an automated flamethrower turret. Burns through heavy armor and alights terrain. May explode.")
+    new Stratagem("A/FLAM-40 Flame Sentry", 3, [DOWN,UP,RIGHT,DOWN,UP,UP], "Deploys an automated flamethrower turret. Burns through heavy armor and alights terrain. May explode."),
+
+    new Stratagem("Orbital Blanket Burst", 2, [RIGHT, UP, RIGHT], "Calls a single precise strike that explodes in the air, raining an indiscriminate number of blankets over a small area."),
 ];
 const boosters = [
-    
+    new Booster("None"),
+    new Booster("Hellpod Space Optimization", "Helldiver hellpods are fully stocked with ammo and supplies.", "AMMO MAX"),
+    new Booster("Vitality Enhancement", "All damage taken is minorly reduced.", "CON +2"),
+    new Booster("UAV Recon Booster", "Scanner ranges are increased." , "PER +1"),
+    new Booster("Stamina Enhancement", "Stamina capacity and recovery is improved.", "CON +1,SPE +1"),
+    new Booster("Muscle Enhancement", "Improves traversal capability over difficult terrain.", "STR +1,CON +1"),
+    new Booster("Increased Reinforcement Budget", "Authorizes one extra Helldiver for backup.", ""),
+    new Booster("Flexible Reinforcement Budget", "", ""),
+    new Booster("Localization Confusion", "Disrupts enemy scanners from accurately identifying your location", "STE +2"),
+    new Booster("Expert Extraction Pilot", "Improves your ability to get the hell out of dodge", "SPE +1,STE+1"),
+    new Booster("Motivational Shocks", "Improves recovery time after being damaged", " CON +1,PRE +1"),
+    new Booster("Experimental Infusion", "Stims temporarily increase movement speed and damage reduction.", "STIM(SPE +2,CON+2)"),
+    new Booster("Firebomb Hellpods", "Hellpods are equipped with volatile incendiary shells that explode on impact.", ""),
+    new Booster("Dead Sprint", "Increases speed and sprinting capability at the cost of health", "+SPE +2,CON -2"),
+    new Booster("Armed Resupply Pods", "All resupply pods are equipped with an autonomous Liberator.", ""),
+    new Booster("Sample Extricator", "Improves your ability to identify enemy weak points", "PRE +1,PER +1"),
 ];
-
-const Ranking = new Enum({
-    Citizen: 0,
-    Cadet: 1,
-    Space_Cadet: 2,
-    Sergeant: 3,
-    Master_Sergeant: 4,
-    Chief: 5,
-    Space_Chief_Prime: 6,
-    Death_Captain: 7,
-    Marshal: 8,
-    Star_Marshal: 9,
-    Admiral: 10,
-    Skull_Admiral: 11,
-    Fleet_Admiral: 12,
-    Admirable_Admiral: 13,
-    Commander: 14,
-    Galactic_Commander: 15,
-    Hell_Commander: 16,
-    General: 17,
-    Five_Star_General: 18,
-    Ten_Star_General: 19,
-    Private: 20,
-    Super_Private: 21,
-    Super_Citizen: -1,
-    Viper_Commando: -2,
-    Fire_Safety_Officer: -3,
-    Expert_Exterminator: -4,
-    Free_of_Thought: -5,
-    Super_Pedestrian: -6,
-    Assault_Infantry: -7,
-    Servant_of_Freedom: -8
-});
 
 class Character {
     constructor() {
         this.name = "";
         this.rank = null;
         this.faction = "";
+
         this.strength = 0;
         this.constitution = 0;
         this.speed = 0;
@@ -546,52 +584,186 @@ function generateCharacter() {
 const character = new Character();
 const hidden = {};
 
-for (var armor of [...armorsLight, ...armorsMedium, ...armorsHeavy]) createDDCC("armor", armor.name);
-for (var weapon of weaponsPrimary) createDDCC("weaponsPrimary", weapon.name);
-for (var weapon of weaponsSecondary) createDDCC("weaponsSecondary", weapon.name);
-for (var weapon of weaponsThrowable) createDDCC("weaponsThrowable", weapon.name);
-for (var weapon of weaponsSupport) createDDCC("weaponsSupport", weapon.name);
-for (var pack of tacpacks) createDDCC("tacpack", pack.name);
-for (var s of stratagems) createDDCC("stratagem1", s.name);
-for (var s of stratagems) createDDCC("stratagem2", s.name);
-for (var s of stratagems) createDDCC("stratagem3", s.name);
-for (var s of stratagems) createDDCC("stratagem4", s.name);
-//for (var b of boosters) createDDCC("booster", b.name);
-
-/*createDDCC("weaponsPrimary", findWeapon("liberator").name);
-createDDCC("weaponsPrimary", findWeapon("none").name);*/
+function createCC() {
+    for (var armor of armors) createDDCC("armor", armor.name);
+    for (var weapon of weaponsPrimary) createDDCC("weaponsPrimary", weapon.name);
+    for (var weapon of weaponsSecondary) createDDCC("weaponsSecondary", weapon.name);
+    for (var weapon of weaponsThrowable) createDDCC("weaponsThrowable", weapon.name);
+    for (var weapon of weaponsSupport) createDDCC("weaponsSupport", weapon.name);
+    for (var pack of tacpacks) createDDCC("tacpack", pack.name);
+    for (var s of stratagems) createDDCC("stratagem1", s.name);
+    for (var s of stratagems) createDDCC("stratagem2", s.name);
+    for (var s of stratagems) createDDCC("stratagem3", s.name);
+    for (var s of stratagems) createDDCC("stratagem4", s.name);
+    for (var b of boosters) createDDCC("booster", b.name);
+}
 
 function createDDCC(id, name) {
     const element = document.getElementById(id).children[2];
     var d = document.createElement('button');
     d.setAttribute('class', "dropdown_custom_item");
     d.setAttribute('onclick', "select(\""+id+"\", \""+name+"\")");
+    d.style.overflow = "hidden";
+    d.style.zIndex = 0;
     hidden[id] = true;
     var h = document.createElement('h4');
     h.appendChild(new Text(name));
     var i = document.createElement('img');
-   if (name == "None") i.setAttribute('src', "images/" + name + ".png");
-else i.setAttribute('src', "images/" + name + ".webp");
+
+    i.setAttribute('src', "images/" + img(name) + ".webp");
+
     d.appendChild(h);
     d.appendChild(i);
     element.appendChild(d);
 }
 
-function toggleDisplay(id) {
-    const element = document.getElementById(id);
-    if (hidden[id]) {
-        hidden[id] = false;
-        element.setAttribute("style", "overflow: visible; z-index: 5;");
-    } else {
-        hidden[id] = true;
-        element.setAttribute("style", "overflow: hidden; z-index: 0;");
-    }
+function img(name) {
+    if (name.includes("(")) name = name.split(" (")[0];
+    if (name.includes("\"")) name = name.replaceAll("\"", "\'");
+    if (name.includes("/")) name = name.replace("/", "-");
+    if (name.includes(" Loadpack")) name = name.replace(" Loadpack", "");
+    return name;
 }
 
-function select(id, name) {
-    toggleDisplay(id);
-    item = document.getElementById(id).children[1].children[0];
-    item.children[0].innerText = name;
-    if (name == "None") item.children[1].setAttribute('src', "images/" + name + ".png");
-    else item.children[1].setAttribute('src', "images/" + name + ".webp");
+function confirm() {
+    var armor =     armors.findIndex(i => i.name == document.getElementById("armor")            .children[1].children[0].children[0].innerText);
+    var weapon1 =   weaponsPrimary.findIndex(i => i.name == document.getElementById("weaponsPrimary")   .children[1].children[0].children[0].innerText);
+    var weapon2 =   weaponsSecondary.findIndex(i => i.name == document.getElementById("weaponsSecondary") .children[1].children[0].children[0].innerText);
+    var weaponT =   weaponsThrowable.findIndex(i => i.name == document.getElementById("weaponsThrowable") .children[1].children[0].children[0].innerText);
+    var weaponS =   weaponsSupport.findIndex(i => i.name == document.getElementById("weaponsSupport")   .children[1].children[0].children[0].innerText);
+    var pack =      tacpacks.findIndex(i => i.name == document.getElementById("tacpack")          .children[1].children[0].children[0].innerText);
+    var s1 =        stratagems.findIndex(i => i.name == document.getElementById("stratagem1")       .children[1].children[0].children[0].innerText);
+    var s2 =        stratagems.findIndex(i => i.name == document.getElementById("stratagem2")       .children[1].children[0].children[0].innerText);
+    var s3 =        stratagems.findIndex(i => i.name == document.getElementById("stratagem3")       .children[1].children[0].children[0].innerText);
+    var s4 =        stratagems.findIndex(i => i.name == document.getElementById("stratagem4")       .children[1].children[0].children[0].innerText);
+    var boost =     boosters.findIndex(i => i.name == document.getElementById("booster")          .children[1].children[0].children[0].innerText);
+    console.log(armor, weapon1, weapon2, weaponT, weaponS, pack, s1, s2, s3, s4, boost);
+    const code = armor.toString().padStart(2, '0') +
+                weapon1.toString().padStart(2, '0') +
+                weapon2.toString().padStart(2, '0') +
+                weaponT.toString().padStart(2, '0') +
+                weaponS.toString().padStart(2, '0') +
+                pack.toString().padStart(2, '0') +
+                s1.toString().padStart(2, '0') +
+                s2.toString().padStart(2, '0') +
+                s3.toString().padStart(2, '0') +
+                s4.toString().padStart(2, '0') +
+                boost.toString().padStart(2, '0');
+    console.log(code);
+
+    window.open("charactersheet.html?code=" + code, "_blank");
+}
+
+function getLoadout(code) {
+    const armor = armors[new Number(code.slice(0, 2))];
+    const weapon1 = weaponsPrimary[new Number(code.slice(2, 4))];
+    const weapon2 = weaponsSecondary[new Number(code.slice(4, 6))];
+    const weaponT = weaponsThrowable[new Number(code.slice(6, 8))];
+    const weaponS = weaponsSupport[new Number(code.slice(8, 10))];
+    const pack = tacpacks[new Number(code.slice(10, 12))];
+    const s1 = stratagems[new Number(code.slice(12, 14))];
+    const s2 = stratagems[new Number(code.slice(14, 16))];
+    const s3 = stratagems[new Number(code.slice(16, 18))];
+    const s4 = stratagems[new Number(code.slice(18, 20))];
+    const boost = boosters[new Number(code.slice(20, 22))];
+
+    console.log(armor, weapon1, weapon2, weaponT, weaponS, pack, s1, s2, s3, s4, boost);
+
+    var item = null;
+
+    item = document.getElementById("armor");
+    item.children[0].innerText = "Name: " + armor.name;
+    item.children[1].children[0].innerText = "Plating: " + armor.plating;
+    item.children[1].children[1].innerText = "Resistance: " + armor.resistance;
+    item.children[1].children[2].innerText = "Passive: " + armor.passive;
+
+    item = document.getElementById("weaponsPrimary");
+    item.children[0].innerText = "Name: " + weapon1.name;
+    item.children[1].children[0].innerText = "Weapon Type: " + weapon1.weaponType;
+    item.children[1].children[1].innerText = "Damage Type: " + weapon1.damageType;
+    item.children[1].children[2].innerText = "Penetration: " + weapon1.penetration;
+    item.children[1].children[3].innerText = "Damage: " + weapon1.damage;
+    item.children[1].children[4].innerText = "Accuracy: " + weapon1.accuracy;
+    item.children[1].children[5].innerText = "Reloads: " + weapon1.reloads;
+    item.children[1].children[6].innerText = "Passives: " + (weapon1.passives || "None");
+    item.children[2].setAttribute("src", "images/" + img(weapon1.name) + ".webp");
+
+    item = document.getElementById("weaponsSecondary");
+    item.children[0].innerText = "Name: " + weapon2.name;
+    item.children[1].children[0].innerText = "Weapon Type: " + weapon2.weaponType;
+    item.children[1].children[1].innerText = "Damage Type: " + weapon2.damageType;
+    item.children[1].children[2].innerText = "Penetration: " + weapon2.penetration;
+    item.children[1].children[3].innerText = "Damage: " + weapon2.damage;
+    item.children[1].children[4].innerText = "Accuracy: " + weapon2.accuracy;
+    item.children[1].children[5].innerText = "Reloads: " + weapon2.reloads;
+    item.children[1].children[6].innerText = "Passives: " + (weapon2.passives || "None");
+    item.children[2].setAttribute("src", "images/" + img(weapon2.name) + ".webp");
+
+    item = document.getElementById("weaponsThrowable");
+    item.children[0].innerText = "Name: " + weaponT.name;
+    item.children[1].children[0].innerText = "Weapon Type: " + weaponT.weaponType;
+    item.children[1].children[1].innerText = "Damage Type: " + weaponT.damageType;
+    item.children[1].children[2].innerText = "Penetration: " + weaponT.penetration;
+    item.children[1].children[3].innerText = "Damage: " + weaponT.damage;
+    item.children[1].children[4].innerText = "Accuracy: " + weaponT.accuracy;
+    item.children[1].children[5].innerText = "Reloads: " + weaponT.reloads;
+    item.children[1].children[6].innerText = "Passives: " + (weaponT.passives || "None");
+    item.children[2].setAttribute("src", "images/" + img(weaponT.name) + ".webp");
+
+    item = document.getElementById("weaponsSupport");
+    item.children[0].innerText = "Name: " + weaponS.name;
+    item.children[1].children[0].innerText = "Weapon Type: " + weaponS.weaponType;
+    item.children[1].children[1].innerText = "Damage Type: " + weaponS.damageType;
+    item.children[1].children[2].innerText = "Penetration: " + weaponS.penetration;
+    item.children[1].children[3].innerText = "Damage: " + weaponS.damage;
+    item.children[1].children[4].innerText = "Accuracy: " + weaponS.accuracy;
+    item.children[1].children[5].innerText = "Reloads: " + weaponS.reloads;
+    item.children[1].children[6].innerText = "Passives: " + (weaponS.passives || "None");
+    item.children[2].setAttribute("src", "images/" + img(weaponS.name) + ".webp");
+
+    item = document.getElementById("tacpack");
+    item.children[0].innerText = "Name: " + pack.name;
+    item.children[1].children[0].innerText = "Description: " + pack.description;
+    item.children[1].children[1].innerText = "Modifier: " + pack.modifier;
+    item.children[1].children[2].innerText = "Count: " + pack.count;
+    item.children[2].setAttribute("src", "images/" + img(pack.name) + ".webp");
+
+    item = document.getElementById("stratagem1");
+    item.children[0].innerText = "Name: " + s1.name;
+    item.children[1].children[0].innerText = "Type: " + s1.type;
+    item.children[1].children[1].innerText = "Code: " + s1.code;
+    item.children[1].children[2].innerText = "Description: " + s1.description;
+    item.children[1].children[3].innerText = "Cooldown: " + s1.cooldown;
+    item.children[2].setAttribute("src", "images/" + img(s1.name) + ".webp");
+
+    item = document.getElementById("stratagem2");
+    item.children[0].innerText = "Name: " + s2.name;
+    item.children[1].children[0].innerText = "Type: " + s2.type;
+    item.children[1].children[1].innerText = "Code: " + s2.code;
+    item.children[1].children[2].innerText = "Description: " + s2.description;
+    item.children[1].children[3].innerText = "Cooldown: " + s2.cooldown;
+    item.children[2].setAttribute("src", "images/" + img(s2.name) + ".webp");
+
+    item = document.getElementById("stratagem3");
+    item.children[0].innerText = "Name: " + s3.name;
+    item.children[1].children[0].innerText = "Type: " + s3.type;
+    item.children[1].children[1].innerText = "Code: " + s3.code;
+    item.children[1].children[2].innerText = "Description: " + s3.description;
+    item.children[1].children[3].innerText = "Cooldown: " + s3.cooldown;
+    item.children[2].setAttribute("src", "images/" + img(s3.name) + ".webp");
+
+    item = document.getElementById("stratagem4");
+    item.children[0].innerText = "Name: " + s4.name;
+    item.children[1].children[0].innerText = "Type: " + s4.type;
+    item.children[1].children[1].innerText = "Code: " + s4.code;
+    item.children[1].children[2].innerText = "Description: " + s4.description;
+    item.children[1].children[3].innerText = "Cooldown: " + s4.cooldown;
+    item.children[2].setAttribute("src", "images/" + img(s4.name) + ".webp");
+
+    item = document.getElementById("booster");
+    item.children[0].innerText = "Name: " + boost.name;
+    item.children[1].children[0].innerText = "Description: " + boost.description;
+    item.children[1].children[1].innerText = "Modifier: " + boost.modifier;
+    item.children[2].setAttribute("src", "images/" + img(boost.name) + ".webp");
+
 }

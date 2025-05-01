@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <title>HELLDIVERS: Mess Hall</title>
+</head>
+<body>
+  <div class="header"><a href="index.html"><img src="images/title_yellow.png", style="object-fit:contain"></a></div>
+  <div class="content">
+    <div class="contentcontainer" id="sheet">
+        <div class="character">
+            
+        </div>
+        <div class="loadout">
+            <div class="item" id="armor">
+                <h1>Name</h1>
+                <div>
+                    <p>Plating Thickness</p>
+                    <p>Damage Resistance</p>
+                    <p>Passive</p>
+                </div>
+                <img src="images/None.webp">
+            </div>
+            <div class="item" id="weaponsPrimary">
+                <h1>Name</h1>
+                <div>
+                    <p>WP Type</p>
+                    <p>DMG Type</p>
+                    <p>Bullet Penetration</p>
+                    <p>Damage</p>
+                    <p>Accuracy</p>
+                    <p>Extra Magazines</p>
+                    <p>Passive</p>
+                </div>
+                <img src="images/None.webp">
+            </div>
+            <div class="item" id="weaponsSecondary">
+                <h1>Name</h1>
+                <div>
+                    <p>WP Type</p>
+                    <p>DMG Type</p>
+                    <p>Bullet Penetration</p>
+                    <p>Damage</p>
+                    <p>Accuracy</p>
+                    <p>Extra Magazines</p>
+                    <p>Passive</p>
+                </div>
+                <img src="images/None.webp">
+            </div>
+            <div class="item" id="weaponsThrowable">
+                <h1>Name</h1>
+                <div>
+                    <p>WP Type</p>
+                    <p>DMG Type</p>
+                    <p>Bullet Penetration</p>
+                    <p>Damage</p>
+                    <p>Accuracy</p>
+                    <p>Extra Magazines</p>
+                    <p>Passive</p>
+                </div>
+                <img src="images/None.webp">
+            </div>
+            <div class="item" id="weaponsSupport">
+                <h1>Name</h1>
+                <div>
+                    <p>WP Type</p>
+                    <p>DMG Type</p>
+                    <p>Bullet Penetration</p>
+                    <p>Damage</p>
+                    <p>Accuracy</p>
+                    <p>Extra Magazines</p>
+                    <p>Passive</p>
+                </div>
+                <img src="images/None.webp">
+            </div>
+            <div class="item" id="tacpack">
+                <h1>Name</h1>
+                <div>
+                    <p>Description</p>
+                    <p>Modifier</p>
+                    <p>Count</p>
+                    <div></div> <!-- Armor or weapon -->
+                </div>
+                <img src="images/None.webp">
+            </div>
+            <div class="item" id="stratagem1">
+                <h1>Name</h1>
+                <div>
+                    <p>Type</p>
+                    <p>Code</p>
+                    <p>Description</p>
+                    <p>Cooldown</p>
+                    <div></div> <!-- Armor or weapon -->
+                </div>
+                <img src="images/None.webp">
+            </div>
+            <div class="item" id="stratagem2">
+                <h1>Name</h1>
+                <div>
+                    <p>Type</p>
+                    <p>Code</p>
+                    <p>Description</p>
+                    <p>Cooldown</p>
+                    <div></div> <!-- Armor or weapon -->
+                </div>
+                <img src="images/None.webp">
+            </div>
+            <div class="item" id="stratagem3">
+                <h1>Name</h1>
+                <div>
+                    <p>Type</p>
+                    <p>Code</p>
+                    <p>Description</p>
+                    <p>Cooldown</p>
+                    <div></div> <!-- Armor or weapon -->
+                </div>
+                <img src="images/None.webp">
+            </div>
+            <div class="item" id="stratagem4">
+                <h1>Name</h1>
+                <div>
+                    <p>Type</p>
+                    <p>Code</p>
+                    <p>Description</p>
+                    <p>Cooldown</p>
+                    <div></div> <!-- Armor or weapon -->
+                </div>
+                <img src="images/None.webp">
+            </div>
+            <div class="item" id="booster">
+                <h1>Name</h1>
+                <div>
+                    <p>Description</p>
+                    <p>Modifiers</p>
+                </div>
+                <img src="images/None.webp">
+            </div>
+        </div>
+
+        <script src="sheet creator.js"></script>
+        <script>
+            var code = new URLSearchParams(window.location.search).get('code');
+            getLoadout(code);
+        </script>
+    </div>
+    </div>
+  </div>
+</body>
+</html>

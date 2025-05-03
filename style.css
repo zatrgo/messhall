@@ -1,6 +1,53 @@
+@font-face {
+    font-family: "FS Sinclair";
+    src: url("fonts/FS Sinclair/FS Sinclair Light.otf") format("opentype");
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: "FS Sinclair";
+    src: url("fonts/FS Sinclair/FS Sinclair Light Italic.otf") format("opentype");
+    font-weight: 300;
+    font-style: italic;
+}
+@font-face {
+    font-family: "FS Sinclair";
+    src: url("fonts/FS Sinclair/FS Sinclair Medium.otf") format("opentype");
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: "FS Sinclair";
+    src: url("fonts/FS Sinclair/FS Sinclair Medium Italic.otf") format("opentype");
+    font-weight: 500;
+    font-style: italic;
+}
+@font-face {
+    font-family: "FS Sinclair";
+    src: url("fonts/FS Sinclair/FS Sinclair Regular.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "FS Sinclair";
+    src: url("fonts/FS Sinclair/FS Sinclair Italic.otf") format("opentype");
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: "FS Sinclair";
+    src: url("fonts/FS Sinclair/FS Sinclair Bold.otf") format("opentype");
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: "FS Sinclair";
+    src: url("fonts/FS Sinclair/FS Sinclair Bold Italic.otf") format("opentype");
+    font-weight: bold;
+    font-style: italic;
+}
+
 * {
-    position: relative;
-    display: block;
     margin: 0;
     border: 0;
     padding: 0;
@@ -13,224 +60,207 @@ body {
     background-image: url("images/bg.webp");
     background-size: 100%;
     background-attachment: fixed;
+    * {
+        position: relative;
+        display: block;
+    }
+}
+
+script, style {
+    display: none;
 }
 
 @media (min-width: 800px) {
 
-.header {
-    background: linear-gradient(to right, #16191f50, #121a24e0, #121a24e0, #16191f50);
-    padding: 30px 0px;
-    border-bottom: 3px solid #eee000;
-}
-.header img {
-    width: 500px;
-    margin: auto;
-    display: block;
-}
-
-button {
-    padding: 5px;
-    font-size: larger;
-}
-
-.content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 20px;
-    margin: 20px 5%;
-}
-
-.contentcontainer {
-    box-sizing: border-box;
-    align-items: center;
-    margin: auto;
-    padding: 20px;
-    background-color: #0c0c0ce0;
-}
-.contentcontainer#contents {
-    width: 75%;
-}
-#contents a {
-    display: block;
-    align-content: vertical;
-    width: auto;
-    text-align: center;
-    padding: 10px;
-    margin: 10px 0;
-    border: solid 1px #eee000a0;
-    background-color: #353010d0;
-}
-
-.contentcontainer#charcreator {
-    box-sizing: border-box;
-    align-items: center;
-    margin: auto;
-    padding: 20px;
-    width: 75%;
-
-    background-color: #0c0c0ce0;
-}
-
-.dropdown_custom {
-    height: 50px;
-    width: 100%;
-    margin: auto;
-    overflow: hidden;
-    position: relative;
-    z-index: 0;
-    background-color: #c9c9c9e0;
-
-}
-
-.dropdown_custom_head {
-    display: inline-block;
-    position: absolute;
-    background-color: #2d2e30;
-    width: 48%;
-    padding: 0;
-    left: 0;
-    height: 100%;
-    max-height: 100%;
-    vertical-align: top;
-    align-content: center;
-    border-top: 1px solid #99993366;
-
-    h3 {
-        display: flex;
-        font-weight: 500;
-        font-size: 30px;
-        justify-content: center;
-        align-items: center;
-        padding: 5px;
+    .header {
+        background: linear-gradient(to right, #16191f50, #121a24e0, #121a24e0, #16191f50);
+        padding: 30px 0px;
+        border-bottom: 3px solid #eee000;
     }
-}
-.dropdown_custom_select {
-    display: inline-block;
-    position: absolute;
-    background-color: #20254088;
-    width: 52%;
-    height: 100%;
-    right: 0;
-}
-
-.dropdown_custom_item {
-    display: flex;
-    height: 50px;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    background: #273642;
-    border-top: 1px solid #99993366;
-    
-    h4 {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: inherit;
-        height: 100%;
-        color: white;
-        font-size: 25px;
-        font-weight: 400;
-    }
-    img {
-        height: 50px;
-        min-width: 50px;
+    .header img {
+        width: 500px;
+        margin: auto;
         display: block;
-        object-fit: cover;
-        align-items: center;
-        float: right;
     }
-}
-.dropdown_custom_item:hover h4 {
-    color: yellow;
-    font-weight:500;
-}
 
-.dropdown_custom_list {
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    right: -5px;
-    background-color: #2d2e30;
-    width: 52%;
-    height: max-content;
-    border: 5px solid #708090;
-    border-top: 2px solid #708090;
-    
-    .dropdown_custom_item {
-        position: relative;
+    button {
+        padding: 5px;
+        font-size: larger;
+    }
+
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+        margin: 20px 5%;
+    }
+
+    .contentcontainer {
+        box-sizing: border-box;
+        align-items: center;
+        margin: auto;
+        padding: 20px;
+        background-color: #0c0c0ce0;
+    }
+    .contentcontainer#contents {
+        width: 75%;
+    }
+    #contents a {
+        display: block;
+        align-content: vertical;
+        width: auto;
+        text-align: center;
+        padding: 10px;
+        margin: 10px 0;
+        border: solid 1px #eee000a0;
+        background-color: #353010d0;
+    }
+
+    .contentcontainer#charcreator {
+        box-sizing: border-box;
+        align-items: center;
+        margin: auto;
+        padding: 20px;
+        width: 75%;
+
+        background-color: #0c0c0ce0;
+    }
+
+    .dropdown_custom {
+        height: 50px;
         width: 100%;
-        height: 41px;
-        border-top: 1px solid #96958fa0;
-        padding: 0;
+        margin: auto;
+        overflow: hidden;
+        position: relative;
+        z-index: 0;
+        background-color: #c9c9c9e0;
 
+    }
+
+    .dropdown_custom_head {
+        display: inline-block;
+        position: absolute;
+        background-color: #2d2e30;
+        width: 48%;
+        padding: 0;
+        left: 0;
+        height: 100%;
+        max-height: 100%;
+        vertical-align: top;
+        align-content: center;
+        border-top: 1px solid #99993366;
+
+        h3 {
+            display: flex;
+            font-weight: 500;
+            font-size: 30px;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+        }
+    }
+    .dropdown_custom_select {
+        display: inline-block;
+        position: absolute;
+        background-color: #20254088;
+        width: 52%;
+        height: 100%;
+        right: 0;
+    }
+
+    .dropdown_custom_item {
+        display: flex;
+        height: 50px;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background: #273642;
+        border-top: 1px solid #99993366;
+        
+        h4 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: inherit;
+            height: 100%;
+            color: white;
+            font-size: 25px;
+            font-weight: 400;
+        }
         img {
-            min-width: 40px;
-            height: 40px;
+            height: 50px;
+            min-width: 50px;
             display: block;
             object-fit: cover;
+            align-items: center;
+            float: right;
         }
-        h4 {
-            font-size: 20px;
-        }
     }
-}
 
-#weaponsPrimary, #weaponsSecondary {
-    .dropdown_custom_select * img {
-        min-width: 90px;
-    }
-    .dropdown_custom_list * img {
-        min-width: 70px;
-    }
-}
-
-.contentcontainer#character {
-    width: 40%;
-    left: 8%;
-}
-.contentcontainer#loadout {
-    width: 40%;
-    right: 8%;
-}
-.item {
-    position: relative;
-    width: 100%;
-    height: 200px;
-    align-content: baseline;
-    * {
-        display: block;
-    }
-    img {
-        display: block;
+    .dropdown_custom_list {
+        flex-direction: column;
         position: absolute;
-        right: 0;
-        top: 0;
-        width: 150px;
-    }
-    h1 {
-        display: block;
-        position: relative;
-        font-size: 30px; 
-    }
-}
+        top: 100%;
+        right: -5px;
+        background-color: #2d2e30;
+        width: 52%;
+        height: max-content;
+        border: 5px solid #708090;
+        border-top: 2px solid #708090;
+        
+        .dropdown_custom_item {
+            position: relative;
+            width: 100%;
+            height: 41px;
+            border-top: 1px solid #96958fa0;
+            padding: 0;
 
-.confirm {
-    margin: 10px auto;
-    width: 300px;
-    height: 50px;
-    background-color: black;
-    color: #ed0;
-    display: block;
-    align-content: center;
-    font-size: 25px;
-    font-weight: 800;
-}
-.confirm:hover {
-    color: black;
-    background-color: #ed0;
-}
+            img {
+                min-width: 40px;
+                height: 40px;
+                display: block;
+                object-fit: cover;
+            }
+            h4 {
+                font-size: 20px;
+                color: white;
+                font-weight: 400;
+            }
+        }
+    }
+    
+    .dropdown_custom_item:hover h4 {
+        color: yellow;
+        font-weight:500;
+    }
+
+    #weaponsPrimary, #weaponsSecondary {
+        .dropdown_custom_select * img {
+            min-width: 90px;
+            margin-left: -40px;
+        }
+        .dropdown_custom_list * img {
+            min-width: 70px;
+            margin-left: -30px;
+        }
+    }
+
+    .confirm {
+        margin: 10px auto;
+        width: 300px;
+        height: 50px;
+        background-color: black;
+        color: #ed0;
+        display: block;
+        align-content: center;
+        font-size: 25px;
+        font-weight: 800;
+    }
+    .confirm:hover {
+        color: black;
+        background-color: #ed0;
+    }
 }
 @media (max-width: 800px) {
     

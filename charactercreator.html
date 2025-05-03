@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    
+    <link rel="icon" href="images/icon.ico" type="image/x-icon">
     <title>HELLDIVERS: Mess Hall</title>
 </head>
 <body>
@@ -151,48 +151,84 @@
                 </div>
             </div>
             <button class="confirm" onclick="confirm()">Confirm Loadout</button>
-            
-            <script src="sheet creator.js"></script>
-            <script>
-                createCC();
-                var active = null;
-
-                function toggleDisplay(id) {
-                    const element = document.getElementById(id);
-
-                    if (active != null && active != id) {
-                        const activeElement = document.getElementById(active);
-                        activeElement.style.overflow = "hidden";
-                        activeElement.style.zIndex = 0;
-                        active = null;
-                    }
-
-                    if (element.style.overflow == "hidden") {
-                        element.style.overflow = "visible";
-                        element.style.zIndex = 5;
-                        active = id;
-                    } else if (element.style.overflow == "visible") {
-                        element.style.overflow = "hidden";
-                        element.style.zIndex = 0;
-                        active = null;
-                    }
-                    
-                    if (id == 'weaponsSupport') {
-                    }
-                }
-
-                function select(id, name) {
-                    toggleDisplay(id);
-                    item = document.getElementById(id).children[1].children[0];
-                    item.children[0].innerText = name;
-                    item.children[1].setAttribute('src', "images/" + img(name) + ".webp");
-                    
-                }
-            </script>
         </div>
     </div>
 </body>
 </html>
-<style>
-    
-</style>
+
+<script src="sheet creator.js"></script>
+<script>
+    createCC();
+    var active = null;
+
+    function toggleDisplay(id) {
+        const element = document.getElementById(id);
+
+        if (active != null && active != id) {
+            const activeElement = document.getElementById(active);
+            activeElement.style.overflow = "hidden";
+            activeElement.style.zIndex = 0;
+            active = null;
+        }
+
+        if (element.style.overflow == "hidden") {
+            element.style.overflow = "visible";
+            element.style.zIndex = 5;
+            active = id;
+        } else if (element.style.overflow == "visible") {
+            element.style.overflow = "hidden";
+            element.style.zIndex = 0;
+            active = null;
+        }
+        
+        if (id == 'weaponsSupport') {
+        }
+    }
+
+    function select(id, name) {
+        toggleDisplay(id);
+        item = document.getElementById(id).children[1].children[0];
+        item.children[0].innerText = name;
+        item.children[1].setAttribute('src', webp(name));
+
+        if (id == "weaponsSupport") autoStrat(name.split(" (")[0]);
+        if (id == "tacpack") autoStrat(name.replace(" Loadpack", ""));
+
+        if (id.includes("stratagem")) singleStrat(id, name);
+    }
+
+    function autoStrat(name) {
+        console.log(name);
+        var yipe = null;
+        for (var id of ["stratagem1", "stratagem2", "stratagem3", "stratagem4"]) {
+            item = document.getElementById(id).children[1].children[0];
+            if (item.children[0].innerText == "None" && stratagems.some(stratagem => stratagem.name === name)) {
+                item.children[0].innerText = name;
+                item.children[1].setAttribute('src', webp(name));
+                yipe = id;
+                break;
+            }
+        }
+        if (!yipe) {
+            yipe = "stratagem1";
+            item = document.getElementById(yipe).children[1].children[0];
+            if (item.children[0].innerText == "None" && stratagems.some(stratagem => stratagem.name === name)) {
+                item.children[0].innerText = name;
+                item.children[1].setAttribute('src', webp(name));
+            }
+        }
+        singleStrat(yipe, name);
+    }
+    function singleStrat(id, name) {
+        for (var id1 of ["stratagem1", "stratagem2", "stratagem3", "stratagem4"]) {
+            if (id1 == id) continue;
+            item = document.getElementById(id1).children[1].children[0];
+            bling = item.children[0].innerText;
+            if (bling == name && bling != "None") { 
+                item.children[0].innerText = "None";
+                item.children[1].setAttribute('src', webp("None"));
+                break;
+            }
+        }
+    }
+</script>

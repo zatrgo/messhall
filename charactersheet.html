@@ -2,151 +2,311 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
-  <title>HELLDIVERS: Mess Hall</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/icon.ico" type="image/x-icon">
+    <title>HELLDIVERS: Mess Hall</title>
 </head>
 <body>
-  <div class="header"><a href="index.html"><img src="images/title_yellow.png", style="object-fit:contain"></a></div>
-  <div class="content">
-    <div class="contentcontainer" id="sheet">
-        <div class="character">
-            
-        </div>
-        <div class="loadout">
-            <div class="item" id="armor">
-                <h1>Name</h1>
-                <div>
-                    <p>Plating Thickness</p>
-                    <p>Damage Resistance</p>
-                    <p>Passive</p>
-                </div>
-                <img src="images/None.webp">
-            </div>
-            <div class="item" id="weaponsPrimary">
-                <h1>Name</h1>
-                <div>
-                    <p>WP Type</p>
-                    <p>DMG Type</p>
-                    <p>Bullet Penetration</p>
-                    <p>Damage</p>
-                    <p>Accuracy</p>
-                    <p>Extra Magazines</p>
-                    <p>Passive</p>
-                </div>
-                <img src="images/None.webp">
-            </div>
-            <div class="item" id="weaponsSecondary">
-                <h1>Name</h1>
-                <div>
-                    <p>WP Type</p>
-                    <p>DMG Type</p>
-                    <p>Bullet Penetration</p>
-                    <p>Damage</p>
-                    <p>Accuracy</p>
-                    <p>Extra Magazines</p>
-                    <p>Passive</p>
-                </div>
-                <img src="images/None.webp">
-            </div>
-            <div class="item" id="weaponsThrowable">
-                <h1>Name</h1>
-                <div>
-                    <p>WP Type</p>
-                    <p>DMG Type</p>
-                    <p>Bullet Penetration</p>
-                    <p>Damage</p>
-                    <p>Accuracy</p>
-                    <p>Extra Magazines</p>
-                    <p>Passive</p>
-                </div>
-                <img src="images/None.webp">
-            </div>
-            <div class="item" id="weaponsSupport">
-                <h1>Name</h1>
-                <div>
-                    <p>WP Type</p>
-                    <p>DMG Type</p>
-                    <p>Bullet Penetration</p>
-                    <p>Damage</p>
-                    <p>Accuracy</p>
-                    <p>Extra Magazines</p>
-                    <p>Passive</p>
-                </div>
-                <img src="images/None.webp">
-            </div>
-            <div class="item" id="tacpack">
-                <h1>Name</h1>
-                <div>
-                    <p>Description</p>
-                    <p>Modifier</p>
-                    <p>Count</p>
-                    <div></div> <!-- Armor or weapon -->
-                </div>
-                <img src="images/None.webp">
-            </div>
-            <div class="item" id="stratagem1">
-                <h1>Name</h1>
-                <div>
-                    <p>Type</p>
-                    <p>Code</p>
-                    <p>Description</p>
-                    <p>Cooldown</p>
-                    <div></div> <!-- Armor or weapon -->
-                </div>
-                <img src="images/None.webp">
-            </div>
-            <div class="item" id="stratagem2">
-                <h1>Name</h1>
-                <div>
-                    <p>Type</p>
-                    <p>Code</p>
-                    <p>Description</p>
-                    <p>Cooldown</p>
-                    <div></div> <!-- Armor or weapon -->
-                </div>
-                <img src="images/None.webp">
-            </div>
-            <div class="item" id="stratagem3">
-                <h1>Name</h1>
-                <div>
-                    <p>Type</p>
-                    <p>Code</p>
-                    <p>Description</p>
-                    <p>Cooldown</p>
-                    <div></div> <!-- Armor or weapon -->
-                </div>
-                <img src="images/None.webp">
-            </div>
-            <div class="item" id="stratagem4">
-                <h1>Name</h1>
-                <div>
-                    <p>Type</p>
-                    <p>Code</p>
-                    <p>Description</p>
-                    <p>Cooldown</p>
-                    <div></div> <!-- Armor or weapon -->
-                </div>
-                <img src="images/None.webp">
-            </div>
-            <div class="item" id="booster">
-                <h1>Name</h1>
-                <div>
-                    <p>Description</p>
-                    <p>Modifiers</p>
-                </div>
-                <img src="images/None.webp">
-            </div>
-        </div>
-
-        <script src="sheet creator.js"></script>
-        <script>
-            var code = new URLSearchParams(window.location.search).get('code');
-            getLoadout(code);
-        </script>
+    <div class="header"><a href="index.html"><img src="images/title_yellow.png", style="object-fit:contain"></a></div>
+    <div class="content">
+        <div class="contentcontainer" id="character">
+        <h1> hi </h1>
     </div>
+    <div class="contentcontainer" id="loadout">
+        <div class="item" id="armor">
+            <h1>Name</h1>
+            <div>
+                <p>Plating Thickness</p>
+                <p>Damage Resistance</p>
+                <p>Passive</p>
+            </div>
+            <img src="images/None.webp">
+        </div>
+        <div class="item" id="weaponsPrimary">
+            <h1>Name</h1>
+            <div>
+                <p>WP Type</p>
+                <p>DMG Type</p>
+                <p>Bullet Penetration</p>
+                <p>Damage</p>
+                <p>Accuracy</p>
+                <p>Extra Magazines</p>
+                <p>Passive</p>
+            </div>
+            <img src="images/None.webp">
+        </div>
+        <div class="item" id="weaponsSecondary">
+            <h1>Name</h1>
+            <div>
+                <p>WP Type</p>
+                <p>DMG Type</p>
+                <p>Bullet Penetration</p>
+                <p>Damage</p>
+                <p>Accuracy</p>
+                <p>Extra Magazines</p>
+                <p>Passive</p>
+            </div>
+            <img src="images/None.webp">
+        </div>
+        <div class="item" id="weaponsThrowable">
+            <h1>Name</h1>
+            <div>
+                <p>WP Type</p>
+                <p>DMG Type</p>
+                <p>Bullet Penetration</p>
+                <p>Damage</p>
+                <p>Accuracy</p>
+                <p>Extra Magazines</p>
+                <p>Passive</p>
+            </div>
+            <img src="images/None.webp">
+        </div>
+        <div class="item" id="weaponsSupport">
+            <h1>Name</h1>
+            <div>
+                <p>WP Type</p>
+                <p>DMG Type</p>
+                <p>Bullet Penetration</p>
+                <p>Damage</p>
+                <p>Accuracy</p>
+                <p>Extra Magazines</p>
+                <p>Passive</p>
+            </div>
+            <img src="images/None.webp">
+        </div>
+        <div class="item" id="tacpack">
+            <h1>Name</h1>
+            <div>
+                <p>Description</p>
+                <p>Modifier</p>
+                <p>Count</p>
+                <div></div> <!-- Armor or weapon -->
+            </div>
+            <img src="images/None.webp">
+        </div>
+        <div class="item" id="stratagem1">
+            <h1>Name</h1>
+            <div>
+                <p>Type</p>
+                <p>Code</p>
+                <p>Description</p>
+                <p>Cooldown</p>
+                <div></div> <!-- Armor or weapon -->
+            </div>
+            <img src="images/None.webp">
+        </div>
+        <div class="item" id="stratagem2">
+            <h1>Name</h1>
+            <div>
+                <p>Type</p>
+                <p>Code</p>
+                <p>Description</p>
+                <p>Cooldown</p>
+                <div></div> <!-- Armor or weapon -->
+            </div>
+            <img src="images/None.webp">
+        </div>
+        <div class="item" id="stratagem3">
+            <h1>Name</h1>
+            <div>
+                <p>Type</p>
+                <p>Code</p>
+                <p>Description</p>
+                <p>Cooldown</p>
+                <div></div> <!-- Armor or weapon -->
+            </div>
+            <img src="images/None.webp">
+        </div>
+        <div class="item" id="stratagem4">
+            <h1>Name</h1>
+            <div>
+                <p>Type</p>
+                <p>Code</p>
+                <p>Description</p>
+                <p>Cooldown</p>
+                <div></div> <!-- Armor or weapon -->
+            </div>
+            <img src="images/None.webp">
+        </div>
+        <div class="item" id="booster">
+            <h1>Name</h1>
+            <div>
+                <p>Description</p>
+                <p>Modifiers</p>
+            </div>
+            <img src="images/None.webp">
+        </div>
     </div>
-  </div>
 </body>
+<style>
+    .contentcontainer#character {
+        position: absolute;
+        width: 40%;
+        left: 8%;
+        background-color: #2c2a0bbb;
+    }
+    .contentcontainer#loadout {
+        position: absolute;
+        width: 40%;
+        right: 8%;
+        background-color: #2c2a0bbb;
+    }
+    .item {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 160px;
+        align-content: center;
+        background-color: #2c2a0bbb;
+        margin: 5px;
+
+
+        h1 {
+            display: block;
+            position: absolute;
+            text-align: center;
+            align-content: center;
+            
+            font-size: 25px;
+            top: 0;
+            width: 100%;
+            height: 50px;
+        }
+        img {
+            display: block;
+            position: absolute;
+            right: 0;
+            bottom:0;
+            width: 110px;
+            height: 110px;
+        }
+        div {
+            display: block;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: inherit;
+            height: 110px;
+        }
+    }
+</style>
+<script src="sheet creator.js"></script>
+<script>
+    function getLoadout() {
+        var code = new URLSearchParams(window.location.search).get('code');
+        const armor = armors[new Number(code.slice(0, 2))];
+        const weapon1 = weaponsPrimary[new Number(code.slice(2, 4))];
+        const weapon2 = weaponsSecondary[new Number(code.slice(4, 6))];
+        const weaponT = weaponsThrowable[new Number(code.slice(6, 8))];
+        const weaponS = weaponsSupport[new Number(code.slice(8, 10))];
+        const pack = tacpacks[new Number(code.slice(10, 12))];
+        const s1 = stratagems[new Number(code.slice(12, 14))];
+        const s2 = stratagems[new Number(code.slice(14, 16))];
+        const s3 = stratagems[new Number(code.slice(16, 18))];
+        const s4 = stratagems[new Number(code.slice(18, 20))];
+        const boost = boosters[new Number(code.slice(20, 22))];
+
+        console.log(armor, weapon1, weapon2, weaponT, weaponS, pack, s1, s2, s3, s4, boost);
+
+        var item = null;
+        item = document.getElementById("armor");
+        item.children[0].innerText = armor.name;
+        item.children[1].children[0].innerText = "Plating: " + armor.plating;
+        item.children[1].children[1].innerText = "Resistance: " + armor.resistance;
+        item.children[1].children[2].innerText = "Passive: " + armor.passive;
+
+        item = document.getElementById("weaponsPrimary");
+        item.children[0].innerText = weapon1.name;
+        item.children[1].children[0].innerText = "Weapon Type: " + weapon1.weaponType;
+        item.children[1].children[1].innerText = "Damage Type: " + weapon1.damageType;
+        item.children[1].children[2].innerText = "Penetration: " + weapon1.penetration;
+        item.children[1].children[3].innerText = "Damage: " + weapon1.damage;
+        item.children[1].children[4].innerText = "Accuracy: " + weapon1.accuracy;
+        item.children[1].children[5].innerText = "Reloads: " + weapon1.reloads;
+        item.children[1].children[6].innerText = "Passives: " + (weapon1.passives || "None");
+        item.children[2].setAttribute("src", "images/" + webp(weapon1.name) + ".webp");
+
+        item = document.getElementById("weaponsSecondary");
+        item.children[0].innerText = weapon2.name;
+        item.children[1].children[0].innerText = "Weapon Type: " + weapon2.weaponType;
+        item.children[1].children[1].innerText = "Damage Type: " + weapon2.damageType;
+        item.children[1].children[2].innerText = "Penetration: " + weapon2.penetration;
+        item.children[1].children[3].innerText = "Damage: " + weapon2.damage;
+        item.children[1].children[4].innerText = "Accuracy: " + weapon2.accuracy;
+        item.children[1].children[5].innerText = "Reloads: " + weapon2.reloads;
+        item.children[1].children[6].innerText = "Passives: " + (weapon2.passives || "None");
+        item.children[2].setAttribute("src", "images/" + webp(weapon2.name) + ".webp");
+
+        item = document.getElementById("weaponsThrowable");
+        item.children[0].innerText = weaponT.name;
+        item.children[1].children[0].innerText = "Weapon Type: " + weaponT.weaponType;
+        item.children[1].children[1].innerText = "Damage Type: " + weaponT.damageType;
+        item.children[1].children[2].innerText = "Penetration: " + weaponT.penetration;
+        item.children[1].children[3].innerText = "Damage: " + weaponT.damage;
+        item.children[1].children[4].innerText = "Accuracy: " + weaponT.accuracy;
+        item.children[1].children[5].innerText = "Reloads: " + weaponT.reloads;
+        item.children[1].children[6].innerText = "Passives: " + (weaponT.passives || "None");
+        item.children[2].setAttribute("src", "images/" + webp(weaponT.name) + ".webp");
+
+        item = document.getElementById("weaponsSupport");
+        item.children[0].innerText = weaponS.name;
+        item.children[1].children[0].innerText = "Weapon Type: " + weaponS.weaponType;
+        item.children[1].children[1].innerText = "Damage Type: " + weaponS.damageType;
+        item.children[1].children[2].innerText = "Penetration: " + weaponS.penetration;
+        item.children[1].children[3].innerText = "Damage: " + weaponS.damage;
+        item.children[1].children[4].innerText = "Accuracy: " + weaponS.accuracy;
+        item.children[1].children[5].innerText = "Reloads: " + weaponS.reloads;
+        item.children[1].children[6].innerText = "Passives: " + (weaponS.passives || "None");
+        item.children[2].setAttribute("src", "images/" + webp(weaponS.name) + ".webp");
+
+        item = document.getElementById("tacpack");
+        item.children[0].innerText = pack.name;
+        item.children[1].children[0].innerText = "Description: " + pack.description;
+        item.children[1].children[1].innerText = "Modifier: " + pack.modifier;
+        item.children[1].children[2].innerText = "Count: " + pack.count;
+        item.children[2].setAttribute("src", "images/" + webp(pack.name) + ".webp");
+
+        item = document.getElementById("stratagem1");
+        item.children[0].innerText = s1.name;
+        item.children[1].children[0].innerText = "Type: " + s1.type;
+        item.children[1].children[1].innerText = "Code: " + s1.code;
+        item.children[1].children[2].innerText = "Description: " + s1.description;
+        item.children[1].children[3].innerText = "Cooldown: " + s1.cooldown;
+        item.children[2].setAttribute("src", "images/" + webp(s1.name) + ".webp");
+
+        item = document.getElementById("stratagem2");
+        item.children[0].innerText = s2.name;
+        item.children[1].children[0].innerText = "Type: " + s2.type;
+        item.children[1].children[1].innerText = "Code: " + s2.code;
+        item.children[1].children[2].innerText = "Description: " + s2.description;
+        item.children[1].children[3].innerText = "Cooldown: " + s2.cooldown;
+        item.children[2].setAttribute("src", "images/" + webp(s2.name) + ".webp");
+
+        item = document.getElementById("stratagem3");
+        item.children[0].innerText = s3.name;
+        item.children[1].children[0].innerText = "Type: " + s3.type;
+        item.children[1].children[1].innerText = "Code: " + s3.code;
+        item.children[1].children[2].innerText = "Description: " + s3.description;
+        item.children[1].children[3].innerText = "Cooldown: " + s3.cooldown;
+        item.children[2].setAttribute("src", "images/" + webp(s3.name) + ".webp");
+
+        item = document.getElementById("stratagem4");
+        item.children[0].innerText = s4.name;
+        item.children[1].children[0].innerText = "Type: " + s4.type;
+        item.children[1].children[1].innerText = "Code: " + s4.code;
+        item.children[1].children[2].innerText = "Description: " + s4.description;
+        item.children[1].children[3].innerText = "Cooldown: " + s4.cooldown;
+        item.children[2].setAttribute("src", "images/" + webp(s4.name) + ".webp");
+
+        item = document.getElementById("booster");
+        item.children[0].innerText = boost.name;
+        item.children[1].children[0].innerText = "Description: " + boost.description;
+        item.children[1].children[1].innerText = "Modifier: " + boost.modifier;
+        item.children[2].setAttribute("src", "images/" + webp(boost.name) + ".webp");
+    }
+
+    getLoadout();
+</script>
 </html>

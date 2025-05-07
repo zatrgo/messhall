@@ -1,218 +1,3 @@
-class Enum {
-    constructor(values) {
-        this.values = values;
-        Object.keys(values).forEach(key => {
-            this[key] = values[key];
-        });
-    }
-
-    name(value) {
-        return Object.keys(this.values).find(key => this.values[key] === value).replace(/_/g, ' ');
-    }
-}
-
-const WeaponType = new Enum({
-    Assault_Rifle: 0,
-    Marksman_Rifle: 1,
-    Sniper_Rifle: 2,
-    Submachine_Gun: 3,
-    Shotgun: 4,
-    Explosive: 5,
-    Energy_Based: 6,
-    Pistol: 7,
-    Melee: 8,
-    Throwable: 9,
-    Special: 10,
-    Machine_Gun: 11,
-    Launcher: 12,
-    Sprayer: 13
-});
-
-const DamageType = new Enum({
-    Physical: 0,
-    Explosive: 1,
-    Fire: 2,
-    Laser: 3,
-    Caustic: 4,
-    Acid: 5,
-    Electric: 6,
-    Plasma: 7
-});
-
-const Thickness = new Enum({
-    Unarmored: 0,
-    Light: 1,
-    Medium: 2,
-    Heavy: 3,
-    AntiTank: 4
-});
-
-const Damage = new Enum({
-    Minimal: 0,
-    Low: 1,
-    Mild: 2,
-    Moderate: 3,
-    Decent: 4,
-    High: 5,
-    Severe: 6,
-    Extreme: 7,
-    Democratic: 8
-});
-
-const Accuracy = new Enum({
-    Spread: 0,
-    Wide: 1,
-    Poor: 2,
-    Fair: 3,
-    Precise: 4,
-    Pinpoint: 5
-});
-
-const StratInput = new Enum({
-    Up: 0,
-    Down: 1,
-    Left: 2,
-    Right: 3
-});
-
-const UP = StratInput.Up;
-const DOWN = StratInput.Down;
-const LEFT = StratInput.Left;
-const RIGHT = StratInput.Right;
-
-const Stratatype = new Enum({
-    Common: 0,
-    Support: 1,
-    Offensive: 2,
-    Defensive: 3
-});
-
-const Ranking = new Enum({
-    Citizen: 0,
-    Cadet: 1,
-    Space_Cadet: 2,
-    Sergeant: 3,
-    Master_Sergeant: 4,
-    Chief: 5,
-    Space_Chief_Prime: 6,
-    Death_Captain: 7,
-    Marshal: 8,
-    Star_Marshal: 9,
-    Admiral: 10,
-    Skull_Admiral: 11,
-    Fleet_Admiral: 12,
-    Admirable_Admiral: 13,
-    Commander: 14,
-    Galactic_Commander: 15,
-    Hell_Commander: 16,
-    General: 17,
-    Five_Star_General: 18,
-    Ten_Star_General: 19,
-    Private: 20,
-    Super_Private: 21,
-    Super_Citizen: -1,
-    Viper_Commando: -2,
-    Fire_Safety_Officer: -3,
-    Expert_Exterminator: -4,
-    Free_of_Thought: -5,
-    Super_Pedestrian: -6,
-    Assault_Infantry: -7,
-    Servant_of_Freedom: -8
-});
-
-class Armor {
-    constructor(name, plating = 0, resistance = 0, passive = "") {
-        this.name = name;
-        this.plating = Thickness.name(plating);
-        this.resistance = Damage.name(resistance);
-        this.passive = passive;
-    }
-
-    toString() {
-        return `${this.name} (${this.plating} Armor, ${this.resistance} Resistance, PASSIVE: "${this.passive}")`;
-    }
-}
-function findArmor(name, plating = 0) {
-
-    if (plating == 0) 
-        return armors.find(armor => armor.name.toLowerCase().includes(name.toLowerCase())) || new Armor("None");
-    else if (plating > 3) return armorsSpecial.find(armor => armor.name.toLowerCase().includes(name.toLowerCase())) || new Armor("None");
-    else {
-        const armorp = armors.filter(armor => armor.plating === Thickness.name(plating));
-        return armorp.find(armor => armor.name.toLowerCase().includes(name.toLowerCase())) || new Armor("None");
-    }
-}
-
-class Weapon {
-    constructor(name, weaponType = 0, damageType = [], penetration = 0, damage = 0, accuracy = 0, maxReloads = 0, passives = []) {
-        this.name = name;
-        this.weaponType = WeaponType.name(weaponType);
-        this.damageType = damageType.map(dt => DamageType.name(dt));
-        this.penetration = Thickness.name(penetration);
-        this.damage = Damage.name(damage);
-        this.accuracy = Accuracy.name(accuracy);
-        this.reloads = maxReloads;
-        this.maxReloads = maxReloads;
-        this.passives = passives;
-    }
-
-    toString() {
-        const damageTypes = this.damageType.length === 1 ? this.damageType[0] : `(${this.damageType.join(', ')})`;
-        const passives = this.passives.length === 0 ? "None" : this.passives.length === 1 ? this.passives[0] : `(${this.passives.join(', ')})`;
-        return `${this.name} (${WeaponType.name(this.weaponType)}, DMG TYPE: ${damageTypes}, ${this.penetration} Penetrating, ${this.damage} Damage, ${this.accuracy} Accuracy, Max Reloads: ${this.maxReloads}, PASSIVES: ${passives})`;
-    }
-}
-function findWeapon(name, slot = 0) {
-    if (name.toLowerCase == "none") return new Weapon("None");
-    const allWeapons = [...weaponsPrimary, ...weaponsSecondary, ...weaponsThrowable, ...weaponsSupport];
-    const weaponLists = [allWeapons, weaponsPrimary, weaponsSecondary, weaponsThrowable, weaponsSupport];
-    const weapons = weaponLists[slot] || allWeapons;
-    return weapons.find(weapon => weapon.name.toLowerCase().includes(name.toLowerCase())) || new Weapon("None");
-}
-
-class TacPack {
-    constructor(name, description, modifier, count = 0, extra = null) {
-        this.name = name;
-        this.description = description;
-        this.modifier = modifier;
-        this.count = count;
-        this.extra = extra;
-    }
-
-    toString() {
-        return `${this.name}: ${this.description}`;
-    }
-}
-function findTacPack(name) {
-    return tacpacks.find(pack => pack.name.toLowerCase().includes(name.toLowerCase())) || null;
-}
-
-class Stratagem {
-    constructor(name, type=0, code=[], description = "", modifier = [], cooldown = 0) {
-        this.name = name;
-        this.type = Stratatype.name(type);
-        this.code = code.map(value => StratInput.name(value));
-        this.description = description;
-        this.cooldown = cooldown;
-    }
-
-    toString() {
-        return `${this.name}: ${this.description}`;
-    }
-}
-function findStratagem(name) {
-    return stratagems.find(stratagem => stratagem.name.toLowerCase().includes(name.toLowerCase())) || null;
-}
-
-class Booster {
-    constructor(name, description="", modifier="") {
-        this.name = name;
-        this.description = description;
-        this.modifier = modifier;
-    }
-    toString() {return `${this.name}: ${this.description}`;}
-}
-
 const armors = [
     new Armor("None"),
 
@@ -512,38 +297,6 @@ const boosters = [
     new Booster("Sample Extricator", "Improves your ability to identify enemy weak points", "PRE +1,PER +1"),
 ];
 
-class Character {
-    constructor() {
-        this.name = "";
-        this.rank = null;
-        this.faction = "";
-
-        this.strength = 0;
-        this.constitution = 0;
-        this.speed = 0;
-        this.stealth = 0;
-        this.precision = 0;
-        this.perception = 0;
-
-        this.armor = null;
-        this.weaponPrimary = null;
-        this.weaponSecondary = null;
-        this.weaponThrowable = null;
-        this.weaponSupport = null;
-        this.backpack = null;
-        this.stratagem1 = null;
-        this.stratagem2 = null;
-        this.stratagem3 = null;
-        this.stratagem4 = null;
-        this.booster = null;
-    }
-
-    set(stat, value) {
-        const stats = ["strength", "constitution", "speed", "stealth", "precision", "perception"];
-        this[stats[stat]] = value;
-    }
-};
-
 function generateCharacter() {
     const character = new Character();
 
@@ -617,7 +370,14 @@ function createDDCC(id, name) {
     d.appendChild(i);
     element.appendChild(d);
 }
+function nameimg(name) {
 
+    if (name.includes("(")) name = name.split(" (")[0];
+    if (name.includes("\"")) name = name.replaceAll("\"", "\'");
+    if (name.includes("/")) name = name.replace("/", "-");
+    if (name.includes(" Loadpack")) name = name.replace(" Loadpack", "");
+    return name
+}
 function webp(name) {
 
     var prefix = "";
@@ -630,13 +390,8 @@ function webp(name) {
     if (tacpacks.some(pack => pack.name === name)) prefix = "stratagems/";
     if (stratagems.some(stratagem => stratagem.name === name)) prefix = "stratagems/";
     if (boosters.some(booster => booster.name === name)) prefix = "boosters/";
-    
-    if (name.includes("(")) name = name.split(" (")[0];
-    if (name.includes("\"")) name = name.replaceAll("\"", "\'");
-    if (name.includes("/")) name = name.replace("/", "-");
-    if (name.includes(" Loadpack")) name = name.replace(" Loadpack", "");
 
-    return "images/" + prefix + name + ".webp";
+    return "images/" + prefix + nameimg(name) + ".webp";
 }
 
 function confirm() {
@@ -667,4 +422,3 @@ function confirm() {
 
     window.open("charactersheet.html?code=" + code, "_blank");
 }
-

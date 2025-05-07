@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="images/icon.ico" type="image/x-icon">
-    <title>HELLDIVERS: Mess Hall</title>
+    <title>Character Creator | HELLDIVERS: Mess Hall</title>
 </head>
 <body>
     <div class="header"><a href="index.html"><img src="images/title_yellow.png", style="object-fit:contain"></a></div>
     <div class="content">
         <div class="contentcontainer" id="charcreator">
+            <input type="text" id="name" placeholder="Name" maxlength="32" oninput="this.value = this.value.replace(/[^a-zA-Z0-9'_-.,()]$/g, '')">
+            <input type="text" id="rank" placeholder="Rank" maxlength="32" oninput="this.value = this.value.replace(/[^a-zA-Z0-9'_-.,()]$/g, '')">
+            <input type="text" id="faction" placeholder="Faction" maxlength="32" oninput="this.value = this.value.replace(/[^a-zA-Z0-9'_-.,()]$/g, '')">
+        </div>
+        <div class="contentcontainer" id="loadoutcreator">
             <div class="dropdown_custom" id="armor" style="overflow: hidden; z-index: 0;">
                 <div class="dropdown_custom_head">
                     <h3><u>Armor</u></h3>
@@ -155,7 +160,38 @@
     </div>
 </body>
 </html>
+<style>
+    .contentcontainer#charcreator {
+        box-sizing: border-box;
+        align-items: center;
+        padding: 20px;
+        width: 45%;
+        height: 100%;
+        background-color: #0c0c0ce0;
+    }
+    .contentcontainer#loadoutcreator {
+        box-sizing: border-box;
+        align-items: center;
+        padding: 20px;
+        width: 45%;
+        background-color: #0c0c0ce0;
+    }
 
+    input {
+        background-color: #1a1a1a;
+        color: #ffffff;
+        border: 1px solid #333333;
+        padding: 5px;
+        border-radius: 8px;
+        height: 30px;
+        font-size: 20px;
+        width: 90%;
+    }
+    input::placeholder {
+        color: #aaa;
+    }
+</style>
+<script src="commons.js"></script>
 <script src="sheet creator.js"></script>
 <script>
     createCC();
@@ -219,6 +255,7 @@
         }
         singleStrat(yipe, name);
     }
+    
     function singleStrat(id, name) {
         for (var id1 of ["stratagem1", "stratagem2", "stratagem3", "stratagem4"]) {
             if (id1 == id) continue;

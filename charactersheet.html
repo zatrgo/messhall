@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="images/icon.ico" type="image/x-icon">
-    <title>HELLDIVERS: Mess Hall</title>
+    <title> | HELLDIVERS: Mess Hall</title>
 </head>
 <body>
     <div class="header"><a href="index.html"><img src="images/title_yellow.png", style="object-fit:contain"></a></div>
@@ -192,6 +192,7 @@
         }
     }
 </style>
+<script src="commons.js"></script>
 <script src="sheet creator.js"></script>
 <script>
     function getLoadout() {
@@ -308,5 +309,7 @@
     }
 
     getLoadout();
+    const title = document.getElementsByTagName("title")[0];
+    title.innerText = new URLSearchParams(window.location.search).get('name') + " | HELLDIVERS: Mess Hall";
 </script>
 </html>

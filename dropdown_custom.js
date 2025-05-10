@@ -1,14 +1,26 @@
 class HTMLDropdownElement extends HTMLElement {
     constructor() {
         super();
-        this.items = [];
-        this.select = document.createElement("div");
+        this.visible = false;
+        this.options = [];
+        self.addEventListener("click", toggleView());
     }
-
+    
+    toggleView() {
+        this.visible = !this.visible;
+        
+    }
+    
     connectedCallback() {
         console.log("Custom element added to page.");
-
-        items = this.getElementsByTagName(Option);
+        
+        this.options = self.getElemens
+    
+        for (const opt of options) {
+            opt.addEventListener("hover");
+            opt.addEventListener("click");
+            
+        }
         
 
         this.innerHTML = `

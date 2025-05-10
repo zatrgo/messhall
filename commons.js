@@ -254,10 +254,15 @@ class Character {
     }
 };
 
-function NPC(name, faction, str, con, spe, ste, pre, per, weapon, weapon2, armor) {
+function NPC(name, faction, armor, weapon1, weapon2, str=0, con=0, spe=0, ste=0, pre=0, per=0) {
     const c = new Character();
     c.name = name;
     c.faction = faction;
+
+    c.armor = armor;
+    c.weaponPrimary = weapon;
+    c.weaponSecondary = weapon2;
+
     c.strength = str;
     c.constitution = con;
     c.speed = spe;
@@ -265,8 +270,5 @@ function NPC(name, faction, str, con, spe, ste, pre, per, weapon, weapon2, armor
     c.precision = pre;
     c.perception = per;
     
-    c.weaponPrimary = weapon;
-    c.weaponSecondary = weapon2;
-    c.armor = armor;
     return c;
 }

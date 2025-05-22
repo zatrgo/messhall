@@ -221,6 +221,7 @@ const stratagems = [
     new Stratagem("LAS-98 Laser Cannon", 1, [DOWN, LEFT, DOWN, UP, LEFT], "Deploys a laser weapon that fires a continuous beam. Needs to cool down periodically."),
     new Stratagem("ARC-3 Arc Thrower", 1, [DOWN, LEFT, UP, UP], "Deploys an electric weapon that charges and fires arcs of lightning at close-medium. Can chain to multiple targets."),
     new Stratagem("LAS-99 Quasar Cannon", 1, [DOWN, DOWN, UP, LEFT, RIGHT], "Deploys a weapon that charges up to fire a single explosive energy burst. Specialized for vehicle armor."),
+    new Stratagem("TX-41 Sterilizer", 1, [DOWN, LEFT, UP, DOWN, LEFT], "Deploys a weapon that fires out a stream of caustic gas which slows and confuses targets, as well as burns through armor."),
 
     new Stratagem("LIFT-850 Jump Pack", 1, [DOWN, UP, UP, DOWN, UP], "Deploys a Tac-pack that allows the wearer to jump short distances quickly."),
     new Stratagem("LIFT-860 Hover Pack", 1, [DOWN, UP, UP, DOWN, LEFT, RIGHT], "Deploys a Tac-pack that allows the wearer to hover in midair for a short time."),
@@ -356,7 +357,7 @@ function createDDCC(id, name) {
     const element = document.getElementById(id).children[2];
     var d = document.createElement('button');
     d.setAttribute('class', "dropdown_custom_item");
-    d.setAttribute('onclick', "select(\""+id+"\", \""+name+"\")");
+    d.setAttribute('onclick', 'select(\"'+id+'\", \"'+name+'\")');
     d.style.overflow = "hidden";
     d.style.zIndex = 0;
     hidden[id] = true;
@@ -370,14 +371,15 @@ function createDDCC(id, name) {
     d.appendChild(i);
     element.appendChild(d);
 }
-function nameimg(name) {
 
+function nameimg(name) {
     if (name.includes("(")) name = name.split(" (")[0];
-    if (name.includes("\"")) name = name.replaceAll("\"", "\'");
-    if (name.includes("/")) name = name.replace("/", "-");
+    if (name.includes("\"")) name = name.replaceAll("\"", "");
+    if (name.includes("/")) name = name.replace("/", "");
     if (name.includes(" Loadpack")) name = name.replace(" Loadpack", "");
-    return name
+    return name;
 }
+
 function webp(name) {
 
     var prefix = "";
@@ -422,3 +424,4 @@ function confirm() {
 
     window.open("charactersheet.html?code=" + code, "_blank");
 }
+

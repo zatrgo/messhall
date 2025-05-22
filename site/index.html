@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="images/icon.ico" type="image/x-icon">
-  <title>HELLDIVERS: Mess Hall</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./dropdown_custom.css">
+    <title>HELLDIVERS: Mess Hall</title>
 </head>
 <body>
-  <div class="header"><a href="index.html"><img src="images/title_yellow.png", style="object-fit:contain"></a></div>
-  <div class="content">
-    <div class="contentcontainer" id="contents">
-      <a href="charactercreator.html"> Character Sheet Creator </a>
-      <a href="bases.html"> Current Base Info (WIP)</a>
+    <div class="header"><img src="images/title_yellow.png"></div>
+    <div class="content">
+        <div class="contentcontainer" id="contents">
+            <a href="charactercreator.html"> Character Sheet Creator </a>
+        </div>
+
+        <drop-down>
+            <option value="0">Option 0</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+        </drop-down>
+
     </div>
-  </div>
 </body>
 </html>
+<script src="./dropdown_custom.js"></script>

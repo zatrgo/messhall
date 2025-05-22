@@ -10,11 +10,13 @@
 <body>
     <div class="header"><a href="index.html"><img src="images/title_yellow.png", style="object-fit:contain"></a></div>
     <div class="content">
+        <!--
         <div class="contentcontainer" id="charcreator">
             <input type="text" id="name" placeholder="Name" maxlength="32" oninput="this.value = this.value.replace(/[^a-zA-Z0-9'_-.,()]$/g, '')">
             <input type="text" id="rank" placeholder="Rank" maxlength="32" oninput="this.value = this.value.replace(/[^a-zA-Z0-9'_-.,()]$/g, '')">
             <input type="text" id="faction" placeholder="Faction" maxlength="32" oninput="this.value = this.value.replace(/[^a-zA-Z0-9'_-.,()]$/g, '')">
         </div>
+        -->
         <div class="contentcontainer" id="loadoutcreator">
             <div class="dropdown_custom" id="armor" style="overflow: hidden; z-index: 0;">
                 <div class="dropdown_custom_head">
@@ -223,13 +225,18 @@
 
     function select(id, name) {
         toggleDisplay(id);
+        console.log("ID: " + id);
         item = document.getElementById(id).children[1].children[0];
+        console.log("Name: " + name);
         item.children[0].innerText = name;
+        console.log("webp: " + webp(name));
         item.children[1].setAttribute('src', webp(name));
 
         if (id == "weaponsSupport") autoStrat(name.split(" (")[0]);
-        if (id == "tacpack") autoStrat(name.replace(" Loadpack", ""));
-
+        if (id == "tacpack") {
+            console.log(name.replace(" Loadpack", ""));
+            autoStrat(name);
+        }
         if (id.includes("stratagem")) singleStrat(id, name);
     }
 

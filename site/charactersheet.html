@@ -213,13 +213,14 @@
 
         var item = null;
         item = document.getElementById("armor");
-        item.children[0].innerText = armor.name;
+        item.children[0].innerText = "Armor: " + armor.name;
         item.children[1].children[0].innerText = "Plating: " + armor.plating;
         item.children[1].children[1].innerText = "Resistance: " + armor.resistance;
         item.children[1].children[2].innerText = "Passive: " + armor.passive;
+        item.children[2].setAttribute("src", webp(armor.name));
 
         item = document.getElementById("weaponsPrimary");
-        item.children[0].innerText = weapon1.name;
+        item.children[0].innerText = "Primary Weapon: " + weapon1.name;
         item.children[1].children[0].innerText = "Weapon Type: " + weapon1.weaponType;
         item.children[1].children[1].innerText = "Damage Type: " + weapon1.damageType;
         item.children[1].children[2].innerText = "Penetration: " + weapon1.penetration;
@@ -227,10 +228,10 @@
         item.children[1].children[4].innerText = "Accuracy: " + weapon1.accuracy;
         item.children[1].children[5].innerText = "Reloads: " + weapon1.reloads;
         item.children[1].children[6].innerText = "Passives: " + (weapon1.passives || "None");
-        item.children[2].setAttribute("src", "images/" + webp(weapon1.name) + ".webp");
+        item.children[2].setAttribute("src", webp(weapon1.name));
 
         item = document.getElementById("weaponsSecondary");
-        item.children[0].innerText = weapon2.name;
+        item.children[0].innerText = "Secondary Weapon: " + weapon2.name;
         item.children[1].children[0].innerText = "Weapon Type: " + weapon2.weaponType;
         item.children[1].children[1].innerText = "Damage Type: " + weapon2.damageType;
         item.children[1].children[2].innerText = "Penetration: " + weapon2.penetration;
@@ -238,10 +239,10 @@
         item.children[1].children[4].innerText = "Accuracy: " + weapon2.accuracy;
         item.children[1].children[5].innerText = "Reloads: " + weapon2.reloads;
         item.children[1].children[6].innerText = "Passives: " + (weapon2.passives || "None");
-        item.children[2].setAttribute("src", "images/" + webp(weapon2.name) + ".webp");
+        item.children[2].setAttribute("src", webp(weapon2.name));
 
         item = document.getElementById("weaponsThrowable");
-        item.children[0].innerText = weaponT.name;
+        item.children[0].innerText = "Throwable: " + weaponT.name;
         item.children[1].children[0].innerText = "Weapon Type: " + weaponT.weaponType;
         item.children[1].children[1].innerText = "Damage Type: " + weaponT.damageType;
         item.children[1].children[2].innerText = "Penetration: " + weaponT.penetration;
@@ -249,10 +250,10 @@
         item.children[1].children[4].innerText = "Accuracy: " + weaponT.accuracy;
         item.children[1].children[5].innerText = "Reloads: " + weaponT.reloads;
         item.children[1].children[6].innerText = "Passives: " + (weaponT.passives || "None");
-        item.children[2].setAttribute("src", "images/" + webp(weaponT.name) + ".webp");
+        item.children[2].setAttribute("src", webp(weaponT.name));
 
         item = document.getElementById("weaponsSupport");
-        item.children[0].innerText = weaponS.name;
+        item.children[0].innerText = "Support Weapon: " + weaponS.name;
         item.children[1].children[0].innerText = "Weapon Type: " + weaponS.weaponType;
         item.children[1].children[1].innerText = "Damage Type: " + weaponS.damageType;
         item.children[1].children[2].innerText = "Penetration: " + weaponS.penetration;
@@ -260,52 +261,52 @@
         item.children[1].children[4].innerText = "Accuracy: " + weaponS.accuracy;
         item.children[1].children[5].innerText = "Reloads: " + weaponS.reloads;
         item.children[1].children[6].innerText = "Passives: " + (weaponS.passives || "None");
-        item.children[2].setAttribute("src", "images/" + webp(weaponS.name) + ".webp");
+        item.children[2].setAttribute("src", webp(weaponS.name));
 
         item = document.getElementById("tacpack");
-        item.children[0].innerText = pack.name;
+        item.children[0].innerText = "TacPack: " + pack.name;
         item.children[1].children[0].innerText = "Description: " + pack.description;
         item.children[1].children[1].innerText = "Modifier: " + pack.modifier;
         item.children[1].children[2].innerText = "Count: " + pack.count;
-        item.children[2].setAttribute("src", "images/" + webp(pack.name) + ".webp");
+        item.children[2].setAttribute("src", webp(pack.name));
 
         item = document.getElementById("stratagem1");
-        item.children[0].innerText = s1.name;
+        item.children[0].innerText = "Stratagem 1: " + s1.name;
         item.children[1].children[0].innerText = "Type: " + s1.type;
         item.children[1].children[1].innerText = "Code: " + s1.code;
         item.children[1].children[2].innerText = "Description: " + s1.description;
         item.children[1].children[3].innerText = "Cooldown: " + s1.cooldown;
-        item.children[2].setAttribute("src", "images/" + webp(s1.name) + ".webp");
+        item.children[2].setAttribute("src", webp(s1.name));
 
         item = document.getElementById("stratagem2");
-        item.children[0].innerText = s2.name;
+        item.children[0].innerText = "Stratagem 2: " + s2.name;
         item.children[1].children[0].innerText = "Type: " + s2.type;
         item.children[1].children[1].innerText = "Code: " + s2.code;
         item.children[1].children[2].innerText = "Description: " + s2.description;
         item.children[1].children[3].innerText = "Cooldown: " + s2.cooldown;
-        item.children[2].setAttribute("src", "images/" + webp(s2.name) + ".webp");
+        item.children[2].setAttribute("src", webp(s2.name));
 
         item = document.getElementById("stratagem3");
-        item.children[0].innerText = s3.name;
+        item.children[0].innerText = "Stratagem 3: " + s3.name;
         item.children[1].children[0].innerText = "Type: " + s3.type;
         item.children[1].children[1].innerText = "Code: " + s3.code;
         item.children[1].children[2].innerText = "Description: " + s3.description;
         item.children[1].children[3].innerText = "Cooldown: " + s3.cooldown;
-        item.children[2].setAttribute("src", "images/" + webp(s3.name) + ".webp");
+        item.children[2].setAttribute("src", webp(s3.name));
 
         item = document.getElementById("stratagem4");
-        item.children[0].innerText = s4.name;
+        item.children[0].innerText = "Stratagem 4: " + s4.name;
         item.children[1].children[0].innerText = "Type: " + s4.type;
         item.children[1].children[1].innerText = "Code: " + s4.code;
         item.children[1].children[2].innerText = "Description: " + s4.description;
         item.children[1].children[3].innerText = "Cooldown: " + s4.cooldown;
-        item.children[2].setAttribute("src", "images/" + webp(s4.name) + ".webp");
+        item.children[2].setAttribute("src", webp(s4.name));
 
         item = document.getElementById("booster");
-        item.children[0].innerText = boost.name;
+        item.children[0].innerText = "Booster: " + boost.name;
         item.children[1].children[0].innerText = "Description: " + boost.description;
         item.children[1].children[1].innerText = "Modifier: " + boost.modifier;
-        item.children[2].setAttribute("src", "images/" + webp(boost.name) + ".webp");
+        item.children[2].setAttribute("src", webp(boost.name));
     }
 
     getLoadout();

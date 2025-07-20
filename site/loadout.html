@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/icon.ico" type="image/x-icon">
+    <title>Character Creator | HELLDIVERS: Mess Hall</title>
+</head>
+<body>
+    <div class="header"><a href="index.html"><img src="images/title_yellow.png", style="object-fit:contain"></a></div>
+    <div class="content">
+        <!--
+        <div class="contentcontainer" id="charcreator">
+            <input type="text" id="name" placeholder="Name" maxlength="32" oninput="this.value = this.value.replace(/[^a-zA-Z0-9'_-.,()]$/g, '')">
+            <input type="text" id="rank" placeholder="Rank" maxlength="32" oninput="this.value = this.value.replace(/[^a-zA-Z0-9'_-.,()]$/g, '')">
+            <input type="text" id="faction" placeholder="Faction" maxlength="32" oninput="this.value = this.value.replace(/[^a-zA-Z0-9'_-.,()]$/g, '')">
+        </div>
+        -->
+        <div class="contentcontainer" id="loadoutcreator">
+            <h3><u>Armor</u></h3>
+            <drop-down id="armor">
+            </drop-down>
+            <h3><u>Primary Weapon</u></h3>
+            <drop-down id="weaponsPrimary">
+            </drop-down>
+            <h3><u>Secondary Weapon</u></h3>
+            <drop-down id="weaponsSecondary">
+            </drop-down>
+            <h3><u>Throwable</u></h3>
+            <drop-down id="weaponsThrowable">
+            </drop-down>
+            <h3><u>Support Weapon</u></h3>
+            <drop-down id="weaponsSupport">
+            </drop-down>
+            <h3><u>Tac-Pack</u></h3>
+            <drop-down id="tacpack">
+            </drop-down>
+            <h3><u>Stratagem #1</u></h3>
+            <drop-down id="stratagem1">
+            </drop-down>
+            <h3><u>Stratagem #2</u></h3>
+            <drop-down id="stratagem2">
+            </drop-down>
+            <h3><u>Stratagem #3</u></h3>
+            <drop-down id="stratagem3">
+            </drop-down>
+            <h3><u>Stratagem #4</u></h3>
+            <drop-down id="stratagem4">
+            </drop-down>
+            <h3><u>Booster</u></h3>
+            <drop-down id="booster">
+            </drop-down>
+            <!--
+            <button class="confirm" onclick="confirm()">Confirm Loadout</button>
+            -->
+        </div>
+    </div>
+</body>
+</html>
+<style>
+    .contentcontainer {
+        box-sizing: border-box;
+        align-items: center;
+        z-index: 0;
+        display: block;
+        padding: 20px;
+        width: 1000px;
+        position: relative;
+        background-color: #0c0c0ce0;
+    }
+
+    #loadoutcreator {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 50px;
+
+        h3 {
+            display: inline-block;
+            height: 100%;
+            max-width:40%;
+            font-weight: 500;
+            font-size: 17px;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+        }
+        drop-down {
+            display: inline-block;
+            max-width: 60%;
+            right: 0;
+            --height: 50px;
+            --optheight: 40px;
+            --fontsize: 0.6;
+            border: solid 2px red;
+            font-weight: 400;
+            align-items: center;
+            text-align: center;
+
+            div.selected {
+                background-color: grey;
+                :hover {
+                    font-weight: 500;
+                    color: yellow;
+                }
+                img {
+                    height: var(--height);
+                    width: var(--height);
+                }
+                p {
+                    width: inherit;
+                    height: 100%;
+                    vertical-align: middle;
+                    text-align: center;
+                }
+            }
+
+            div.options {
+                option {
+                    text-align: center;
+                    vertical-align: middle;
+                    border: solid 2px red;
+
+                    img {
+                        height: var(--optheight);
+                        width: var(--optheight);
+                    }
+                    p {
+                        width: inherit;
+                        height: 100%;
+
+                    }
+                    &:hover {
+                        color:yellow;
+                        font-weight: 500;
+                    }
+                }
+            }
+            &#weaponsPrimary div.options option img, &#weaponsSecondary div.options option img {
+                height: var(--optheight);
+                width: calc(2 * var(--optheight));
+            }
+        } 
+    }
+
+    div#weaponsPrimary drop-down div, div#weaponsSecondary drop-down div {
+        &.selected img {
+            height: var(--height);
+            width: calc(2 * var(--height));
+        }
+
+        &.options option img {
+            height: var(--optheight);
+            width: calc(2 * var(--optheight));
+        }
+    }
+
+    input {
+        background-color: #1a1a1a;
+        color: #ffffff;
+        border: 1px solid #333333;
+        padding: 5px;
+        border-radius: 8px;
+        height: 30px;
+        font-size: 20px;
+        width: 90%;
+    }
+    input::placeholder {
+        color: #aaa;
+    }
+</style>
+<script src="commons.js"></script>
+<script src="sheet creator.js"></script>
+<script>
+    createCC();
+</script>
+<script src="dropdown_custom.js"></script>

@@ -5,23 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="images/icon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="./dropdown_custom.css">
     <title>HELLDIVERS: Mess Hall</title>
 </head>
 <body>
     <div class="header"><img src="images/title_yellow.png"></div>
     <div class="content">
-        <div class="contentcontainer" id="contents">
-            <a href="charactercreator.html"> Character Sheet Creator </a>
-        </div>
 
-        <drop-down>
-            <option value="0">Option 0</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-        </drop-down>
+        <div class="contentcontainer" id="contents">
+            <a href="loadout.html"> Character Sheet Creator </a>
+        </div>
+        <div class="contentcontainer">
+            <drop-down id="buh">
+                <option><p>opt 0</p></option>
+                <option><p>opt 1</p></option>
+                <option><p>opt 2</p></option>
+            </drop-down>
+            <drop-down id="guh">
+                <option><p>opt a</p></option>
+                <option><p>opt b</p></option>
+                <option><p>opt c</p></option>
+            </drop-down>
+        </div>
 
     </div>
 </body>
 </html>
 <script src="./dropdown_custom.js"></script>
+<style>
+    .contentcontainer {
+        width: 70%;
+        position: relative;
+    }
+    
+    drop-down {
+        --height: 50px;
+        --optheight: 40px;
+        border: solid 2px red;
+        width: 200px;
+        background-color: grey;
+        :hover {
+            font-weight: 500;
+            color: yellow;
+        }
+        p {
+            width: inherit;
+            height: 100%;
+        
+        }
+        .options option {
+            border: solid 2px blue;
+            border-top: 0;
+
+            p {
+                width: inherit;
+                height: 100%;
+            }
+            &:hover {
+                color:yellow;
+                font-weight: 500;
+            }
+        }
+    }
+</style>

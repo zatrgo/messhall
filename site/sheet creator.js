@@ -354,25 +354,20 @@ function createCC() {
 }
 
 function createDDCC(id, name) {
-    const element = document.getElementById(id).children[2];
-    var d = document.createElement('button');
-    d.setAttribute('class', "dropdown_custom_item");
-    d.setAttribute('onclick', 'select(\"'+id+'\", \"'+name+'\")');
-    d.style.overflow = "hidden";
-    d.style.zIndex = 0;
-    hidden[id] = true;
-    var h = document.createElement('h4');
-    h.appendChild(new Text(name));
-    var i = document.createElement('img');
+    const element = document.getElementById(id);
+    d = document.createElement('option');
 
-    i.setAttribute('src', webp(name));
-
-    d.appendChild(h);
+    p = document.createElement('p');
+    p.appendChild(new Text(name));
+    d.appendChild(p);
+    i = document.createElement('img');
+    i.setAttribute("src", webp(name));
     d.appendChild(i);
     element.appendChild(d);
 }
 
 function nameimg(name) {
+
     if (name.includes("(")) name = name.split(" (")[0];
     if (name.includes("\"")) name = name.replaceAll("\"", "");
     if (name.includes("/")) name = name.replace("/", "");

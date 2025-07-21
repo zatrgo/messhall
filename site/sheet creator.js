@@ -355,7 +355,7 @@ function createCC() {
 
 function createDDCC(id, name) {
     const element = document.getElementById(id);
-    d = document.createElement('option');
+    d = document.createElement('drop-option');
 
     p = document.createElement('p');
     p.appendChild(new Text(name));

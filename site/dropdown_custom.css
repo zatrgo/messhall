@@ -14,30 +14,31 @@ drop-down {
         flex-direction: row;
         align-items: flex-start;
         width: 100%;
-        font-size: calc(var(--optheight) * var(--fontsize));
 
         * {
             display: flex;
             height: var(--height);
+                font-size: calc(var(--height) * var(--fontsize));
         }
     }
 
     .options {
         display: none;
         position: absolute;
-        width: 100%;
+        min-width: 100%;
+        width: max-content;
         height: max-content;
         top: var(--height);
         
-        option {
+        drop-option {
             position: relative;
             display: flex;
             flex-direction: row;
             height: var(--optheight);
-            font-size: calc(var(--optheight) * 0.8);
 
             * {
-                display: flex;
+                display: block;
+                position: relative;
                 height: var(--height);
                 font-size: calc(var(--optheight) * var(--fontsize));
             }

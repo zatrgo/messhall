@@ -1,17 +1,17 @@
 class HTMLDropdownElement extends HTMLElement {
     visible = false;
-    height = 50;
     selected = null;
     selectdiv = null;
     options = [];
     optdiv = null;
+
+    on_select = null;
 
     constructor() {
         super();
     }
 
     toggleView() {
-        console.log(this.visible);
         this.visible = !this.visible;  
         this.optdiv.style.display = this.visible ? 'block' : 'none';
 
@@ -26,14 +26,15 @@ class HTMLDropdownElement extends HTMLElement {
     }
 
     select(e, obj) {
+        console.log("Selected: ", obj);
         this.selected = obj;
         this.selectdiv.innerHTML = this.selected.innerHTML;
+        if (this.on_select != null) this.on_select();
     }
 
     connectedCallback() {
-        if (this.hasAttribute("height")) this.height = this.getAttribute("height");
         //options
-        this.options = this.querySelectorAll("option");
+        this.options = this.querySelectorAll("drop-option");
         this.selected = this.options[0]; 
         this.addEventListener("mousedown", this.toggleView);
 
@@ -57,26 +58,61 @@ class HTMLDropdownElement extends HTMLElement {
         var rel = `<link rel="stylesheet" href="dropdown_custom.css">`;
         if (!head.includes(rel)) head += rel;
         document.getElementsByTagName("head")[0].innerHTML = head;
-    
-    }
 
+        let onselect = this.getAttribute("on-select");
+        if (onselect != null) {
+            var func = onselect.split("(")[0];
+            var argstring = onselect.split("(")[1].trim();
+            var argsplits = argstring.replace(")", "").split(",");
+
+            var args = [];
+            for (var arg of argsplits) {
+                if (arg == 'this') args.push(this);
+                else args.push(window[arg]);
+            }
+            this.on_select = () => {window[func](...args);}
+        }
+    }
     disconnectedCallback() {
-        console.log("Custom element removed from page.");
+        console.log("Drop down element removed from page.");
     }
-
     connectedMoveCallback() {
-        console.log("Custom element moved with moveBefore()");
+        console.log("Drop down element moved with moveBefore()");
     }
-
     adoptedCallback() {
-        console.log("Custom element moved to new page.");
+        console.log("Drop down element moved to new page.");
     }
-
     attributeChangedCallback(name, oldValue, newValue) {
         console.log(`Attribute ${name} has changed.`);
     }
 
 }
 
+class HTMLDropOptionELement extends HTMLElement {
+
+    value = null;
+
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        this.value = this.getAttribute("value");
+    }
+
+    disconnectedCallback() {
+        console.log("Drop option element removed from page.");
+    }
+    connectedMoveCallback() {
+        console.log("Drop option element moved with moveBefore()");
+    }
+    adoptedCallback() {
+        console.log("Drop option element moved to new page.");
+    }
+    attributeChangedCallback(name, oldValue, newValue) {
+        console.log(`Attribute ${name} has changed.`);
+    }
+}
 
 customElements.define("drop-down", HTMLDropdownElement);
+customElements.define("drop-option", HTMLDropOptionELement);

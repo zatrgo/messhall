@@ -36,11 +36,11 @@
             </div>
             <div class="dropdown_container" style="z-index:8">
                 <h3><u>Support Weapon</u></h3>
-                <drop-down id="weaponsSupport"></drop-down>
+                <drop-down id="weaponsSupport" on-select="strat(this)"></drop-down>
             </div>
             <div class="dropdown_container" style="z-index:7">
                 <h3><u>Tac-Pack</u></h3>
-                <drop-down id="tacpack"></drop-down>
+                <drop-down id="tacpack" on-select="strat(this)"></drop-down>
             </div>
             <div class="dropdown_container" style="z-index:6">
                 <h3><u>Stratagem #1</u></h3>
@@ -105,7 +105,7 @@
             }
             drop-down {
                 display: flex;
-                width: 400px;
+                width: 500px;
                 --height: 50px;
                 --optheight: 40px;
                 --fontsize: 0.6;
@@ -133,19 +133,25 @@
                 }
 
                 div.options {
-                    option {
+                    background-color: #333d;
+                    border: solid 2px red;
+                    left: -2px;
+
+                    drop-option {
                         text-align: center;
                         vertical-align: middle;
-                        border: solid 2px red;
+                        border-top: solid 2px red;
+                        height: var(--optheight);
 
                         img {
-                            height: var(--optheight);
                             width: var(--optheight);
+                            height: var(--optheight);
+                            right: 0;
+                            position: absolute;
                         }
                         p {
                             width: inherit;
-                            height: 100%;
-
+                            float: left;
                         }
                         &:hover {
                             color:yellow;
@@ -153,7 +159,7 @@
                         }
                     }
                 }
-                &#weaponsPrimary div.options option img, &#weaponsSecondary div.options option img {
+                &#weaponsPrimary div.options drop-option img, &#weaponsSecondary div.options drop-option img {
                     height: var(--optheight);
                     width: calc(2 * var(--optheight));
                 }
@@ -167,7 +173,7 @@
             width: calc(2 * var(--height));
         }
 
-        &.options option img {
+        &.options drop-option img {
             height: var(--optheight);
             width: calc(2 * var(--optheight));
         }
@@ -191,5 +197,42 @@
 <script src="sheet creator.js"></script>
 <script>
     createCC();
+
+    let strats = [
+        document.getElementById("stratagem1"),
+        document.getElementById("stratagem2"),
+        document.getElementById("stratagem3"),
+        document.getElementById("stratagem4")
+    ];
+
+    function strat(obj) {
+        console.log(typeof(obj));
+        let id = obj.getAttribute("id");
+        console.log("Set stratagem: " + obj.selected, obj.selected.innerHTML);
+        
+        let name = obj.selected.children[0].innerHTML;
+        let selection = "";
+        if (id == "weaponsSupport") selection = name.split(" (")[0];
+        if (id == "tacpack") selection = name.replace(" Loadpack", "");
+        
+        // If it's already selected, do nothing
+        let selected = false;
+        for (let strat of strats) if (strat.selected.children[0].innerHTML == selection) {
+            selected = true;
+            console.log("Already selected stratagem: " + selection);
+            break;
+        }
+        if (selected) return;
+
+        //Find the first empty slot
+        for (var strat of strats) {
+            if (strat.selected.innerHTML.includes("None")) {
+                let stratOption = Array.from(strat.options).find(option => option.children[0].innerHTML === selection);
+                strat.select(null, stratOption);
+                break;
+            }
+        }
+
+    }
 </script>
 <script src="dropdown_custom.js"></script>

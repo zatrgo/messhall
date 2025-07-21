@@ -1,49 +1,39 @@
 drop-down {
+    --height: 50px;
+    --optheight: calc(var(--height) * 0.8);
+    --fontsize: 0.8;
     height: var(--height);
-    display: block;
     overflow: visible;
     position: relative;
-    flex-direction: row;
-    align-items: flex-start;
-    width: 100%;
     min-width: var(--height);
     height: var(--height);
-    font-size: calc(var(--height) * 0.8);
-    * {
-        display: flex;
-        height: var(--height);
 
-        font-size: calc(var(--height) * var(--fontsize));
+    .selected {
+        pointer-events: none;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        width: 100%;
+        font-size: calc(var(--optheight) * var(--fontsize));
+
+        * {
+            display: flex;
+            height: var(--height);
+        }
     }
 
-    
-}
-
-.dropdown_container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 5;
-    pointer-events: none;
-
-    div {
-        flex-direction: column;
-        position: absolute;
+    .options {
         display: none;
-        z-index: 10;
+        position: absolute;
         width: 100%;
         height: max-content;
-        pointer-events: all;
         top: var(--height);
         
-        
         option {
-            height: var(--optheight);
             position: relative;
             display: flex;
-            width: fit-content;
+            flex-direction: row;
+            height: var(--optheight);
             font-size: calc(var(--optheight) * 0.8);
 
             * {

@@ -15,12 +15,12 @@
             <a href="loadout.html"> Character Sheet Creator </a>
         </div>
         <div class="contentcontainer">
-            <drop-down id="buh">
+            <drop-down id="buh" style="z-index:1">
                 <option><p>opt 0</p></option>
                 <option><p>opt 1</p></option>
                 <option><p>opt 2</p></option>
             </drop-down>
-            <drop-down id="guh">
+            <drop-down id="guh"  style="z-index:0">
                 <option><p>opt a</p></option>
                 <option><p>opt b</p></option>
                 <option><p>opt c</p></option>
@@ -43,17 +43,20 @@
         border: solid 2px red;
         width: 200px;
         background-color: grey;
-        :hover {
+        &:hover .selected p {
             font-weight: 500;
             color: yellow;
         }
-        p {
-            width: inherit;
-            height: 100%;
-        
+        .selected {
+            p {
+                width: inherit;
+                height: 100%;
+                color: white;
+            }
         }
         .options option {
             border: solid 2px blue;
+            background-color: black;
             border-top: 0;
 
             p {

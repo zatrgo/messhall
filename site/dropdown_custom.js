@@ -13,7 +13,7 @@ class HTMLDropdownElement extends HTMLElement {
 
     toggleView() {
         this.visible = !this.visible;  
-        this.optdiv.style.display = this.visible ? 'block' : 'none';
+        this.optdiv.style.display = this.visible ? null : 'none';
 
         if (this.visible)
             for (var element of document.getElementsByTagName("drop-down")) 
@@ -22,7 +22,7 @@ class HTMLDropdownElement extends HTMLElement {
 
     setView(visible) {
         this.visible = visible;
-        this.optdiv.style.display = this.visible ? 'block' : 'none';
+        this.optdiv.style.display = this.visible ? null : 'none';
     }
 
     select(e, obj) {
@@ -33,6 +33,7 @@ class HTMLDropdownElement extends HTMLElement {
     }
 
     connectedCallback() {
+
         //options
         this.options = this.querySelectorAll("drop-option");
         this.selected = this.options[0]; 
@@ -47,6 +48,7 @@ class HTMLDropdownElement extends HTMLElement {
         //Create options div
         this.optdiv = document.createElement("div");
         this.optdiv.setAttribute('class', 'options');
+        this.optdiv.style.display = 'none';
         this.appendChild(this.optdiv);
 
         for (var opt of this.options) {

@@ -132,16 +132,21 @@
                     }
                 }
 
-                div.options {
+                .options {
                     background-color: #333d;
-                    border: solid 2px red;
+                    border: solid 1px red;
                     left: -2px;
+                    display: grid;
+                    grid-template-columns: auto auto;
+                    width: max-content;
+
 
                     drop-option {
                         text-align: center;
                         vertical-align: middle;
-                        border-top: solid 2px red;
+                        border: solid 1px red;
                         height: var(--optheight);
+                        width: calc(max-content + var(--optheight));
 
                         img {
                             width: var(--optheight);
@@ -150,7 +155,7 @@
                             position: absolute;
                         }
                         p {
-                            width: inherit;
+                            width: max-content;
                             float: left;
                         }
                         &:hover {

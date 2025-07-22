@@ -23,9 +23,7 @@ drop-down {
     }
 
     .options {
-        display: none;
         position: absolute;
-        min-width: 100%;
         width: max-content;
         height: max-content;
         top: var(--height);
@@ -35,12 +33,14 @@ drop-down {
             display: flex;
             flex-direction: row;
             height: var(--optheight);
+            width: max-content;
 
             * {
-                display: block;
+                display: flex;
                 position: relative;
-                height: var(--height);
+                height: auto;
                 font-size: calc(var(--optheight) * var(--fontsize));
+                align-items: center;
             }
         }
     }

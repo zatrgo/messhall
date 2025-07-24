@@ -13,16 +13,69 @@
     <div class="content">
 
         <div class="contentcontainer" id="map">
-            <div class="biome">
+            <div class="settings">
+                <drop-down id="enemy">
+                    <drop-option>Automatons</drop-option>
+                    <drop-option>Terminids</drop-option>
+                    <drop-option>Illuminate</drop-option>
+                </drop-down>
                 <drop-down id="biome">
-                    <drop-option value="0">Ice</drop-option>
-                    <drop-option value="1">Forest</drop-option>
-                    <drop-option value="2">Desert</drop-option>
-                    <drop-option value="3">Swamp</drop-option>
+                    <drop-option>Plains</drop-option> 
+                    <drop-option>Tundra</drop-option>
+                    <drop-option>Jungle</drop-option>
+                    <drop-option>Swamp</drop-option>
+                    <drop-option>Desert</drop-option>
+                    <drop-option>Badlands</drop-option>
+                    <drop-option>Ethereal</drop-option>
+                    <drop-option>Ionic</drop-option>
+                    <drop-option>Glacier</drop-option>
+                    <drop-option>Boneyard</drop-option>
+                    <drop-option>Moon</drop-option>
+                </drop-down>
+                <drop-down id="colonization">
+                    <drop-option>Untouched</drop-option>
+                    <drop-option>Abandoned</drop-option>
+                    <drop-option>Colony</drop-option>
+                    <drop-option>Metropolis</drop-option>
+                </drop-down>
+                <drop-down id="terrain">
+                    <drop-option>Flat</drop-option>
+                    <drop-option>Moderate</drop-option>
+                    <drop-option>Rough</drop-option>
+                </drop-down> 
+            </div>
+            <div class="markers">
+                <drop-down id="misc">
+                    <drop-option value="extraction"><img src="images/icons/Misc/Extraction 1.webp"></drop-option>
+                    <drop-option><img src="images/icons/Misc/POI 1.webp"></drop-option>
+                    <drop-option><img src="images/icons/Misc/POI 2.webp"></drop-option>
+                </drop-down>
+                <drop-down id="mainobjs_generic">
+                    <drop-option><img src="images\icons\Main Objectives\Generic\Terminate Illegal Broadcast.webp"></drop-option>
+                    <drop-option><img src="images\icons\Main Objectives\Generic\Pump Fuel To ICBM.webp"></drop-option>
+                    <drop-option><img src="images\icons\Main Objectives\Generic\Upload Escape Pod Data.webp"></drop-option>
+                    <drop-option><img src="images\icons\Main Objectives\Generic\Spread Democracy.webp"></drop-option>
+                    <drop-option><img src="images\icons\Main Objectives\Generic\Conduct Geological Survey.webp"></drop-option>
+                    <drop-option><img src="images\icons\Main Objectives\Generic\Launch ICBM.webp"></drop-option>
+                    <drop-option><img src="images\icons\Main Objectives\Generic\Retrieve Valuable Data.webp"></drop-option>
+                    <drop-option><img src="images\icons\Main Objectives\Generic\Emergency Evacuation.webp"></drop-option>
+                    <drop-option><img src="images\icons\Main Objectives\Generic\Retrieve Essential Personnel.webp"></drop-option>
+                    <drop-option><img src="images\icons\Main Objectives\Generic\Evacuate High-Value Assets.webp"></drop-option>
+                </drop-down>
+                <drop-down id="mainobjs_faction">
+                </drop-down>
+                <drop-down id="sideobjs_generic">
+                    <drop-option><img src="images\icons\Side Objectives\Generic\SEAF Artillery.webp"></drop-option>
+                    <drop-option><img src="images\icons\Side Objectives\Generic\Radar Station.webp"></drop-option>
+                    <drop-option><img src="images\icons\Side Objectives\Generic\SEAF SAM Site.webp"></drop-option>
+                    <drop-option><img src="images\icons\Side Objectives\Generic\Upload Escape Pod Data.webp"></drop-option>
+                    <drop-option><img src="images\icons\Side Objectives\Generic\Destroy Rogue Research Station.webp"></drop-option>
+                    <drop-option><img src="images\icons\Side Objectives\Generic\Terminate Illegal Broadcast.webp"></drop-option>
+                </drop-down>
+                <drop-down id="sideobjs_faction">
                 </drop-down>
             </div>
         </div>
-
     </div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 class HTMLDropdownElement extends HTMLElement {
     visible = false;
     selected = null;
+    selectedValue = null;
     selectdiv = null;
     options = [];
     optdiv = null;
@@ -29,6 +30,7 @@ class HTMLDropdownElement extends HTMLElement {
         console.log("Selected: ", obj);
         this.selected = obj;
         this.selectdiv.innerHTML = this.selected.innerHTML;
+        if (obj.getAttribute("value") != null) this.selectedValue = obj.getAttribute("value");
         if (this.on_select != null) this.on_select();
     }
 
@@ -38,6 +40,7 @@ class HTMLDropdownElement extends HTMLElement {
         this.options = this.querySelectorAll("drop-option");
         this.selected = this.options[0]; 
         this.addEventListener("mousedown", this.toggleView);
+
 
         //Create selected div and set to the first option
         this.selectdiv = document.createElement("div");

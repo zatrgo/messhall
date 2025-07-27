@@ -46,6 +46,7 @@ class HTMLDropdownElement extends HTMLElement {
         this.selectdiv = document.createElement("div");
         this.selectdiv.setAttribute('class', 'selected');
         this.appendChild(this.selectdiv);
+        console.log(this.selected);
         this.selectdiv.innerHTML = this.selected.innerHTML;
         
         //Create options div

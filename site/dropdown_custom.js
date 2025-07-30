@@ -96,6 +96,7 @@ class HTMLDropdownElement extends HTMLElement {
 
 class HTMLDropOptionELement extends HTMLElement {
 
+    hasValue = false;
     value = null;
 
     constructor() {
@@ -104,6 +105,7 @@ class HTMLDropOptionELement extends HTMLElement {
 
     connectedCallback() {
         this.value = this.getAttribute("value");
+        this.hasValue = (this.value != null);
     }
 
     disconnectedCallback() {

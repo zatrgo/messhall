@@ -38,10 +38,11 @@
                         <drop-option><p>Moon</p></drop-option>
                     </drop-down>
                     <drop-down id="colonization" style="z-index: 1">
-                        <drop-option><p>Untouched</p></drop-option>
+                        <drop-option><p>< WIP ></p></drop-option>
+                        <!--drop-option><p>Untouched</p></drop-option>
                         <drop-option><p>Abandoned</p></drop-option>
                         <drop-option><p>Colony</p></drop-option>
-                        <drop-option><p>Metropolis</p></drop-option>
+                        <drop-option><p>Metropolis</p></drop-option-->
                     </drop-down>
                     <drop-down id="terrain" style="z-index: 0">
                         <drop-option><p>Flat</p></drop-option>
@@ -52,72 +53,83 @@
             </div>
             <div class="contentgroup_horizontal">
                 <div class="contentcontainer" id="markers" style="z-index: 1">
-                    <drop-down id="misc" style="z-index: 5">
-                        <drop-option><img src="images/icons/Misc/Extraction 1.webp"><p>Extraction Point</p></drop-option>
-                        <drop-option><img src="images/icons/Misc/POI 1.webp"><p>Minor POI (Undiscovered)</p></drop-option>
-                        <drop-option><img src="images/icons/Misc/POI 2.webp"><p>Minor POI (Discovered)</p></drop-option>
-                    </drop-down>
-                    <drop-down id="outposts" style="z-index: 4">
-                        <drop-option><img src="images\icons\Outposts\terminid_small.webp"><p>Small Outpost</p></drop-option>
-                        <drop-option><img src="images\icons\Outposts\terminid_medium.webp"><p>Medium Outpost</p></drop-option>
-                        <drop-option><img src="images\icons\Outposts\terminid_heavy.webp"><p>Heavy Outpost</p></drop-option>
-                        <drop-option><img src="images\icons\Outposts\terminid_mega.webp"><p>Meganest</p></drop-option>
-                    </drop-down>
-                    <drop-down id="mainobjs_generic" style="z-index: 3">
-                        <drop-option><img src="images\icons\Main Objectives\Generic\Terminate Illegal Broadcast.webp"><p>Terminate Illegal Broadcast</p></drop-option>
-                        <drop-option><img src="images\icons\Main Objectives\Generic\Pump Fuel To ICBM.webp"><p>Pump Fuel To ICBM</p></drop-option>
-                        <drop-option><img src="images\icons\Main Objectives\Generic\Upload Escape Pod Data.webp"><p>Upload Escape Pod Data</p></drop-option>
-                        <drop-option><img src="images\icons\Main Objectives\Generic\Spread Democracy.webp"><p>Spread Democracy</p></drop-option>
-                        <drop-option><img src="images\icons\Main Objectives\Generic\Conduct Geological Survey.webp"><p>Conduct Geological Survey</p></drop-option>
-                        <drop-option><img src="images\icons\Main Objectives\Generic\Launch ICBM.webp"><p>Launch ICBM</p></drop-option>
-                        <drop-option><img src="images\icons\Main Objectives\Generic\Retrieve Valuable Data.webp"><p>Retrieve Valuable Data</p></drop-option>
-                        <drop-option><img src="images\icons\Main Objectives\Generic\Emergency Evacuation.webp"><p>Emergency Evacuation</p></drop-option>
-                        <drop-option><img src="images\icons\Main Objectives\Generic\Retrieve Essential Personnel.webp"><p>Retrieve Essential Personnel</p></drop-option>
-                        <drop-option><img src="images\icons\Main Objectives\Generic\Evacuate High-Value Assets.webp"><p>Evacuate High-Value Assets</p></drop-option>
-                    </drop-down>
-                    <drop-down id="mainobjs_faction" style="z-index: 2">
-                        <drop-option><img src="images\icons\Main Objectives\Terminid\Eradicate Terminid Swarm.webp"><p>Eradicate Terminid Swarm</p></drop-option>
-                        <drop-option><img src="images\icons\Main Objectives\Terminid\Eliminate Brood Commanders.webp"><p>Eliminate Brood Commanders</p></drop-option>
-                        <drop-option><img src="images\icons\Main Objectives\Terminid\Eliminate Chargers.webp"><p>Eliminate Chargers</p></drop-option>
-                        <drop-option><img src="images\icons\Main Objectives\Terminid\Eliminate Impaler.webp"><p>Eliminate Impaler</p></drop-option>
-                        <drop-option><img src="images\icons\Main Objectives\Terminid\Eliminate Bile Titans.webp"><p>Eliminate Bile Titans</p></drop-option>
-                        <drop-option><img src="images\icons\Main Objectives\Terminid\Activate E-710 Pumps.webp"><p>Activate E-710 Pumps</p></drop-option>
-                        <drop-option><img src="images\icons\Main Objectives\Terminid\Purge Hatcheries.webp"><p>Purge Hatcheries</p></drop-option>
-                        <drop-option><img src="images\icons\Main Objectives\Terminid\Enable E-710 Extraction.webp"><p>Enable E-710 Extraction</p></drop-option>
-                        <drop-option><img src="images\icons\Main Objectives\Terminid\Nuke Nursery.webp"><p>Nuke Nursery</p></drop-option>
-                        <drop-option><img src="images\icons\Main Objectives\Terminid\Blitz - Destroy Nests.webp"><p>Blitz - Destroy Nests</p></drop-option>
-                    </drop-down>
-                    <drop-down id="sideobjs_generic" style="z-index: 1">
-                        <drop-option><img src="images\icons\Side Objectives\Generic\SEAF Artillery.webp"><p>SEAF Artillery</p></drop-option>
-                        <drop-option><img src="images\icons\Side Objectives\Generic\Radar Station.webp"><p>Radar Station</p></drop-option>
-                        <drop-option><img src="images\icons\Side Objectives\Generic\SEAF SAM Site.webp"><p>SEAF SAM Site</p></drop-option>
-                        <drop-option><img src="images\icons\Side Objectives\Generic\Upload Escape Pod Data.webp"><p>Upload Escape Pod Data</p></drop-option>
-                        <drop-option><img src="images\icons\Side Objectives\Generic\Destroy Rogue Research Station.webp"><p>Destroy Rogue Research Station</p></drop-option>
-                        <drop-option><img src="images\icons\Side Objectives\Generic\Terminate Illegal Broadcast.webp"><p>Terminate Illegal Broadcast</p></drop-option>
-                    </drop-down>
-                    <drop-down id="sideobjs_faction" style="z-index: 0">
-                        <drop-option><img src="images\icons\Side Objectives\Terminids\Spore Spewer.webp"><p>Spore Spewer</p></drop-option>
-                        <drop-option><img src="images\icons\Side Objectives\Terminids\Stalker Lair.webp"><p>Stalker Lair</p></drop-option>
-                        <drop-option><img src="images\icons\Side Objectives\Terminids\Shrieker Nest.webp"><p>Shrieker Nest</p></drop-option>
-                        <drop-option><img src="images\icons\Side Objectives\Terminids\Retrieve Mutant Larva.webp"><p>Retrieve Mutant Larva</p></drop-option>
-                    </drop-down>
-                </div>
-                <div class="contentcontainer" id="add">
-                    <button onclick="addmarker('misc')" id="misc"><img src="images/icons/add.webp"></button>
-                    <button onclick="addmarker('outposts')" id="outposts"><img src="images/icons/add.webp"></button>
-                    <button onclick="addmarker('mainobjs_generic')" id="mainobjs_generic"><img src="images/icons/add.webp"></button>
-                    <button onclick="addmarker('mainobjs_faction')" id="mainobjs_faction"><img src="images/icons/add.webp"></button>
-                    <button onclick="addmarker('sideobjs_generic')" id="sideobjs_generic"><img src="images/icons/add.webp"></button>
-                    <button onclick="addmarker('sideobjs_faction')" id="sideobjs_faction"><img src="images/icons/add.webp"></button>
+                    <button id="generate" onclick="generate()">Generate</button>
+                    <div style="z-index: 5">
+                        <drop-down id="misc">
+                            <drop-option><img src="images/icons/Misc/Extraction 1.webp"><p>Extraction Point</p></drop-option>
+                            <drop-option><img src="images/icons/Misc/POI 1.webp"><p>Minor POI (Undiscovered)</p></drop-option>
+                            <drop-option><img src="images/icons/Misc/POI 2.webp"><p>Minor POI (Discovered)</p></drop-option>
+                        </drop-down>
+                        <button onclick="addmarker('button_misc')" id="button_misc"><img src="images/icons/add.webp"></button>
+                    </div>
+                    <div style="z-index: 4">
+                        <drop-down id="outposts">
+                            <drop-option><img src="images\icons\Outposts\terminid_small.webp"><p>Small Outpost</p></drop-option>
+                            <drop-option><img src="images\icons\Outposts\terminid_medium.webp"><p>Medium Outpost</p></drop-option>
+                            <drop-option><img src="images\icons\Outposts\terminid_heavy.webp"><p>Heavy Outpost</p></drop-option>
+                            <drop-option><img src="images\icons\Outposts\terminid_mega.webp"><p>Meganest</p></drop-option>
+                        </drop-down>
+                        <button onclick="addmarker('button_outposts')" id="button_outposts"><img src="images/icons/add.webp"></button>
+                    </div>
+                    <div style="z-index: 3">
+                        <drop-down id="mainobjs_generic">
+                            <drop-option><img src="images\icons\Main Objectives\Generic\Terminate Illegal Broadcast.webp"><p>Terminate Illegal Broadcast</p></drop-option>
+                            <drop-option><img src="images\icons\Main Objectives\Generic\Pump Fuel To ICBM.webp"><p>Pump Fuel To ICBM</p></drop-option>
+                            <drop-option><img src="images\icons\Main Objectives\Generic\Upload Escape Pod Data.webp"><p>Upload Escape Pod Data</p></drop-option>
+                            <drop-option><img src="images\icons\Main Objectives\Generic\Spread Democracy.webp"><p>Spread Democracy</p></drop-option>
+                            <drop-option><img src="images\icons\Main Objectives\Generic\Conduct Geological Survey.webp"><p>Conduct Geological Survey</p></drop-option>
+                            <drop-option><img src="images\icons\Main Objectives\Generic\Launch ICBM.webp"><p>Launch ICBM</p></drop-option>
+                            <drop-option><img src="images\icons\Main Objectives\Generic\Retrieve Valuable Data.webp"><p>Retrieve Valuable Data</p></drop-option>
+                            <drop-option><img src="images\icons\Main Objectives\Generic\Emergency Evacuation.webp"><p>Emergency Evacuation</p></drop-option>
+                            <drop-option><img src="images\icons\Main Objectives\Generic\Retrieve Essential Personnel.webp"><p>Retrieve Essential Personnel</p></drop-option>
+                            <drop-option><img src="images\icons\Main Objectives\Generic\Evacuate High-Value Assets.webp"><p>Evacuate High-Value Assets</p></drop-option>
+                        </drop-down>
+                        <button onclick="addmarker('button_mainobjs_generic')" id="button_mainobjs_generic"><img src="images/icons/add.webp"></button>
+                    </div>
+                    <div style="z-index: 2">
+                        <drop-down id="mainobjs_faction">
+                            <drop-option><img src="images\icons\Main Objectives\Terminid\Eradicate Terminid Swarm.webp"><p>Eradicate Terminid Swarm</p></drop-option>
+                            <drop-option><img src="images\icons\Main Objectives\Terminid\Eliminate Brood Commanders.webp"><p>Eliminate Brood Commanders</p></drop-option>
+                            <drop-option><img src="images\icons\Main Objectives\Terminid\Eliminate Chargers.webp"><p>Eliminate Chargers</p></drop-option>
+                            <drop-option><img src="images\icons\Main Objectives\Terminid\Eliminate Impaler.webp"><p>Eliminate Impaler</p></drop-option>
+                            <drop-option><img src="images\icons\Main Objectives\Terminid\Eliminate Bile Titans.webp"><p>Eliminate Bile Titans</p></drop-option>
+                            <drop-option><img src="images\icons\Main Objectives\Terminid\Activate E-710 Pumps.webp"><p>Activate E-710 Pumps</p></drop-option>
+                            <drop-option><img src="images\icons\Main Objectives\Terminid\Purge Hatcheries.webp"><p>Purge Hatcheries</p></drop-option>
+                            <drop-option><img src="images\icons\Main Objectives\Terminid\Enable E-710 Extraction.webp"><p>Enable E-710 Extraction</p></drop-option>
+                            <drop-option><img src="images\icons\Main Objectives\Terminid\Nuke Nursery.webp"><p>Nuke Nursery</p></drop-option>
+                            <drop-option><img src="images\icons\Main Objectives\Terminid\Blitz - Destroy Nests.webp"><p>Blitz - Destroy Nests</p></drop-option>
+                        </drop-down>
+                        <button onclick="addmarker('button_mainobjs_faction')" id="button_mainobjs_faction"><img src="images/icons/add.webp"></button>
+                    </div>
+                    <div style="z-index: 1">
+                        <drop-down id="sideobjs_generic">
+                            <drop-option><img src="images\icons\Side Objectives\Generic\SEAF Artillery.webp"><p>SEAF Artillery</p></drop-option>
+                            <drop-option><img src="images\icons\Side Objectives\Generic\Radar Station.webp"><p>Radar Station</p></drop-option>
+                            <drop-option><img src="images\icons\Side Objectives\Generic\SEAF SAM Site.webp"><p>SEAF SAM Site</p></drop-option>
+                            <drop-option><img src="images\icons\Side Objectives\Generic\Upload Escape Pod Data.webp"><p>Upload Escape Pod Data</p></drop-option>
+                            <drop-option><img src="images\icons\Side Objectives\Generic\Destroy Rogue Research Station.webp"><p>Destroy Rogue Research Station</p></drop-option>
+                            <drop-option><img src="images\icons\Side Objectives\Generic\Terminate Illegal Broadcast.webp"><p>Terminate Illegal Broadcast</p></drop-option>
+                        </drop-down>
+                        <button onclick="addmarker('button_sideobjs_generic')" id="button_sideobjs_generic"><img src="images/icons/add.webp"></button>
+                    </div>
+                    <div style="z-index: 0">
+                        <drop-down id="sideobjs_faction">
+                            <drop-option><img src="images\icons\Side Objectives\Terminids\Spore Spewer.webp"><p>Spore Spewer</p></drop-option>
+                            <drop-option><img src="images\icons\Side Objectives\Terminids\Stalker Lair.webp"><p>Stalker Lair</p></drop-option>
+                            <drop-option><img src="images\icons\Side Objectives\Terminids\Shrieker Nest.webp"><p>Shrieker Nest</p></drop-option>
+                            <drop-option><img src="images\icons\Side Objectives\Terminids\Retrieve Mutant Larva.webp"><p>Retrieve Mutant Larva</p></drop-option>
+                        </drop-down>
+                        <button onclick="addmarker('button_sideobjs_faction')" id="button_sideobjs_faction"><img src="images/icons/add.webp"></button>
+                    </div>
                 </div>
                 <div class="contentcontainer" id="map">
-                    <canvas id="mapCanvas" width="500" height="500"></canvas>
                 </div>
             </div>
         </div>
         <div class="half">
             <div class="contentcontainer" id="info">
-                <p>info</p>
+                <h3>Mission Info</h3>
+                <span id="info_enemy"><p>Enemies in this region:  </p> <p>Terminids</p> <img src="images/icons/terminid.webp"></span>
             </div>
             <div class="contentcontainer" id="missions">
                 <p>missions</p>
@@ -131,31 +143,37 @@
         --mapsize: 500px;
         display: flex;
         flex-direction: row;
-
     }
-    .half {
+    @media (min-width: 1000px) {.half {
         display: flex;
         flex-wrap: wrap;
         width: 49%;
-    }
+    }}
+    @media (max-width: 1000px) {.half {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }}
+    
     .contentgroup_vertical {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
-        width: calc(var(--mapsize) + 170px);
+        --fullsize: calc(var(--mapsize) + 150px);
+        width: var(--fullsize);
 
     }
     .contentgroup_horizontal {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
         align-items: flex-start;
         width: calc(var(--mapsize) + 170px);
 
     }
     .contentcontainer {
         padding: 0;
+        margin: 0;
         &#settingheader {
             width: 100%;
             margin-bottom: 0;
@@ -163,7 +181,7 @@
             justify-content:center;
             align-items: center;
             p {
-                width: calc(calc(var(--mapsize) + 170px) / 4);
+                width: calc(var(--fullsize) / 4);
                 justify-content: center;
                 text-align: center;
                 border-left: solid 1px #eeed;
@@ -172,8 +190,6 @@
                 padding: 10px 0;
                 font-size: 25px;
                 font-weight: 500;
-                
-                
             }
         }
         &#settings {
@@ -186,16 +202,12 @@
             
             drop-down {
                 display: inline-block;
-                width: calc(calc(var(--mapsize) + 170px) / 4);
+                width: calc(var(--fullsize) / 4);
                 border-left: solid 1px #eeed;
                 border-right: solid 1px #eeed;
-                --height: 60px;
-                --fontsize: 0.5;
-
-                &:hover .selected p {
-                    color: yellow;
-                    font-weight: 500;
-                }
+                --height: 50px;
+                --fontsize: 0.45;
+                --bgcolor: none;
                 
                 .selected p {
                     width: 100%;
@@ -214,77 +226,104 @@
                     drop-option {
                         padding: 0 10px;
                         width: 100%;
-
-                        &:hover p {
-                            color: yellow;
-                            font-weight: 500;
-                        }
                     }
                 }
             }
 
         }
         &#markers {
-            width: 75px;
+            width: 140px;
             height: var(--mapsize);
             padding: 20px 10px;
-            padding-right: 0;
+            margin: 0;
+            margin-right: 10px;
             align-items: center;
+            justify-content: center;
 
-            drop-down {
-                --height: 60px;
-                --fontsize: 0.4;
-                width: 60px;
-                padding-bottom: 10px;
-                border: solid 1px #0000;
+            >button {
+                background-color: black;
+                color: yellow;
+                border: solid 1px yellow;
+                text-align: center;
+                justify-content: center;
+                margin: auto;
+                margin-bottom: 10px;
+                width: 100px;
+                height: 40px;
 
-                &:hover .selected img {
-                    border: solid 1px yellow;
+                &:hover {
+                    font-weight: 500;
+                    border: solid 2px yellow;
                 }
-
-                .selected {
-                    p {
-                        display: none;
-                    }
-                    img {
-                        box-sizing: border-box;
-                    }
-                }
-                .options {
-                    background-color: #221e;
-                    width: max-content;
-                    drop-option {
-                        padding: 2px 5px;
-                        height: 50px;
-
-                        p {
-                            padding: 5px 10px;
-                        }
-                        img {
-                            height: 50px;
-                        }
-
-                        &:hover p {
-                            color: yellow;
-                            font-weight: 500;
-                        }
-                    }
+                &:active {
+                    background-color: yellow;
+                    color: black;
+                    border: solid 1px black;
                 }
             }
-        }
-        &#add {
-            width: 75px;
-            height: var(--mapsize);
-            margin-right: 10px;
-            padding: 20px 0px;
-            button {
-                width: 60px;
-                height: 60px;
-                margin-bottom: 10px;
-                background: none;
-                img {
-                    width: 100%;
-                    height: 100%;
+
+            >div {
+                display: flex;
+                flex-direction: row;
+                margin-bottom: 5px;
+
+                drop-down {
+                    --height: 60px;
+                    --fontsize: 0.4;
+                    --bgcolor: none;
+                    z-index: 1;
+                    width: 60px;
+                    padding: 0;
+                    .selected {
+                        padding: 0;
+                        p {
+                            display: none;
+                        }
+                    }
+                    .options {
+                        background-color: #221e;
+                        width: max-content;
+                        drop-option {
+                            padding: 2px 5px;
+                            height: 54px;
+
+                            p {
+                                padding: 5px 10px;
+                            }
+                            img {
+                                height: 50px;
+                            }
+                        }
+                    }
+                }
+
+                button {
+                    z-index: 0;
+                    width: 60px;
+                    height: 60px;
+                    background: none;
+                    padding: 0;
+                    border: solid 1px #0000;
+                    justify-content: center;
+                    img {
+                        width: 80%;
+                        height: 80%;
+                        margin: auto;
+                    }
+                    &:hover {
+                        border: solid 1px #fff500;
+                        img {
+                            width: 90%;
+                            height: 90%;
+                        }
+                    }
+                    &:active {
+                        background-color: #fff500;
+                        img {
+                            width: 90%;
+                            height: 90%;
+                        }
+                    }
                 }
             }
         }
@@ -292,25 +331,62 @@
             width: var(--mapsize);
             height: var(--mapsize);
         }
-
         &#info, &#missions {
             width: 100%;
             height: 100px;
             justify-content: baseline;
+
+            span {
+                display: flex;
+                --height: 20px;
+                height: var(--height);
+                font-size: var(--height);
+                vertical-align: middle;
+                * {
+                    align-content: baseline;
+                    display: inline-block;
+                    font-size: calc(var(--height) * 0.8);
+
+                }
+                img {
+                    width: var(--height);
+                    height: var(--height);
+                    
+                }
+            }
         }
     }
     
 </style>
 <script src="dropdown_custom.js"></script>
+<script type="module" src="./mapgenerator.js"></script>
+<script src="https://unpkg.com/konva@9/konva.min.js"></script>
 <script>
 
+    const mapSize = 500;
 
-    var canvas = document.getElementById("mapCanvas")
-    var ctx = canvas.getContext("2d");
-    var border = new Image();
-    border.src = "images/minimap.webp";
-    border.onload = function() {
-        ctx.drawImage(border, 0, 0, 500, 500);
+    function AddImage(layer, image, w=mapSize, h=mapSize) {
+        var img = new Image();
+        img.onload = function() {
+            var k = new Konva.Image({image:img, width:w, height:h});
+            layer.add(k);
+        }
+        img.src = image;
     }
+
+
+    const stage = new Konva.Stage({container: 'map', width: mapSize, height: mapSize});
+
+    const layer_bg = new Konva.Layer();
+    stage.add(layer_bg);
+    const layer_map = new Konva.Layer();
+    stage.add(layer_map);
+    const layer_grid = new Konva.Layer();
+    stage.add(layer_grid);
+
+    AddImage(layer_bg, "images/minimap.webp", 500);
+    AddImage(layer_bg, "images/mask.webp", 500);
+    //Generation
+    AddImage(layer_bg, "images/map 1000m grid.webp", 500);
+
 </script>
-<script src="mapgenerator.js"></script>

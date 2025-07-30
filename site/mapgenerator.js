@@ -1,11 +1,22 @@
-import { ds } from 'ds-heightmap'
-
-const width = 400
-const height = 300
-const { data, max, min } = ds({
-  width,
-  height
-})
+import { ds } from './heightmap';
+const data = ds({
+  width: 500,           // the width of the map, must be larger than 1.
+  height: 500,          // the height of the map, must be larger than 1.
+  depth: 2000,          // [optional] the value of each pixel will be within 0~depth, default: 2000.
+  rough: 1,             // [optional] effect the terrain variability (roughness), default: 1.
+  randomizer(base, range) {
+    // [optional] customize the logic of random height generation.
+    // receive two number arguments:
+    // first is the average of the four(or three) vertices of the square/diamomnd step.
+    // second is half of the square/diamond width plus half of its height, you might want to use this value to decide how big the random value plus to the average is.
+    // finally, return the height
+    const random = Math.random() * Math.pow(2, -range / (129 * 2))
+    return base + random
+  }
+});
+console.log(data.data); // you would get a 2D-array of numbers
+console.log(data.max);  // the maximum number in all pixels
+console.log(data.min);  // the minimum number in all pixels
 
 const range = max - min
 const colorData = []
@@ -32,8 +43,9 @@ const imageData = new ImageData(
   height,
 );
 
-const canvas = document.getElementById('mapCanvas')
-canvas.width = width
-canvas.height = height
-const ctx = canvas.getContext('2d')
-ctx.putImageData(imageData, 0, 0)
+function drawMap(canvas) {
+    canvas.width = width
+    canvas.height = height
+    const ctx = canvas.getContext('2d')
+    ctx.putImageData(imageData, 0, 0)
+}

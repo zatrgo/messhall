@@ -1,7 +1,6 @@
 class HTMLDropdownElement extends HTMLElement {
     visible = false;
     selected = null;
-    selectedValue = null;
     selectdiv = null;
     options = [];
     optdiv = null;
@@ -11,7 +10,7 @@ class HTMLDropdownElement extends HTMLElement {
     constructor() {
         super();
     }
-
+    
     toggleView() {
         this.visible = !this.visible;  
         this.optdiv.style.display = this.visible ? null : 'none';
@@ -27,38 +26,42 @@ class HTMLDropdownElement extends HTMLElement {
     }
 
     select(e, obj) {
-        console.log("Selected: ", obj);
         this.selected = obj;
         this.selectdiv.innerHTML = this.selected.innerHTML;
         if (obj.getAttribute("value") != null) this.selectedValue = obj.getAttribute("value");
         if (this.on_select != null) this.on_select();
     }
 
-    connectedCallback() {
-
-        //options
+    updateOptions() {
         this.options = this.querySelectorAll("drop-option");
+        var exists = false;
+        for (var opt of this.options) {
+            opt.addEventListener("mousedown", this.select.bind(this, event, opt));
+            this.optdiv.appendChild(opt);
+        }
         this.selected = this.options[0]; 
+        this.selectdiv.innerHTML = this.selected.innerHTML;
+    }
+    
+    connectedCallback() {
+        
         this.addEventListener("mousedown", this.toggleView);
 
-
-        //Create selected div and set to the first option
-        this.selectdiv = document.createElement("div");
-        this.selectdiv.setAttribute('class', 'selected');
-        this.appendChild(this.selectdiv);
-        console.log(this.selected);
-        this.selectdiv.innerHTML = this.selected.innerHTML;
         
         //Create options div
         this.optdiv = document.createElement("div");
         this.optdiv.setAttribute('class', 'options');
         this.optdiv.style.display = 'none';
         this.appendChild(this.optdiv);
-
-        for (var opt of this.options) {
-            opt.addEventListener("mousedown", this.select.bind(this, event, opt));
-            this.optdiv.appendChild(opt);
-        }
+        
+        //Create selected div and set to the first option
+        this.selectdiv = document.createElement("div");
+        this.selectdiv.setAttribute('class', 'selected');
+        this.appendChild(this.selectdiv);
+        
+        //Add options into options div
+        this.updateOptions();
+        
 
         var head = document.getElementsByTagName("head")[0].innerHTML;
         var rel = `<link rel="stylesheet" href="dropdown_custom.css">`;
@@ -109,7 +112,6 @@ class HTMLDropOptionELement extends HTMLElement {
     }
 
     disconnectedCallback() {
-        console.log("Drop option element removed from page.");
     }
     connectedMoveCallback() {
         console.log("Drop option element moved with moveBefore()");

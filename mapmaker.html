@@ -449,11 +449,11 @@
                 else if (post.includes('medium')) var dangerSize = markerSize * 1.8;
                 else if (post.includes('heavy')) var dangerSize = markerSize * 2.2;
                 else if (post.includes('mega')) var dangerSize = markerSize * 2.6;
-
+                dangerSize = dangerSize * (0.8 + (Math.random()*0.4));
                 var markermid = markerSize / 2;
                 var dangermid = dangerSize / 2;
 
-                AddImage(layer_map, ("images/icons/danger 1.webp"), dangerSize, dangerSize, function(danger) {
+                AddImage(layer_map, ("images/icons/danger.webp"), dangerSize, dangerSize, function(danger) {
                     danger.moveToBottom();
                     dangers.push(danger);
                     danger.x((img.x() - dangermid) + markermid);

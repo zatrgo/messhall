@@ -59,8 +59,7 @@
                     <div style="z-index: 5">
                         <drop-down id="misc">
                             <drop-option><img src="images/icons/Misc/Extraction 1.webp"><p>Extraction Point</p></drop-option>
-                            <drop-option><img src="images/icons/Misc/POI 1.webp"><p>Minor POI (Undiscovered)</p></drop-option>
-                            <drop-option><img src="images/icons/Misc/POI 2.webp"><p>Minor POI (Discovered)</p></drop-option>
+                            <drop-option><img src="images/icons/Misc/POI 1.webp"><p>Minor Point of Interest</p></drop-option>
                         </drop-down>
                         <button onclick="addMarker('misc')" id="button_misc"><img src="images/icons/add.webp"></button>
                     </div>
@@ -113,7 +112,7 @@
                 </div>
             </div>
         </div>
-        <!--div class="half">
+        <div class="half">
             <div class="contentcontainer" id="info">
                 <h3>Mission Info</h3>
                 <span id="info_enemy"><p>Enemies in this region:  </p> <p>Terminids</p> <img src="images/icons/terminid.webp"></span>
@@ -121,7 +120,7 @@
             <div class="contentcontainer" id="missions">
                 <p>missions</p>
             </div>
-        </div-->
+        </div>
     </div>
 </body>
 </html>
@@ -351,6 +350,7 @@
 </style>
 <script src="dropdown_custom.js"></script>
 <script src="https://unpkg.com/konva@9/konva.min.js"></script>
+<script src="mapmaking.js"></script>
 <script>
     
     const mapSize = 500;
@@ -389,78 +389,6 @@
     const dropM = document.getElementById('mainobjs_faction');
     const dropS = document.getElementById('sideobjs_faction');
 
-    const bugsO = `
-        <drop-option><img src="images/icons/outposts/terminid_small.webp"><p>Small Nest</p></drop-option>
-        <drop-option><img src="images/icons/outposts/terminid_medium.webp"><p>Medium Nest</p></drop-option>
-        <drop-option><img src="images/icons/outposts/terminid_heavy.webp"><p>Heavy Nest</p></drop-option>
-        <drop-option><img src="images/icons/outposts/terminid_mega.webp"><p>Meganest</p></drop-option>
-    `
-    const botsO = `
-        <drop-option><img src="images/icons/outposts/automaton_small.webp"><p>Small Outpost</p></drop-option>
-        <drop-option><img src="images/icons/outposts/automaton_medium.webp"><p>Medium Outpost</p></drop-option>
-        <drop-option><img src="images/icons/outposts/automaton_heavy.webp"><p>Heavy Outpost</p></drop-option>
-        <drop-option><img src="images/icons/outposts/automaton_mega.webp"><p>Fortress</p></drop-option>
-    `
-    const squidsO = `
-        <drop-option><img src="images/icons/outposts/illuminate_small.webp"><p>Small Encampment</p></drop-option>
-        <drop-option><img src="images/icons/outposts/illuminate_medium.webp"><p>Medium Encampment</p></drop-option>
-        <drop-option><img src="images/icons/outposts/illuminate_heavy.webp"><p>Heavy Encampment</p></drop-option>
-        <drop-option><img src="images/icons/outposts/illuminate_mega.webp"><p>Great Fleet</p></drop-option>
-    `
-    const bugsM = `    
-        <drop-option><img src="images/icons/main/terminid/Eradicate Terminid Swarm.webp"><p>Eradicate terminid Swarm</p></drop-option>
-        <drop-option><img src="images/icons/main/terminid/Eliminate Brood Commanders.webp"><p>Eliminate Brood Commanders</p></drop-option>
-        <drop-option><img src="images/icons/main/terminid/Eliminate Chargers.webp"><p>Eliminate Chargers</p></drop-option>
-        <drop-option><img src="images/icons/main/terminid/Eliminate Impaler.webp"><p>Eliminate Impaler</p></drop-option>
-        <drop-option><img src="images/icons/main/terminid/Eliminate Bile Titans.webp"><p>Eliminate Bile Titans</p></drop-option>
-        <drop-option><img src="images/icons/main/terminid/Activate E-710 Pumps.webp"><p>Activate E-710 Pumps</p></drop-option>
-        <drop-option><img src="images/icons/main/terminid/Purge Hatcheries.webp"><p>Purge Hatcheries</p></drop-option>
-        <drop-option><img src="images/icons/main/terminid/Enable E-710 Extraction.webp"><p>Enable E-710 Extraction</p></drop-option>
-        <drop-option><img src="images/icons/main/terminid/Nuke Nursery.webp"><p>Nuke Nursery</p></drop-option>
-        <drop-option><img src="images/icons/main/terminid/Blitz - Destroy Nests.webp"><p>Blitz - Destroy Nests</p></drop-option>                
-    `
-    const botsM = `
-        <drop-option><img src="images/icons/main/automaton/Eradicate Automaton Forces.webp"><p>Eradicate Automaton Forces</p></drop-option>
-        <drop-option><img src="images/icons/main/automaton/Destroy Transmission Network.webp"><p>Destroy Transmission Network</p></drop-option>
-        <drop-option><img src="images/icons/main/automaton/Eliminate Devastators.webp"><p>Eliminate Devastators</p></drop-option>
-        <drop-option><img src="images/icons/main/automaton/Eliminate Hulks.webp"><p>Eliminate Hulks</p></drop-option>
-        <drop-option><img src="images/icons/main/automaton/Eliminate Factory Strider.webp"><p>Eliminate Factory Strider</p></drop-option>
-        <drop-option><img src="images/icons/main/automaton/Sabotage Supply Bases.webp"><p>Sabotage Supply Bases</p></drop-option>
-        <drop-option><img src="images/icons/main/automaton/Sabotage Air Ships.webp"><p>Sabotage Air Ships</p></drop-option>
-        <drop-option><img src="images/icons/main/automaton/Sabotage Air Base.webp"><p>Sabotage Air Base</p></drop-option>
-        <drop-option><img src="images/icons/main/automaton/Destroy Command Bunkers.webp"><p>Destroy Command Bunkers</p></drop-option>
-        <drop-option><img src="images/icons/main/automaton/Neutralize Orbital Defenses.webp"><p>Neutralize Orbital Defenses</p></drop-option>
-        <drop-option><img src="images/icons/main/automaton/Blitz - Destroy Fabricators.webp"><p>Blitz - Destroy Fabricators</p></drop-option>
-    `
-    const squidsM = `
-        <drop-option><img src="images/icons/main/illuminate/Purge Illuminate.webp"><p>Purge Illuminate</p></drop-option>
-        <drop-option><img src="images/icons/main/illuminate/Evacuate Colonists.webp"><p>Evacuate Colonists</p></drop-option>
-        <drop-option><img src="images/icons/main/illuminate/Retrieve Recon Craft Intel.webp"><p>Retrieve Recon Craft Intel</p></drop-option>
-        <drop-option><img src="images/icons/main/illuminate/Free Colony.webp"><p>Free Colony</p></drop-option>
-        <drop-option><img src="images/icons/main/illuminate/Destroy Harvesters.webp"><p>Destroy Harvesters</p></drop-option>
-        <drop-option><img src="images/icons/main/illuminate/Repel Invasion Fleet.webp"><p>Repel Invasion Fleet</p></drop-option>
-        <drop-option><img src="images/icons/main/illuminate/Take Down Overship.webp"><p>Take Down Overship</p></drop-option>
-        <drop-option><img src="images/icons/main/illuminate/Blitz - Destroy Warp Ships.webp"><p>Blitz - Destroy Warp Ships</p></drop-option>
-    `
-    const bugsS = `    
-        <drop-option><img src="images/icons/side/terminid/Spore Spewer.webp"><p>Spore Spewer</p></drop-option>
-        <drop-option><img src="images/icons/side/terminid/Stalker Lair.webp"><p>Stalker Lair</p></drop-option>
-        <drop-option><img src="images/icons/side/terminid/Shrieker Nest.webp"><p>Shrieker Nest</p></drop-option>
-        <drop-option><img src="images/icons/side/terminid/Retrieve Mutant Larva.webp"><p>Retrieve Mutant Larva</p></drop-option>              
-    `
-    const botsS = `
-        <drop-option><img src="images/icons/side/automaton/Detector Tower.webp"><p>Detector Tower</p></drop-option>
-        <drop-option><img src="images/icons/side/automaton/Mortar Emplacement.webp"><p>Mortar Emplacement</p></drop-option>
-        <drop-option><img src="images/icons/side/automaton/Stratagem Jammer.webp"><p>Stratagem Jammer</p></drop-option>
-        <drop-option><img src="images/icons/side/automaton/Anti-Air Emplacement.webp"><p>Anti-Air Emplacement</p></drop-option>
-        <drop-option><img src="images/icons/side/automaton/Gunship Facility.webp"><p>Gunship Facility</p></drop-option>
-        <drop-option><img src="images/icons/side/automaton/Intercept Convoy.webp"><p>Intercept Convoy</p></drop-option>
-        <drop-option><img src="images/icons/side/automaton/Enemy Bio-Processors.webp"><p>Enemy Bio-Processors</p></drop-option>
-    `
-    const squidsS = `
-        <drop-option><img src="images/icons/side/illuminate/Cognitive Disruptor.webp"><p>Cognitive Disruptor</p></drop-option>
-    `
-
     const started = false;
 
     function setMarkers() {
@@ -469,11 +397,13 @@
             dropO.optdiv.innerHTML = bugsO;
             dropM.optdiv.innerHTML = bugsM;
             dropS.optdiv.innerHTML = bugsS;
-        } else if (enemy == 'automaton') {
+        }
+        else if (enemy == 'automaton') {
             dropO.optdiv.innerHTML = botsO;
             dropM.optdiv.innerHTML = botsM;
             dropS.optdiv.innerHTML = botsS;
-        } else if (enemy == 'illuminate') {
+        }
+        else if (enemy == 'illuminate') {
             dropO.optdiv.innerHTML = squidsO;
             dropM.optdiv.innerHTML = squidsM;
             dropS.optdiv.innerHTML = squidsS;
@@ -495,18 +425,42 @@
     const markerSize = 60;
     var markers = [];
     var shadows = [];
+    var dangers = [];
+    var missions = [];
 
     function addMarker(id) {
-        var drop = document.getElementById(id);
-        var src = drop.selected.children[0].src;
+        var s = document.getElementById(id).selected.children;
         
-        AddImage(layer_map, src, markerSize, markerSize, function(img) {
+        AddImage(layer_map, s[0].src, markerSize, markerSize, function(img) {
             img.draggable(true);
             markers.push(img);
+
             AddImage(layer_map, "images/icons/shadow.webp", markerSize, markerSize, function(shadow) {
                 shadow.moveToBottom();
                 shadows.push(shadow);
             });
+
+            if (id == "outposts") {
+
+                var post = s[0].getAttribute('src');
+                console.log(typeof(post));
+
+                if (post.includes('small')) var dangerSize = markerSize * 1.4;
+                else if (post.includes('medium')) var dangerSize = markerSize * 1.8;
+                else if (post.includes('heavy')) var dangerSize = markerSize * 2.2;
+                else if (post.includes('mega')) var dangerSize = markerSize * 2.6;
+
+                var markermid = markerSize / 2;
+                var dangermid = dangerSize / 2;
+
+                AddImage(layer_map, ("images/icons/danger 1.webp"), dangerSize, dangerSize, function(danger) {
+                    danger.moveToBottom();
+                    dangers.push(danger);
+                    danger.x((img.x() - dangermid) + markermid);
+                    danger.y((img.y() - dangermid) + markermid);
+                });
+            } else {dangers.push(null);}
+
             img.on('dragmove', () => {
                 var end = mapSize - markerSize;
                 if (img.x() <= 0) img.x(0);
@@ -517,27 +471,50 @@
                 var shadow = shadows[markers.indexOf(img)];
                 shadow.x(img.x());
                 shadow.y(img.y());
+                
+                if (id == "outposts") {
+                    var danger = dangers[markers.indexOf(img)];
+                    danger.x((img.x() - dangermid) + markermid);
+                    danger.y((img.y() - dangermid) + markermid);
+                }
+
             });
         });
+        
+        var div = document.createElement('div');
+        document.getElementById('missions').appendChild(div);
+        div.id = s[1].innerText;
+        var di = document.createElement('img');
+        var dh = document.createElement('h1');
+        var dp = document.createElement('p');
+
+        di.src = s[0].src;
+        dh.innerText = s[1].innerText;
+        
+        div.appendChild(di);
+        div.appendChild(dh);
+        div.appendChild(dp);
+        
     }
+
     
 </script>
 <script type="module">
     import {drawMap} from "./mapgenerator.js";
     
     const biomes = [
-        "rgb(54, 67, 35)",
-        "rgb(60, 78, 42)",
-        "rgb(30, 60, 30)",
-        "rgb(41, 54, 25)",
-        "rgb(74, 61, 29)",
-        "rgb(74, 54, 35)",
-        "rgb(88, 48, 96)",
-        "rgb(32, 64, 96)",
-        "rgb(70, 84, 90)",
-        "rgb(61, 61, 61)",
-        "rgb(96, 104, 8)",
-        "rgb(48, 49, 54)"
+        "rgb(74, 92, 48)",      // brighter
+        "rgb(70, 90, 55)",      // brighter
+        "rgb(45, 90, 40)",      // brighter
+        "rgb(70, 80, 30)",      // brighter
+        "rgb(100, 82, 39)",     // brighter
+        "rgb(100, 74, 48)",     // brighter
+        "rgb(100, 50, 100)",    // brighter
+        "rgb(40, 80, 120)",     // brighter
+        "rgb(90, 108, 116)",    // brighter
+        "rgb(81, 81, 81)",      // brighter
+        "rgb(128, 139, 10)",    // brighter
+        "rgb(64, 65, 72)"       // brighter
     ]
 
     function GenerateMap() {

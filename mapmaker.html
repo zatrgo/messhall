@@ -662,7 +662,12 @@
         db1.setAttribute('class', 'hide');
         db2.setAttribute('class', 'remove');
 
-        db1.addEventListener('click', function() {obj.marker.visible(!obj.marker.isVisible()); layer_map.draw(); db1.innerText = obj.marker.isVisible() ? "Hide" : "Show";});
+        db1.addEventListener('click', function() {
+            obj.shadow.visible(!obj.marker.isVisible()); 
+            obj.marker.visible(!obj.marker.isVisible()); 
+            layer_map.draw(); 
+            db1.innerText = obj.marker.isVisible() ? "Hide" : "Show";});
+            
         db2.addEventListener('click', function() {deleteMarker(id, this);});
 
         div.addEventListener('mouseenter', function() {obj.border.show()});

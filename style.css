@@ -74,13 +74,16 @@ script, style {
 
     .header {
         background: linear-gradient(to right, #16191f50, #121a24e0, #121a24e0, #16191f50);
-        padding: 30px 0px;
+        padding: 20px 0px;
         border-bottom: 3px solid #eee000;
 
         img, a {
-            width: 500px;
+            height: 200px;
             margin: auto;
             display: block;
+        }
+        &.long img, &.long a {
+            height: 50px;
         }
     }
 

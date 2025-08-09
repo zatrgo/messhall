@@ -8,9 +8,9 @@
     <title>Map Maker | HELLDIVERS: Mess Hall</title>
 </head>
 <body>
-    <div class="header"><a href="index.html"><img src="images/title_yellow.png"></a></div>
+    <div class="header long"><a href="index.html"><img src="images/title_yellow_long.png"></a></div>
     <div class="content">
-        <div class="half">
+        <div class="half1">
             <div class="contentgroup_vertical" style="z-index:1">
                 <div class="contentcontainer" id="settingheader">
                     <p><u>Enemies</u></p>
@@ -20,9 +20,12 @@
                 </div>
                 <div class="contentcontainer" id="settings">
                     <drop-down id="enemy" style="z-index: 3;">
-                        <drop-option value="terminid"><p>Terminids</p></drop-option>
-                        <drop-option value="automaton"><p>Automatons</p></drop-option>
-                        <drop-option value="illuminate"><p>Illuminate</p></drop-option>
+                        <drop-option value="0"><p>Terminids</p></drop-option>
+                        <drop-option value="1"><p>Automatons</p></drop-option>
+                        <drop-option value="2"><p>Illuminate</p></drop-option>
+                        <drop-option value="3"><p>Super Earth</p></drop-option>
+                        <drop-option value="4"><p>Dissidents</p></drop-option>
+
                     </drop-down>
                     <drop-down id="biome" style="z-index: 2">
                         <drop-option value="0"><p>Plains</p></drop-option> 
@@ -56,9 +59,27 @@
             <div class="contentgroup_horizontal">
                 <div class="contentcontainer" id="markers" style="z-index: 1">
                     <button onclick="setMarkers()" id="generate">Generate</button>
+
+                    <div style="z-index: 6">
+                        <drop-down on-select="checkExtract()" id="env">
+                            <drop-option><img src="images\icons\enviromental\Intense Heat.webp"><p>Intense Heat</p></drop-option>
+                            <drop-option><img src="images\icons\enviromental\Fire Tornados.webp"><p>Fire Tornados</p></drop-option>
+                            <drop-option><img src="images\icons\enviromental\Extreme Cold.webp"><p>Extreme Cold</p></drop-option>
+                            <drop-option><img src="images\icons\enviromental\Blizzards.webp"><p>Blizzards</p></drop-option>
+                            <drop-option><img src="images\icons\enviromental\Thick Fog.webp"><p>Thick Fog</p></drop-option>
+                            <drop-option><img src="images\icons\enviromental\Tremors.webp"><p>Tremors</p></drop-option>
+                            <drop-option><img src="images\icons\enviromental\Sandstorms.webp"><p>Sandstorms</p></drop-option>
+                            <drop-option><img src="images\icons\enviromental\Rainstorms.webp"><p>Rainstorms</p></drop-option>
+                            <drop-option><img src="images\icons\enviromental\Ion Storms.webp"><p>Ion Storms</p></drop-option>
+                            <drop-option><img src="images\icons\enviromental\Acid Storms.webp"><p>Acid Storms</p></drop-option>
+                            <drop-option><img src="images\icons\enviromental\Meteor Storms.webp"><p>Meteor Storms</p></drop-option>
+                            <drop-option><img src="images\icons\enviromental\Volcanic Activity.webp"><p>Volcanic Activity</p></drop-option>
+                        </drop-down>
+                        <button onclick="addMarker('env')" id="button_env"><img src="images/icons/add.webp"></button>
+                    </div>
                     <div style="z-index: 5">
-                        <drop-down id="misc">
-                            <drop-option><img src="images/icons/Misc/Extraction 1.webp"><p>Extraction Point</p></drop-option>
+                        <drop-down on-select="checkExtract()" id="misc">
+                            <drop-option><img src="images/icons/Misc/Extraction 2.webp"><p>Extraction Point</p></drop-option>
                             <drop-option><img src="images/icons/Misc/POI 1.webp"><p>Minor Point of Interest</p></drop-option>
                         </drop-down>
                         <button onclick="addMarker('misc')" id="button_misc"><img src="images/icons/add.webp"></button>
@@ -112,34 +133,82 @@
                 </div>
             </div>
         </div>
-        <div class="half">
+        <div class="half2">
             <div class="contentcontainer" id="info">
-                <h3>Mission Info</h3>
-                <span id="info_enemy"><p>Enemies in this region:  </p> <p>Terminids</p> <img src="images/icons/terminid.webp"></span>
-            </div>
-            <div class="contentcontainer" id="missions">
-                <p>missions</p>
+                <h1>MISSION INFO</h1>
+                <div id="info_info">
+                    <label>Approx. difficulty rating:</label>
+                    <input id="info_diff" type="number" min="1" max="15" value="1">
+                    <label>Factions in this region:</label>
+                    <div id="info_factions"></div>
+                    <label>Environmental conditions:</label>
+                    <div id="info_env"></div>
+                </div>
+                <h1>POINTS OF INTEREST</h1>
+                <div id="info_pois">
+                    <div id="pois_extract"></div>
+                    <div id="pois_minor"></div>
+                </div>
+                <h1>OBJECTIVES</h1>
+                <div id="info_obj">
+                    <div id="obj_main_gen"></div>
+                    <div id="obj_main_fac"></div>
+                    <div id="obj_side_gen"></div>
+                    <div id="obj_side_fac"></div>
+                </div>
+                <h1>OUTPOSTS</h1>
+                <div id="info_posts"> 
+                    <div id="posts_bug_small"></div>
+                    <div id="posts_bug_medium"></div>
+                    <div id="posts_bug_heavy"></div>
+                    <div id="posts_bug_mega"></div>
+                    
+                    <div id="posts_bot_small"></div>
+                    <div id="posts_bot_medium"></div>
+                    <div id="posts_bot_heavy"></div>
+                    <div id="posts_bot_mega"></div>
+                    <div id="posts_squ_small"></div>
+                    <div id="posts_squ_medium"></div>
+                    <div id="posts_squ_heavy"></div>
+                    <div id="posts_squ_mega"></div>
+                    <div id="posts_sup_small"></div>
+                    <div id="posts_sup_medium"></div>
+                    <div id="posts_sup_heavy"></div>
+                    <div id="posts_sup_mega"></div>
+                    <div id="posts_dis_small"></div>
+                    <div id="posts_dis_medium"></div>
+                    <div id="posts_dis_heavy"></div>
+                    <div id="posts_dis_mega"></div>
+                </div>
             </div>
         </div>
     </div>
 </body>
 </html>
 <style>
+
     .content {
-        --mapsize: 500px;
+        --mapsize: 600px;
         display: flex;
-        flex-direction: row;
+        justify-content: center;
     }
-    @media (min-width: 1000px) {.half {
-        display: flex;
-        flex-wrap: wrap;
-        width: 49%;
-    }}
-    @media (max-width: 1000px) {.half {
-        display: flex;
-        flex-wrap: wrap;
-        width: 100%;
-    }}
+    @media (min-width: 1000px) {
+        .content {flex-direction: row;}
+        .half1, .half2{
+            width: min-content;
+            height: 100%;
+            margin: auto;
+            margin-top: 0;
+        }
+        .half2 {width: 100%;}
+    }
+    @media (max-width: 1000px) {
+        .content {flex-direction: column;}
+        .half1, .half2 {
+            width: 100%;
+            padding-bottom: 20px;
+        }
+    }
     
     .contentgroup_vertical {
         display: flex;
@@ -221,7 +290,6 @@
             width: 140px;
             height: var(--mapsize);
             padding: 20px 10px;
-            margin: 0;
             margin-right: 10px;
             align-items: center;
             justify-content: center;
@@ -249,6 +317,7 @@
             }
 
             >div {
+                content-visibility: hidden;
                 display: flex;
                 flex-direction: row;
                 margin-bottom: 5px;
@@ -287,7 +356,7 @@
                 }
 
                 button {
-                    display: none;
+                    display: block;
                     z-index: 0;
                     width: 60px;
                     height: 60px;
@@ -321,28 +390,84 @@
             width: var(--mapsize);
             height: var(--mapsize);
         }
-        &#info, &#missions {
+        &#info {
             width: 100%;
-            height: 100px;
-            justify-content: baseline;
+            min-height: 100%;
+            height: max-content;
+            padding: 0;
+            margin: 0;
 
-            span {
-                display: flex;
-                --height: 20px;
-                height: var(--height);
-                font-size: var(--height);
-                vertical-align: middle;
-                * {
-                    align-content: baseline;
+            h1 {
+                width: 100%;
+                font-size: 30px;
+                padding: 10px;
+                justify-content: center;
+                text-align: center;
+                border-top: solid 1px rgb(255, 255, 200);
+                border-bottom: solid 1px rgba(255, 255, 200, 0.5);
+            }
+            >div {
+                font-size: 20px;
+
+                label {
+                    height: 30px;
+                    margin-bottom: 10px;
+                }
+                input {
+                    font-size: 20px;
+                    background-color: #0002;
+                    width: 50px;
+                    font-weight: 600;
+                }
+                div, div>div {
+                    min-height: 30px;
                     display: inline-block;
-                    font-size: calc(var(--height) * 0.8);
+                    vertical-align: middle;
+                    align-items: center;
+                    img {
+                        display: inline;
+                        height: 27px;
+                        margin-right: 5px;
+                        vertical-align: middle;
+                    }
+                    p {
+                        display: inline;
+                        height: 100%;
+                        vertical-align: middle;
+                    }
+                    button {
+                        margin-left: 10px;                        
+                        display: inline;
+                        font-size: 20px;
+                        padding: 5px 10px;
+                        font-weight: 600;
+                        &:hover {
+                            color: yellow;
+                        }
+                        
+                        &.hide {
+                            background-color: rgba(0, 100, 150, 0.7);
+                            &:hover {
+                                background-color: rgba(0, 135, 200, 0.7);
+                            }
+                        }
+                        &.remove {
+                            background-color: rgba(150, 0, 0, 0.7);
+                            &:hover {
+                                background-color: rgba(200, 0, 0, 0.7);
+                            }
+                        }
 
+                    }
                 }
-                img {
-                    width: var(--height);
-                    height: var(--height);
-                    
+                div>div {
+                    display: block;
+                    justify-content: baseline;
                 }
+            }
+            #info_info {
+                display: grid;
+                grid-template-columns: repeat(2, 2fr);
             }
         }
     }
@@ -353,27 +478,28 @@
 <script src="mapmaking.js"></script>
 <script>
     
-    const mapSize = 500;
-
-    function AddImage(layer, image, w=mapSize, h=mapSize, onload=null) {
-        var img = new Image();
-        img.onload = function() {
-            var k = new Konva.Image({image:img, width:w, height:h});
-            layer.add(k);
-            if (onload != null) onload(k);
-        }
-        img.src = image;
-    }
-
+    const mapSize = 600;
+    var generated = false;
+    
     const stage = new Konva.Stage({container: 'map', width: mapSize, height: mapSize});
-
     const layer_bg = new Konva.Layer();
     stage.add(layer_bg);
     const layer_grid = new Konva.Layer();
     stage.add(layer_grid);
     const layer_map = new Konva.Layer();
     stage.add(layer_map);
-    
+
+    function AddImage(layer, image, w=mapSize, h=mapSize, isBottom = false) {
+        var img = new Image();
+        var k = new Konva.Image({image:img, width:w, height:h});
+        img.onload = function() {
+            layer.add(k);
+            if (isBottom) k.moveToBottom();
+        }
+        img.src = image;
+        return k;
+    }
+
     AddImage(layer_bg, "images/minimap.webp");
     AddImage(layer_bg, "images/mask.webp");
 
@@ -385,136 +511,303 @@
     const mask = new Image();
     mask.src = "images/mask.webp";
     
-    const dropO = document.getElementById('outposts');
-    const dropM = document.getElementById('mainobjs_faction');
-    const dropS = document.getElementById('sideobjs_faction');
+    const dropM  = document.getElementById('misc');
+    const dropO  = document.getElementById('outposts');
+    const dropMG = document.getElementById('mainobjs_generic');
+    const dropMF = document.getElementById('mainobjs_faction');
+    const dropSG = document.getElementById('sideobjs_generic');
+    const dropSF = document.getElementById('sideobjs_faction');
 
     const started = false;
 
     function setMarkers() {
         var enemy = document.getElementById('enemy').selected.value;
-        if (enemy == 'terminid') {
+        if (enemy == '0') {
             dropO.optdiv.innerHTML = bugsO;
-            dropM.optdiv.innerHTML = bugsM;
-            dropS.optdiv.innerHTML = bugsS;
+            dropMF.optdiv.innerHTML = bugsM;
+            dropSF.optdiv.innerHTML = bugsS;
         }
-        else if (enemy == 'automaton') {
+        else if (enemy == '1') {
             dropO.optdiv.innerHTML = botsO;
-            dropM.optdiv.innerHTML = botsM;
-            dropS.optdiv.innerHTML = botsS;
+            dropMF.optdiv.innerHTML = botsM;
+            dropSF.optdiv.innerHTML = botsS;
         }
-        else if (enemy == 'illuminate') {
+        else if (enemy == '2') {
             dropO.optdiv.innerHTML = squidsO;
-            dropM.optdiv.innerHTML = squidsM;
-            dropS.optdiv.innerHTML = squidsS;
+            dropMF.optdiv.innerHTML = squidsM;
+            dropSF.optdiv.innerHTML = squidsS;
         }
+        else if (enemy == '3') {
+            dropO.optdiv.innerHTML = seO;
+            dropMF.optdiv.innerHTML = "<drop-option></<drop-option>"
+            dropSF.optdiv.innerHTML = "<drop-option></<drop-option>"
+        }
+        else if (enemy == '4') {
+            dropO.optdiv.innerHTML = dissO;
+            dropMF.optdiv.innerHTML = "<drop-option></<drop-option>"
+            dropSF.optdiv.innerHTML = "<drop-option></<drop-option>"
+        }
+        
         dropO.updateOptions();
-        dropM.updateOptions();
-        dropS.updateOptions();
+        dropMF.updateOptions();
+        dropSF.updateOptions();
 
         if (started) return;
 
         var divs = document.getElementById('markers').children;
         for (var div of divs) {
             if (div == divs[0]) continue;
-            
-            var query = div.querySelectorAll('button');
-            query[0].style.display = "block";
+            div.style.contentVisibility = 'visible';
         }
     }
+    
     const markerSize = 60;
-    var markers = [];
-    var shadows = [];
-    var dangers = [];
-    var missions = [];
+
+    var hasExtraction = false;
+
+    var envs = [];
+    var extract = null; 
+    var mainObjsGeneric = [];
+    var mainObjsFaction = [];
+    var sideObjsGeneric = [];
+    var sideObjsFaction = [];
+    var mpois = []; 
+    var outposts = {
+        bug: { s: [], m: [], h: [], me: [] },
+        bot: { s: [], m: [], h: [], me: [] },
+        squ: { s: [], m: [], h: [], me: [] },
+        sup: { s: [], m: [], h: [], me: [] },
+        dis: { s: [], m: [], h: [], me: [] }
+    }
+
+    var miscButton = document.getElementById('button_misc');
+    
+    function checkExtract() {
+        if (!generated) return;
+        if (dropM.selected.children[1].innerText != "Extraction Point") miscButton.style.display = "block";
+        else {
+            if (extract != null) miscButton.style.display = "none";
+            else miscButton.style.display = "block";
+        }
+    }
 
     function addMarker(id) {
         var s = document.getElementById(id).selected.children;
+        var obj = {name:s[1].innerText, num:0, marker:null, shadow:null, border:null, danger:null, info:null};
         
-        AddImage(layer_map, s[0].src, markerSize, markerSize, function(img) {
-            img.draggable(true);
-            markers.push(img);
+        var marker = AddImage(layer_map, s[0].src, markerSize, markerSize);
+        marker.draggable(true);
+        obj.marker = marker;
+        
+        var border = AddImage(layer_map, "images/icons/border.webp", markerSize*1.4, markerSize*1.4, true);
+        obj.border = border;
+        obj.border.x( (marker.x() - ((markerSize*1.4)/2) ) + (markerSize/2));
+        obj.border.y( (marker.y() - ((markerSize*1.4)/2) ) + (markerSize/2));
+        obj.border.hide();
 
-            AddImage(layer_map, "images/icons/shadow.webp", markerSize, markerSize, function(shadow) {
-                shadow.moveToBottom();
-                shadows.push(shadow);
-            });
+        var shadow = AddImage(layer_map, "images/icons/shadow.webp", markerSize, markerSize, true);
+        obj.shadow = shadow;
+        obj.shadow.x(marker.x());
+        obj.shadow.y(marker.y());
 
+        if (id == "outposts") {
+            var post = s[0].getAttribute('src');
+
+            if (post.includes('small')) var dangerSize = markerSize * 1.5;
+            else if (post.includes('medium')) var dangerSize = markerSize * 1.8;
+            else if (post.includes('heavy')) var dangerSize = markerSize * 2.1;
+            else if (post.includes('mega')) var dangerSize = markerSize * 2.4;
+            dangerSize = dangerSize * (0.85 + (Math.random()*0.3));
+            var markermid = markerSize / 2;
+            var dangermid = dangerSize / 2;
+
+            var danger = AddImage(layer_map, "images/icons/danger.webp", dangerSize, dangerSize, true);
+            obj.danger = danger;
+            danger.x((marker.x() - dangermid) + markermid);
+            danger.y((marker.y() - dangermid) + markermid);
+        }
+
+        marker.on('dragmove', () => {
+            var end = mapSize - markerSize;
+            if (marker.x() <= 0) marker.x(0);
+            if (marker.y() <= 0) marker.y(0);
+            if (marker.x() >= end) marker.x(end);
+            if (marker.y() >= end) marker.y(end);
+
+            obj.border.x( (marker.x() - ((markerSize*1.4)/2) ) + (markerSize/2));
+            obj.border.y( (marker.y() - ((markerSize*1.4)/2) ) + (markerSize/2));
+            
+            obj.shadow.x(marker.x());
+            obj.shadow.y(marker.y());
+            
             if (id == "outposts") {
+                obj.danger.x((marker.x() - dangermid) + markermid);
+                obj.danger.y((marker.y() - dangermid) + markermid);
+            }
 
-                var post = s[0].getAttribute('src');
-                console.log(typeof(post));
-
-                if (post.includes('small')) var dangerSize = markerSize * 1.4;
-                else if (post.includes('medium')) var dangerSize = markerSize * 1.8;
-                else if (post.includes('heavy')) var dangerSize = markerSize * 2.2;
-                else if (post.includes('mega')) var dangerSize = markerSize * 2.6;
-                dangerSize = dangerSize * (0.8 + (Math.random()*0.4));
-                var markermid = markerSize / 2;
-                var dangermid = dangerSize / 2;
-
-                AddImage(layer_map, ("images/icons/danger.webp"), dangerSize, dangerSize, function(danger) {
-                    danger.moveToBottom();
-                    dangers.push(danger);
-                    danger.x((img.x() - dangermid) + markermid);
-                    danger.y((img.y() - dangermid) + markermid);
-                });
-            } else {dangers.push(null);}
-
-            img.on('dragmove', () => {
-                var end = mapSize - markerSize;
-                if (img.x() <= 0) img.x(0);
-                if (img.y() <= 0) img.y(0);
-                if (img.x() >= end) img.x(end);
-                if (img.y() >= end) img.y(end);
-
-                var shadow = shadows[markers.indexOf(img)];
-                shadow.x(img.x());
-                shadow.y(img.y());
-                
-                if (id == "outposts") {
-                    var danger = dangers[markers.indexOf(img)];
-                    danger.x((img.x() - dangermid) + markermid);
-                    danger.y((img.y() - dangermid) + markermid);
-                }
-
-            });
         });
         
         var div = document.createElement('div');
-        document.getElementById('missions').appendChild(div);
-        div.id = s[1].innerText;
+        div.id = obj.name;
         var di = document.createElement('img');
-        var dh = document.createElement('h1');
         var dp = document.createElement('p');
-
-        di.src = s[0].src;
-        dh.innerText = s[1].innerText;
-        
+        var db1 = document.createElement('button');
+        var db2 = document.createElement('button');
         div.appendChild(di);
-        div.appendChild(dh);
         div.appendChild(dp);
+        div.appendChild(db1);
+        div.appendChild(db2);
+        di.src = s[0].src;
+        dp.innerText = obj.name;
+        db1.innerText = "Hide";
+        db2.innerText = "Remove";
+        db1.setAttribute('class', 'hide');
+        db2.setAttribute('class', 'remove');
+
+        db1.addEventListener('click', function() {obj.marker.visible(!obj.marker.isVisible()); layer_map.draw(); db1.innerText = obj.marker.isVisible() ? "Hide" : "Show";});
+        db2.addEventListener('click', function() {deleteMarker(id, this);});
+
+        div.addEventListener('mouseenter', function() {obj.border.show()});
+        div.addEventListener('mouseleave', function() {obj.border.hide()});
+
+        obj.info = div;
         
+        if (id == "env") {
+            envs.push(obj);
+            document.getElementById("info_env").appendChild(div);
+        }
+        else if (id == 'misc') {
+            if (obj.name == "Extraction Point") {
+                extract = obj; 
+                document.getElementById("pois_extract").appendChild(div);
+            }
+            else if (obj.name == "Minor Point of Interest") {
+                mpois.push(obj);
+                document.getElementById("pois_minor").appendChild(div);
+            }
+        }
+        else if (id == 'outposts') {
+            obj.num = dropO.length; 
+            if (obj.name.endsWith("Nest")) {
+                if (obj.name.startsWith("Small")) {document.getElementById("posts_bug_small").appendChild(div); outposts.bug.s.push(obj);}
+                if (obj.name.startsWith("Medium")) {document.getElementById("posts_bug_medium").appendChild(div); outposts.bug.m.push(obj);}
+                if (obj.name.startsWith("Heavy")) {document.getElementById("posts_bug_heavy").appendChild(div); outposts.bug.h.push(obj);}
+            }
+            else if (obj.name == 'Meganest') {document.getElementById("posts_bug_mega").appendChild(div); outposts.bug.me.push(obj);}
+
+            else if (obj.name.endsWith("Outpost")) {
+                if (obj.name.startsWith("Small")) {document.getElementById("posts_bot_small").appendChild(div); outposts.bot.s.push(obj);}
+                if (obj.name.startsWith("Medium")) {document.getElementById("posts_bot_medium").appendChild(div); outposts.bot.m.push(obj);}
+                if (obj.name.startsWith("Heavy")) {document.getElementById("posts_bot_heavy").appendChild(div); outposts.bot.h.push(obj);}
+            }
+            else if (obj.name == 'Fortress') {document.getElementById("posts_bot_mega").appendChild(div); outposts.bot.me.push(obj);}
+
+            else if (obj.name.endsWith("Encampment")) {
+                if (obj.name.startsWith("Small")) {document.getElementById("posts_squ_small").appendChild(div); outposts.squ.s.push(obj);}
+                if (obj.name.startsWith("Medium")) {document.getElementById("posts_squ_medium").appendChild(div); outposts.squ.m.push(obj);}
+                if (obj.name.startsWith("Heavy")) {document.getElementById("posts_squ_heavy").appendChild(div); outposts.squ.h.push(obj);}
+            }
+            else if (obj.name == 'Great Fleet') {document.getElementById("posts_squ_mega").appendChild(div); outposts.squ.me.push(obj);}
+
+            else if (obj.name.endsWith("Guard")) {
+                if (obj.name.startsWith("Small")) {document.getElementById("posts_sup_small").appendChild(div); outposts.sup.s.push(obj);}
+                if (obj.name.startsWith("Medium")) {document.getElementById("posts_sup_medium").appendChild(div); outposts.sup.m.push(obj);}
+                if (obj.name.startsWith("Heavy")) {document.getElementById("posts_sup_heavy").appendChild(div); outposts.sup.h.push(obj);}
+            }
+            else if (obj.name == 'Bastion') {document.getElementById("posts_sup_mega").appendChild(div); outposts.sup.me.push(obj);}
+
+            else if (obj.name.endsWith("Base")) {
+                if (obj.name.startsWith("Small")) {document.getElementById("posts_dis_small").appendChild(div); outposts.dis.s.push(obj);}
+                if (obj.name.startsWith("Medium")) {document.getElementById("posts_dis_medium").appendChild(div); outposts.dis.m.push(obj);}
+                if (obj.name.startsWith("Heavy")) {document.getElementById("posts_dis_heavy").appendChild(div); outposts.dis.h.push(obj);}
+            }
+            else if (obj.name == 'Bunker') {document.getElementById("posts_dis_mega").appendChild(div); outposts.dis.me.push(obj);}
+        }
+        else if (id == 'mainobjs_generic') {
+            mainObjsGeneric.push(obj);
+            document.getElementById("obj_main_gen").appendChild(div);
+        }
+        else if (id == 'mainobjs_faction') {
+            mainObjsFaction.push(obj);
+            document.getElementById("obj_main_fac").appendChild(div);
+        }
+        else if (id == 'sideobjs_generic') {
+            sideObjsGeneric.push(obj);
+            document.getElementById("obj_side_gen").appendChild(div);
+        }
+        else if (id == 'sideobjs_faction') {
+            sideObjsFaction.push(obj);
+            document.getElementById("obj_side_fac").appendChild(div);
+        }
+        checkExtract();
     }
 
+    function deleteMarker(id, button) {
+
+        var arr = null;
+        if (id == "misc") {
+            if (extract.info == button.parentNode) {
+                var obj = extract;
+            }
+            else {
+                arr = mpois;
+                var obj = arr.find(item => item.info === button.parentNode);
+            }
+        }
+        else if (id == "outposts") {
+            var ouch = false;
+            for (post of [outposts.bug, outposts.bot, outposts.squ, outposts.sup, outposts.dis]) {
+                for (postsize of [post.s, post.m, post.h, post.me]) {
+                    var i = postsize.find(item => item.info === button.parentNode);
+                    if (i != null) {
+                        var obj = i;
+                        ouch = true;
+                        break;
+                    }
+                }
+                if (ouch) break;
+            }
+        }
+        else {
+            if (id == "env") arr = envs;
+            else if (id == 'mainobjs_generic') arr = mainObjsGeneric;
+            else if (id == 'mainobjs_faction') arr = mainObjsFaction;
+            else if (id == 'sideobjs_generic') arr = sideObjsGeneric;
+            else if (id == 'sideobjs_faction') arr = sideObjsFaction;
+            var obj = arr.find(item => item.info === button.parentNode);
+        }
+        
+        console.log(id, button, obj);
+        console.log(obj.marker);
+        button.parentNode.remove();
+        obj.marker.destroy();
+        obj.border.destroy();
+        obj.shadow.destroy();
+        if (obj.danger != null) obj.danger.destroy();
+        layer_map.draw();
+
+        if (arr != null) arr.splice(1, arr.indexOf(obj));
+        if (obj == extract) {extract = null; checkExtract();}
+        obj = null;
+    }
     
 </script>
 <script type="module">
-    import {drawMap} from "./mapgenerator.js";
+    //import {drawMap} from "./mapgenerator.js";
     
     const biomes = [
-        "rgb(74, 92, 48)",      // brighter
-        "rgb(70, 90, 55)",      // brighter
-        "rgb(45, 90, 40)",      // brighter
-        "rgb(70, 80, 30)",      // brighter
-        "rgb(100, 82, 39)",     // brighter
-        "rgb(100, 74, 48)",     // brighter
-        "rgb(100, 50, 100)",    // brighter
-        "rgb(40, 80, 120)",     // brighter
-        "rgb(90, 108, 116)",    // brighter
-        "rgb(81, 81, 81)",      // brighter
-        "rgb(128, 139, 10)",    // brighter
-        "rgb(64, 65, 72)"       // brighter
+        "rgb(74, 92, 48)",
+        "rgb(70, 90, 55)",
+        "rgb(45, 90, 40)",
+        "rgb(70, 80, 30)",
+        "rgb(100, 82, 39)",
+        "rgb(100, 74, 48)",
+        "rgb(100, 50, 100)",
+        "rgb(40, 80, 120)",
+        "rgb(90, 108, 116)",
+        "rgb(81, 81, 81)",
+        "rgb(128, 139, 10)",
+        "rgb(64, 65, 72)"
     ]
 
     function GenerateMap() {
@@ -532,6 +825,7 @@
         const generation = new Konva.Image({image:tempcanvas, width:mapSize, height:mapSize});
         layer_grid.add(generation);
         AddImage(layer_grid, "images/map 1000m grid.webp");
+        generated = true;
     }
 
     document.getElementById('generate').addEventListener('click', GenerateMap);

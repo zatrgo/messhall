@@ -59,7 +59,6 @@
             <div class="contentgroup_horizontal">
                 <div class="contentcontainer" id="markers" style="z-index: 1">
                     <button onclick="setMarkers()" id="generate">Generate</button>
-
                     <div style="z-index: 7">
                         <drop-down id="env">
                             <drop-option><img src="images\icons\enviromental\Intense Heat.webp"><p>Intense Heat</p></drop-option>
@@ -178,7 +177,6 @@
                     <div id="posts_bug_medium"></div>
                     <div id="posts_bug_heavy"></div>
                     <div id="posts_bug_mega"></div>
-                    
                     <div id="posts_bot_small"></div>
                     <div id="posts_bot_medium"></div>
                     <div id="posts_bot_heavy"></div>
@@ -635,17 +633,22 @@
         var marker = AddImage(layer_map, s[0].src, markerSize, markerSize);
         marker.draggable(true);
         obj.marker = marker;
+
+        if (id != "env") {
+            marker.x((mapSize/2) - (markerSize/2));
+            marker.y((mapSize/2) - (markerSize/2));
+        }
         
         var border = AddImage(layer_map, "images/icons/border.webp", markerSize*1.4, markerSize*1.4, true);
         obj.border = border;
-        obj.border.x( (marker.x() - ((markerSize*1.4)/2) ) + (markerSize/2));
-        obj.border.y( (marker.y() - ((markerSize*1.4)/2) ) + (markerSize/2));
-        obj.border.hide();
+        border.x((marker.x() - ((markerSize*1.4)/2) ) + (markerSize/2));
+        border.y((marker.y() - ((markerSize*1.4)/2) ) + (markerSize/2));
+        border.hide();
 
         var shadow = AddImage(layer_map, "images/icons/shadow.webp", markerSize, markerSize, true);
         obj.shadow = shadow;
-        obj.shadow.x(marker.x());
-        obj.shadow.y(marker.y());
+        shadow.y(marker.y());
+        shadow.x(marker.x());
 
         if (id == "env") shadow.opacity(0);
         if (id == "misc") {
@@ -676,15 +679,15 @@
             if (marker.x() >= end) marker.x(end);
             if (marker.y() >= end) marker.y(end);
 
-            obj.border.x( (marker.x() - ((markerSize*1.4)/2) ) + (markerSize/2));
-            obj.border.y( (marker.y() - ((markerSize*1.4)/2) ) + (markerSize/2));
+            border.x((marker.x() - ((markerSize*1.4)/2) ) + (markerSize/2));
+            border.y((marker.y() - ((markerSize*1.4)/2) ) + (markerSize/2));
+        
+            shadow.x(marker.x());
+            shadow.y(marker.y());
             
-            obj.shadow.x(marker.x());
-            obj.shadow.y(marker.y());
-            
-            if (id == "outposts") {
-                obj.danger.x((marker.x() - dangermid) + markermid);
-                obj.danger.y((marker.y() - dangermid) + markermid);
+            if (danger != null) {
+                danger.x((marker.x() - dangermid) + markermid);
+                danger.y((marker.y() - dangermid) + markermid);
             }
 
         });
@@ -727,7 +730,7 @@
                 if (id == "env") marker.opacity(0.3);
                 else if (id == "misc") {
                     if (obj.name == "Extraction Point") {ChangeImage(marker, "images/icons/Misc/Extraction 2.webp"); shadow.opacity(1);}
-                    if (obj.name == "Minor Point of Interest") ChangeImage(marker, "images/icons/Misc/POI 2.webp");
+                    if (obj.name == "Minor Point of Interest") {ChangeImage(marker, "images/icons/Misc/POI 2.webp"); shadow.opacity(.5);}
                 }
                 else {
                     marker.cache();
@@ -742,7 +745,7 @@
                 if (id == "env") marker.opacity(1);
                 else if (id == "misc") {
                     if (obj.name == "Extraction Point") {ChangeImage(marker, "images/icons/Misc/Extraction 1.webp"); shadow.opacity(.3);}
-                    if (obj.name == "Minor Point of Interest") ChangeImage(marker, "images/icons/Misc/POI 1.webp");
+                    if (obj.name == "Minor Point of Interest") {ChangeImage(marker, "images/icons/Misc/POI 1.webp"); shadow.opacity(1);}
                 }
                 else {
                     marker.clearCache();
@@ -862,9 +865,7 @@
 
         var arr = null;
         if (id == "misc") {
-            if (extract.info == button.parentNode) {
-                var obj = extract;
-            }
+            if (extract != null) {if (extract.info == button.parentNode) var obj = extract;}
             else {
                 arr = mpois;
                 var obj = arr.find(item => item.info === button.parentNode);

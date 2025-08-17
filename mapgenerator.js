@@ -1,6 +1,6 @@
 import { ds } from './heightmap.js';
 
-const width = 500;
+const width = 600;
 const height = width;
 
 
@@ -9,7 +9,7 @@ export function drawMap(canvas) {
         width: width,           // the width of the map, must be larger than 1.
         height: height,          // the height of the map, must be larger than 1.
         depth: 1000,          // [optional] the value of each pixel will be within 0~depth, default: 2000.
-        rough: 10,             // [optional] effect the terrain variability (roughness), default: 1.
+        rough: 1,             // [optional] effect the terrain variability (roughness), default: 1.
         randomizer(base, range) {
             // [optional] customize the logic of random height generation.
             // receive two number arguments:

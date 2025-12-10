@@ -87,38 +87,49 @@ const Stratatype = new Enum({
     Defensive: 3
 });
 
-const Ranking = new Enum({
-    Citizen: 0,
-    Cadet: 1,
-    Space_Cadet: 2,
-    Sergeant: 3,
-    Master_Sergeant: 4,
-    Chief: 5,
-    Space_Chief_Prime: 6,
-    Death_Captain: 7,
-    Marshal: 8,
-    Star_Marshal: 9,
-    Admiral: 10,
-    Skull_Admiral: 11,
-    Fleet_Admiral: 12,
-    Admirable_Admiral: 13,
-    Commander: 14,
-    Galactic_Commander: 15,
-    Hell_Commander: 16,
-    General: 17,
-    Five_Star_General: 18,
-    Ten_Star_General: 19,
-    Private: 20,
-    Super_Private: 21,
-    Super_Citizen: -1,
-    Viper_Commando: -2,
-    Fire_Safety_Officer: -3,
-    Expert_Exterminator: -4,
-    Free_of_Thought: -5,
-    Super_Pedestrian: -6,
-    Assault_Infantry: -7,
-    Servant_of_Freedom: -8
-});
+const Faction = {
+    seaf: "Super Earth Armed Forces",
+    helldivers: "HELLDIVER Corps",
+    terminid: "Terminid Swarm",
+    collective: "Collective of Cyberstan",
+    illuminate: "Illuminate Cult",
+    dissidents: "Dissident Rebels" 
+}
+
+const Ranking = {
+    helldiver: {
+        honorary: "Honorary Diver",
+        cadet: "Cadet",
+        spaceCadet: "Space Cadet",
+        sergeant: "Sergeant",
+        masterSergeant: "Master Sergeant",
+        chief: "Chief",
+        spaceChiefPrime: "Space Chief Prime",
+        deathCaptain: "Death Captain",
+        marshal: "Marshal",
+        starMarshal: "Star Marshal",
+        admiral: "Admiral",
+        skullAdmiral: "Skull Admiral",
+        fleetAdmiral: "Fleet Admiral",
+        admirableAdmiral: "Admirable Admiral",
+        commander: "Commander",
+        galacticCommander: "Galactic Commander",
+        hellCommander: "Hell Commander",
+        general: "General",
+        fiveStarGeneral: "Five Star General",
+        tenStarGeneral: "Ten Star General",
+        private: "Private",
+        superPrivate: "Super Private",
+        superCitizen: "Super Citizen",
+        viperCommando: "Viper Commando",
+        fireSafetyOfficer: "Fire Safety Officer",
+        expertExterminator: "Expert Exterminator",
+        freeOfThought: "Free of Thought",
+        superPedestrian: "Super Pedestrian",
+        assaultInfantry: "Assault Infantry",
+        servantOfFreedom: "Servant of Freedom"
+    }
+};
 
 class Armor {
     constructor(name, plating = 0, resistance = 0, passive = "") {
@@ -254,7 +265,7 @@ class Character {
     }
 };
 
-function NPC(name, faction, armor, weapon1, weapon2, str=0, con=0, spe=0, ste=0, pre=0, per=0) {
+function NPC(name, faction, armor, weapon1=null, weapon2=null, weaponT=null, weaponS=null, pack=null, str=0, con=0, spe=0, ste=0, pre=0, per=0) {
     const c = new Character();
     c.name = name;
     c.faction = faction;
@@ -262,6 +273,9 @@ function NPC(name, faction, armor, weapon1, weapon2, str=0, con=0, spe=0, ste=0,
     c.armor = armor;
     c.weaponPrimary = weapon;
     c.weaponSecondary = weapon2;
+    c.weaponsThrowable = weaponT;
+    c.weaponSupport = weaponS;
+    c.backpack = pack;
 
     c.strength = str;
     c.constitution = con;
